@@ -6,8 +6,8 @@ export const Orders = (props) => {
     
     return(
     <div>
-        <table className="table">
-            <thead>
+        <table className="table table-sm table-bordered border-primary">
+            <thead className="table-success">
             <tr>
             <th>№ заказа</th>
             <th>Заказчик</th>

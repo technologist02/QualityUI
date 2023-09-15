@@ -1,35 +1,18 @@
-import { useState, useEffect } from "react";
-import { getFilms } from "../api";
-import { createFilm } from "../api";
+import { useState, useEffect, useContext } from "react";
 import { Film as film } from "../api";
 import { Film } from "../components/FilmItem";
+import { DataContext } from "../components/Context";
 
 
 export const Films = () => {
-    const [films, setFilms] = useState([]);
+    const {films = [], addFilm, updateContextFilm} = useContext(DataContext)
+
     const [load, setLoad] = useState(true);
     const [mark, setMark] = useState("");
     const [thick, setThick] = useState();
     const [color, setColor] = useState("");
     
-    useEffect(() => {getFilms().then(data => {setFilms(data); setLoad(false)})}, []);
-
-    async function addFilm(film){
-        try{
-            const response = await createFilm(film);
-            if (response.ok){
-                alert('Пленка успешно добавлена');
-                const newFilms = films.concat(film);
-                setFilms(newFilms);
-            }
-            else{
-                alert("Что-то пошло не так")
-            }
-        }
-        catch{
-            alert("Oops!")
-        }
-    }
+    useEffect(() => {updateContextFilm(); setLoad(false)}, []);
 
     return(
         <div>

@@ -3,9 +3,10 @@ import { Header } from './components/Header';
 import { Route, Routes } from "react-router-dom";
 import { Films } from './Pages/Films';
 import { Orders } from './Pages/Orders';
+import { Context } from './components/Context';
 
 function App() {
-  return (
+  return (<Context>
     <div className="App">
         <Header />
         <main className='container content'>
@@ -16,6 +17,7 @@ function App() {
           </Routes>
         </main>
     </div>
+    </Context>
   );
 }
 

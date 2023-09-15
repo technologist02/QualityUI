@@ -1,19 +1,8 @@
-import { useState } from "react";
 
-export const Film = ({film}) => {
-    const {id, mark, thickness, color} = film;
-    const [newMark, setNewMark] = useState("");
-    const [thick, setThick] = useState();
-    const [newColor, setNewColor] = useState("");
-    return(
-        <>
-        <tr id={id}>
-            <td>{mark}</td>
-            <td>{thickness}</td>
-            <td>{color}</td>
-            <td>
-                <button type="button" className="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Изменить</button>
-                <div className="modal-dialog modal-dialog-centered">
+const modal = () => {
+    
+    return <>
+                    <div className="modal-dialog modal-dialog-centered">
                     <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div className="modal-dialog">
                             <div className="modal-content">
@@ -48,9 +37,5 @@ export const Film = ({film}) => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </td>
-        </tr>
-        </>
-    )
+                </div></>
 }
