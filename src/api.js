@@ -26,6 +26,21 @@ async function createFilm(film) {
     //}
 }
 
+async function changeFilm(id, mark, thickness, color) {
+    const film = {}
+    film.id = id;
+    film.mark = mark;
+    film.thickness = thickness
+    film.color = color;
+    const response = await fetch(`${API_URL}/Films`,{
+        method: 'PATCH',
+        body: JSON.stringify(film),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+          }
+    })
+    return response;
+}
 async function getExtruders() {
     const response = await fetch(`${API_URL}/Extruders`);
     return await response.json();
@@ -40,4 +55,4 @@ class Film{
     
 }
 
-export {getOrders, getFilms, getExtruders, createFilm, Film}
+export {getOrders, getFilms, getExtruders, createFilm, changeFilm, Film}
