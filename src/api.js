@@ -46,6 +46,19 @@ async function getExtruders() {
     return await response.json();
 }
 
+async function createExtruder(extruderName) {
+    const extruder = {};
+    extruder.extruderName=extruderName;
+    const response = await fetch(`${API_URL}/Extruders`,{
+        method: 'POST',
+        body: JSON.stringify(extruder),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+          }
+    })
+    return response;
+}
+
 class Film{
     constructor(mark, thickness, color){
         this.mark = mark;
@@ -55,4 +68,4 @@ class Film{
     
 }
 
-export {getOrders, getFilms, getExtruders, createFilm, changeFilm, Film}
+export {getOrders, getFilms, getExtruders, createExtruder, createFilm, changeFilm, Film}

@@ -2,31 +2,31 @@ import { OrderQuality } from "../components/OrderQuality"
 
 export const Orders = (props) => {
     const {orders} = props;
-    console.log(orders);
+    // console.log(orders);
     
     return(
     <div>
-        <table className="table table-sm table-bordered border-primary">
-            <thead className="table-success">
+        <table className="table table-info table-bordered border-primary">
+            <thead>
             <tr>
-            <th>№ заказа</th>
-            <th>Заказчик</th>
-            <th>Дата</th>
-            <th>№ смены</th>
-            <th>Экструдер</th>
-            <th>Пленка</th>
-            <th>Ширина</th>
-            <th>Толщ. min</th>
-            <th>Толщ. max</th>
-            <th>σ MD, MPa</th>
-            <th>σ TD, MPa</th>
-            <th>E MD, %</th>
-            <th>E TD, %</th>
-            <th>CoF s</th>
-            <th>CoF d</th>
-            <th>Свет, %</th>
-            <th>Corona</th>
-            <th>Стандарт качества</th>
+            <th scope="col">№ заказа</th>
+            <th scope="col">Заказчик</th>
+            <th scope="col">Дата</th>
+            <th scope="col">№ смены</th>
+            <th scope="col">Экструдер</th>
+            <th scope="col">Пленка</th>
+            <th scope="col">Ширина</th>
+            <th scope="col">Толщ. min</th>
+            <th scope="col">Толщ. max</th>
+            <th scope="col">σ MD, MPa</th>
+            <th scope="col">σ TD, MPa</th>
+            <th scope="col">E MD, %</th>
+            <th scope="col">E TD, %</th>
+            <th scope="col">CoF s</th>
+            <th scope="col">CoF d</th>
+            <th scope="col">Свет, %</th>
+            <th scope="col">Corona</th>
+            <th scope="col">Стандарт качества</th>
             </tr>
             </thead>
             <tbody>

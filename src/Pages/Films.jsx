@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Film as film } from "../api";
 import { Film } from "../components/FilmItem";
-import { DataContext } from "../components/Context";
+import { DataContext } from "../Context/Context";
 import { FilmChangeContext } from "../Context/FilmContext";
 import { Modal } from "../components/modal";
 
@@ -18,9 +18,9 @@ export const Films = () => {
     useEffect(() => {updateContextFilm(); setLoad(false)}, []);
 
     return(
-        <div>
+        <div style={{marginLeft:"1rem"}}>
             <Modal></Modal>
-            <button type="button" className="btn btn-outline-info mb-1" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Добавить пленку</button>
+            <button type="button" className="btn btn-primary mb-1" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Добавить пленку</button>
             <div className="row g-2 mb-1 collapse" id="collapseExample">
                 <div className="col-md">
                     <div className="form-floating">

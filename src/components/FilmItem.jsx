@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useContext } from "react";
 import { FilmChangeContext } from "../Context/FilmContext";
 
