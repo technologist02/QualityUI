@@ -1,19 +1,23 @@
 import { useContext, useEffect, useLayoutEffect, useState } from "react"
 import { DataContext } from "../Context/Context"
 import { getFilmMap } from "../Entities/film"
+import { Input } from "../FormComponents/input"
 
 export const Order = () => {
 
-    const {extruders, films, filmMap, updateContextFilm, updateContextExtruders} = useContext(DataContext)
+    const {extruders, films, updateContextFilm, updateContextExtruders} = useContext(DataContext)
 
     const [orderNumber, setOrderNumber] = useState("")
     const [customer, setCustomer] = useState("")
     const [productionDate, setProductionDate] = useState("")
     const [brigadeNumber, setBrigadeNumber] = useState("")
     const [extruderName, setExtruderName] = useState("")
-    const [filmMark, setFilmMark] = useState("")
-    const [filmThickness, setFilmThickness] = useState("")
-    const [filmColor, setFilmColor] = useState("")
+    const [mark, setMark] = useState()
+    const [thick, setThick] = useState()
+    const [color, setColor] = useState()
+    //const [filmMarks, setFilmMarks] = useState([])
+    const [filmThicks, setFilmThicks] = useState([])
+    const [filmColors, setFilmColors] = useState([])
     const [width, setWidth] = useState("")
     const [minThickness, setMinThickness] = useState("")
     const [maxThickness, setMaxThickness] = useState("")
@@ -26,19 +30,43 @@ export const Order = () => {
     const [lightTransmission, setLightTransmission] = useState("")
     const [coronaTreatment, setCoronaTreatment] = useState("")
     const [standartQualityName, setStandartQualityName] = useState("")
-    //const [filmMap, setFilmMap] = useState(new Map())
+    const [filmMap, setFilmMap] = useState(new Map())
 
-    //useEffect(() => updateContextFilm(), [])
-    //useEffect(() => {updateContextFilm()}, []);
+    useEffect(() => {setFilmMap(getFilmMap(films))}, films)
+    // useEffect(() => {updateContextFilm()}, []);
+    useLayoutEffect(() => {setFilmThicks(getFilmThikness())}, [mark])
+    useLayoutEffect(() => {setFilmColors(getFilmColor())}, [mark, thick])
 
-    // useLayoutEffect(()=>{setFilmThickness(); setFilmColor()}, filmMark)
-    // useLayoutEffect(()=>{setFilmColor()}, filmThickness)
-    console.log(films);
-    console.log(filmMap)
+    function getFilmThikness() {
+        try{
+            const array = Array.from(filmMap.get(mark).keys())
+            setThick(array[0]);
+            setColor();
+            return array;
+        }
+        catch{
+            setThick();
+            setColor();
+            return []
+        } 
+    }
+    function getFilmColor(){
+        try{
+            const array = filmMap.get(mark).get(+thick)
+            setColor(array[0]);
+            return array;
+        }
+        catch{
+            setColor();
+            return []
+        }
+        
+    }
 
     return(
         <div style={{marginLeft:"1rem", maxWidth:500}}>
             <h3>Добавить данные по заказу</h3>
+            {/* <Input placeholder="orderNumber" text="Номер заказа"/> */}
             <div className="form-floating">
                 <input type="text" className="form-control" id="orderNumber" placeholder="OrderNumber" 
                     value={orderNumber} onChange={(event) => setOrderNumber(event.target.value)}/>
@@ -69,8 +97,8 @@ export const Order = () => {
             </div>
             <div className="form-floating">
                 <select className="form-select" id="filmMark"
-                    value={filmMark} onChange={(event) => {setFilmMark(event.target.value)}}>
-                        <option disabled>--Выбрать марку пленки--</option>
+                    value={mark} onChange={(event) => {setMark(event.target.value)}}>
+                        <option disabled selected>--Выбрать марку пленки--</option>
                         {
                             filmMap.size && Array.from(filmMap.keys()).map(film => <option key={film} value={film}>{film}</option>)
                         }
@@ -79,20 +107,20 @@ export const Order = () => {
             </div>
             <div className="form-floating">
                 <select className="form-select" id="filmThickness"
-                    value={filmThickness} onChange={(event) => {setFilmThickness(event.target.value)}}>
-                        <option defaultValue={100}>--Выбрать толщину пленки--</option>
+                    value={thick} onChange={(event) => {setThick(event.target.value)}}>
+                        <option disabled selected>--Выбрать толщину пленки--</option>
                         {
-                            filmMark && Array.from(filmMap.get(filmMark).keys()).map(thick => <option value={thick}>{thick}</option>)
+                            filmThicks && filmThicks.map(thick => <option value={thick}>{thick}</option>)
                         }
                 </select>
                 <label htmlFor="filmThickness">Толщина пленки, мкм</label>
             </div>
             <div className="form-floating">
                 <select className="form-select" id="filmColor"
-                    value={filmColor} onChange={(event) => setFilmColor(event.target.value)}>
-                        <option disabled>--Выбрать цвет пленки--</option>
+                    value={color} onChange={(event) => setColor(event.target.value)}>
+                        <option disabled selected>--Выбрать цвет пленки--</option>
                         {
-                            filmThickness && filmMap.get(filmMark).get(+filmThickness).map(color => <option value={color}>{color}</option>)
+                            filmColors && filmColors.map(color => <option value={color}>{color}</option>)
                         }
                 </select>
                 <label htmlFor="filmColor">Цвет</label>

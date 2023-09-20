@@ -38,7 +38,7 @@ export const Modal = () => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => clearFilmContext()}>Закрыть</button>
-                                    <button type="button" className="btn btn-primary" onClick={() => changeFilm(filmId, mark, thick, color)}>Сохранить</button>
+                                    <button type="button" className="btn btn-primary" onClick={() => {changeFilm(filmId, mark, thick, color); clearFilmContext()}}>Сохранить</button>
                                 </div>
                             </div>
                         </div>

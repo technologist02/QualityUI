@@ -22,7 +22,3 @@ export function getFilmMap(films) {
     //console.log(filmMap)
     return filmMap
 }
-
-export function getFilmSet(){
-
-}
