@@ -10,20 +10,14 @@ async function getFilms() {
     return await response.json();
 }
 async function createFilm(film) {
-    //console.log(film);
-    //try{
-        const response = await fetch(`${API_URL}/Films`,{
-            method: 'POST',
-            body: JSON.stringify(film),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8'
-              }
-        })
-        return response;
-    //}
-    //catch {
-        //alert("Какая-то ошибка")
-    //}
+    const response = await fetch(`${API_URL}/Films`,{
+        method: 'POST',
+        body: JSON.stringify(film),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+    })
+    return response;
 }
 
 async function changeFilm(id, mark, thickness, color) {
@@ -37,7 +31,7 @@ async function changeFilm(id, mark, thickness, color) {
         body: JSON.stringify(film),
         headers: {
             'Content-type': 'application/json; charset=UTF-8'
-          }
+        }
     })
     return response;
 }
@@ -59,13 +53,22 @@ async function createExtruder(extruderName) {
     return response;
 }
 
-class Film{
-    constructor(mark, thickness, color){
-        this.mark = mark;
-        this.thickness = thickness;
-        this.color = color;
+async function createOrderQuality(order) {
+    console.log(order)
+    const response = await fetch(`${API_URL}/OrderQuality`,{
+        method: 'POST',
+        body: JSON.stringify(order),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+          }
+    })
+    if (response.ok) {
+        alert("Заказ добавлен")
     }
-    
+    else{
+        alert("Что-то не так")
+    }
+    //return response;
 }
 
-export {getOrders, getFilms, getExtruders, createExtruder, createFilm, changeFilm, Film}
+export {getOrders, getFilms, getExtruders, createExtruder, createFilm, changeFilm, createOrderQuality}

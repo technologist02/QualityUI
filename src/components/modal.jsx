@@ -1,10 +1,11 @@
 import { FilmChangeContext } from "../Context/FilmContext";
+import { ControledInput } from "../FormComponents/ControledInput";
 import { changeFilm } from "../api";
 import { useContext } from "react";
 
 
 export const Modal = () => {
-    const {mark, thick, color, filmId, changeMark, changeThick, changeColor, changeFilmId, clearFilmContext} = useContext(FilmChangeContext)
+    const {mark, thick, color, filmId, changeMark, changeThick, changeColor, clearFilmContext} = useContext(FilmChangeContext)
 
 
     return <>
@@ -18,22 +19,25 @@ export const Modal = () => {
                                     </div>
                                 <div className="modal-body">
                                     <div className="col-md">
-                                        <div className="form-floating">
-                                            <input type="text" id="mark" className="form-control border border-primary" placeholder="Введите марку" value={mark} onChange={(event) => changeMark(event.target.value)} />
-                                            <label htmlFor="mark">Марка</label>
-                                        </div>
+                                        <ControledInput type="text" 
+                                            id="mark"
+                                            text="Марка"
+                                            value={mark} 
+                                            setValue={(text) => changeMark(text)}/>
                                     </div>
                                     <div className="col-md">
-                                        <div className="form-floating">
-                                            <input type="text" id="thick" className="form-control border border-primary" placeholder="Введите толщину" value={thick} onChange={(event) => changeThick(event.target.value)}/>
-                                            <label htmlFor="thick">Толщина</label>
-                                        </div>
+                                        <ControledInput type="text" 
+                                            id="thick"
+                                            text="Толщина"
+                                            value={thick} 
+                                            setValue={(text) => changeThick(text)}/>
                                     </div>
                                     <div className="col-md">
-                                        <div className="form-floating">
-                                            <input type="text" id="color" className="form-control border border-primary" placeholder="Введите цвет" value={color} onChange={(event) => changeColor(event.target.value)}/>
-                                            <label htmlFor="color">Цвет</label>
-                                        </div>
+                                        <ControledInput type="text" 
+                                            id="color"
+                                            text="Цвет"
+                                            value={color} 
+                                            setValue={(text) => changeColor(text)}/>
                                     </div>
                                 </div>
                                 <div className="modal-footer">

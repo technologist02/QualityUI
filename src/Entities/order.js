@@ -1,15 +1,13 @@
-class Order {
-    constructor(orderNumber, customer, productionDate, brigadeNumber, extruderName, filmMark, filmThickness, filmColor,  width, minThickness, maxThickness,
+export class Order {
+    constructor(orderNumber, customer, productionDate, brigadeNumber, extruderId, filmId,  width, minThickness, maxThickness,
         tensileStrengthMD, tensileStrengthTD, elongationAtBreakMD, elongationAtBreakTD, coefficientOfFrictionS, coefficientOfFrictionD,
-        lightTransmission, coronaTreatment, standartQualityName){
+        lightTransmission, coronaTreatment, standartQualityNameId){
             this.orderNumber = orderNumber
             this.customer = customer
             this.productionDate = productionDate
             this.brigadeNumber = brigadeNumber
-            this.extruderName = extruderName
-            this.filmMark = filmMark
-            this.filmThickness = filmThickness
-            this.filmColor = filmColor
+            this.extruderId = extruderId
+            this.filmId = filmId
             this.width = width
             this.minThickness = minThickness
             this.maxThickness = maxThickness
@@ -21,28 +19,6 @@ class Order {
             this.coefficientOfFrictionD = coefficientOfFrictionD
             this.lightTransmission = lightTransmission
             this.coronaTreatment = coronaTreatment
-            this.standartQualityName = standartQualityName
+            this.standartQualityNameId = standartQualityNameId
         }
-    // constructor() {
-    //         this.orderNumber = ""
-    //         this.customer = ""
-    //         this.productionDate = ""
-    //         this.brigadeNumber = ""
-    //         this.extruderName = ""
-    //         this.filmMark = ""
-    //         this.filmThickness = ""
-    //         this.filmColor = ""
-    //         this.width = ""
-    //         this.minThickness = ""
-    //         this.maxThickness = ""
-    //         this.tensileStrengthMD = ""
-    //         this.tensileStrengthTD = ""
-    //         this.elongationAtBreakMD = ""
-    //         this.elongationAtBreakTD = ""
-    //         this.coefficientOfFrictionS = ""
-    //         this.coefficientOfFrictionD = ""
-    //         this.lightTransmission = ""
-    //         this.coronaTreatment = ""
-    //         this.standartQualityNameID = ""
-    // }
 }

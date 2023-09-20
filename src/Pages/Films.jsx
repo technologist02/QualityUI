@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext } from "react";
-import { Film as film } from "../api";
+import { Film as film } from "../Entities/film";
 import { Film } from "../components/FilmItem";
 import { DataContext } from "../Context/Context";
 import { FilmChangeContext } from "../Context/FilmContext";
 import { Modal } from "../components/modal";
+import { ControledInput } from "../FormComponents/ControledInput";
 
 
 export const Films = () => {
@@ -11,9 +12,6 @@ export const Films = () => {
     const {mark, thick, color, changeMark, changeThick, changeColor, clearFilmContext} = useContext(FilmChangeContext)
 
     const [load, setLoad] = useState(true);
-    // const [mark, setMark] = useState("");
-    // const [thick, setThick] = useState();
-    // const [color, setColor] = useState("");
     
     useEffect(() => {updateContextFilm(); setLoad(false)}, []);
 
@@ -23,25 +21,30 @@ export const Films = () => {
             <button type="button" className="btn btn-primary mb-1" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Добавить пленку</button>
             <div className="row g-2 mb-1 collapse" id="collapseExample">
                 <div className="col-md">
-                    <div className="form-floating">
-                        <input type="text" id="mark" className="form-control border border-primary" placeholder="Введите марку" value={mark} onChange={(event) => changeMark(event.target.value)} />
-                        <label htmlFor="mark">Марка</label>
-                    </div>
+                    <ControledInput type="text" 
+                        id="mark"
+                        text="Марка"
+                        value={mark} 
+                        setValue={(text) => changeMark(text)}/>
                 </div>
                 <div className="col-md">
-                    <div className="form-floating">
-                        <input type="text" id="thick" className="form-control border border-primary" placeholder="Введите толщину" value={thick} onChange={(event) => changeThick(event.target.value)}/>
-                        <label htmlFor="thick">Толщина</label>
-                    </div>
+                    <ControledInput type="text" 
+                        id="thick"
+                        text="Толщина"
+                        value={thick} 
+                        setValue={(text) => changeThick(text)}/>
                 </div>
                 <div className="col-md">
-                    <div className="form-floating">
-                        <input type="text" id="color" className="form-control border border-primary" placeholder="Введите цвет" value={color} onChange={(event) => changeColor(event.target.value)}/>
-                        <label htmlFor="color">Цвет</label>
-                    </div>
+                    <ControledInput type="text" 
+                        id="color"
+                        text="Цвет"
+                        value={color} 
+                        setValue={(text) => changeColor(text)}/>
                 </div>
                 <div className="col-md">
-                    <button type="button" className="btn btn-outline-primary btn-lg" onClick={()=>addFilm(new film(mark, thick, color))}>Сохранить</button>
+                    <button type="button" className="btn btn-outline-primary btn-lg" 
+                        onClick={()=>addFilm(new film(mark, thick, color))}>Сохранить
+                    </button>
                 </div>
             </div>
             <table className="table">

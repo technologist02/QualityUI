@@ -2,11 +2,10 @@ import { OrderQuality } from "../components/OrderQuality"
 
 export const Orders = (props) => {
     const {orders} = props;
-    // console.log(orders);
     
     return(
     <div>
-        <table className="table table-info table-bordered border-primary">
+        <table className="table table-warning table-bordered">
             <thead>
             <tr>
             <th scope="col">№ заказа</th>

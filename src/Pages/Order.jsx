@@ -1,23 +1,29 @@
 import { useContext, useEffect, useLayoutEffect, useState } from "react"
 import { DataContext } from "../Context/Context"
 import { getFilmMap } from "../Entities/film"
-import { Input } from "../FormComponents/input"
+import { ControledSelect } from "../FormComponents/ControledSelect"
+import { createOrderQuality } from "../api"
+import { Order as order } from "../Entities/order"
+import { ControledInput } from "../FormComponents/ControledInput"
 
 export const Order = () => {
 
-    const {extruders, films, updateContextFilm, updateContextExtruders} = useContext(DataContext)
+    const {extruders, films} = useContext(DataContext)
+
+    const [extruderName, setExtruderName] = useState("")
+    const [mark, setMark] = useState()
+    const [thick, setThick] = useState()
+    const [color, setColor] = useState()
+    const [extrudersSelect, setExtrudersSelect] = useState([])
+    const [filmMarks, setFilmMarks] = useState([])
+    const [filmThicks, setFilmThicks] = useState([])
+    const [filmColors, setFilmColors] = useState([])
+    const [filmMap, setFilmMap] = useState(new Map())
 
     const [orderNumber, setOrderNumber] = useState("")
     const [customer, setCustomer] = useState("")
     const [productionDate, setProductionDate] = useState("")
     const [brigadeNumber, setBrigadeNumber] = useState("")
-    const [extruderName, setExtruderName] = useState("")
-    const [mark, setMark] = useState()
-    const [thick, setThick] = useState()
-    const [color, setColor] = useState()
-    //const [filmMarks, setFilmMarks] = useState([])
-    const [filmThicks, setFilmThicks] = useState([])
-    const [filmColors, setFilmColors] = useState([])
     const [width, setWidth] = useState("")
     const [minThickness, setMinThickness] = useState("")
     const [maxThickness, setMaxThickness] = useState("")
@@ -30,13 +36,39 @@ export const Order = () => {
     const [lightTransmission, setLightTransmission] = useState("")
     const [coronaTreatment, setCoronaTreatment] = useState("")
     const [standartQualityName, setStandartQualityName] = useState("")
-    const [filmMap, setFilmMap] = useState(new Map())
 
-    useEffect(() => {setFilmMap(getFilmMap(films))}, films)
-    // useEffect(() => {updateContextFilm()}, []);
+    useEffect(() => {setFilmMap(getFilmMap(films))}, [films])
+    useEffect(() => {setExtrudersSelect(getExtruderNames())}, [extruders])
+    useLayoutEffect(() => {setFilmMarks(getFilmMarks())}, [filmMap])
     useLayoutEffect(() => {setFilmThicks(getFilmThikness())}, [mark])
     useLayoutEffect(() => {setFilmColors(getFilmColor())}, [mark, thick])
 
+    function getExtruderNames() {
+        try{
+            const array = Array.from(extruders.map(extruder => extruder.extruderName));
+            setExtruderName(array[0]);
+            return Array.from(extruders.map(extruder => extruder.extruderName))
+        }
+        catch{
+            setExtruderName();
+            return []
+        }
+    }
+    function getFilmMarks() {
+        try{
+            const array = Array.from(filmMap.keys())
+            setMark(array[0]);
+            setThick();
+            setColor();
+            return array
+        }
+        catch{
+            setMark();
+            setThick();
+            setColor();
+            return []
+        }
+    }
     function getFilmThikness() {
         try{
             const array = Array.from(filmMap.get(mark).keys())
@@ -60,131 +92,61 @@ export const Order = () => {
             setColor();
             return []
         }
-        
+    }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(customer)
+        const filmId = films.find(x => x.mark === mark && x.thickness === thick && x.color === color).id
+        const extruderId = extruders.find(x => x.extruderName === extruderName).id
+        const standartQualityNameId = 1
+        const OrderQuality = new order(orderNumber, customer, productionDate, brigadeNumber, extruderId, filmId,  width, minThickness, maxThickness,
+            tensileStrengthMD, tensileStrengthTD, elongationAtBreakMD, elongationAtBreakTD, coefficientOfFrictionS, coefficientOfFrictionD,
+            lightTransmission, coronaTreatment, standartQualityNameId)
+        createOrderQuality(OrderQuality)
     }
 
     return(
         <div style={{marginLeft:"1rem", maxWidth:500}}>
             <h3>Добавить данные по заказу</h3>
-            {/* <Input placeholder="orderNumber" text="Номер заказа"/> */}
-            <div className="form-floating">
-                <input type="text" className="form-control" id="orderNumber" placeholder="OrderNumber" 
-                    value={orderNumber} onChange={(event) => setOrderNumber(event.target.value)}/>
-                <label htmlFor="orderNumber">Номер заказа</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="customer" placeholder="Customer" 
-                    value={customer} onChange={(event) => setCustomer(event.target.value)}/>
-                <label htmlFor="customer">Заказчик</label>
-            </div>
-            <div className="form-floating">
-                <input type="date" className="form-control" id="productionDate" placeholder="productionDate" 
-                    value={productionDate} onChange={(event) => setProductionDate(event.target.value)}/>
-                <label htmlFor="productionDate">Дата производства</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="brigadeNumber" placeholder="brigadeNumber" 
-                    value={brigadeNumber} onChange={(event) => setBrigadeNumber(event.target.value)}/>
-                <label htmlFor="brigadeNumber">Номер смены</label>
-            </div>
-            <div className="form-floating">
-                <select className="form-select" id="extruderName"
-                    value={extruderName} onChange={(event) => setExtruderName(event.target.value)}>
-                        <option disabled selected>--Выбрать рабочий центр--</option>
-                        {extruders.length && extruders.map(extruder => <option key={extruder.id} value={extruder.extruderName}>{extruder.extruderName}</option>)}
-                </select>
-                <label htmlFor="extruderName">Экструдер</label>
-            </div>
-            <div className="form-floating">
-                <select className="form-select" id="filmMark"
-                    value={mark} onChange={(event) => {setMark(event.target.value)}}>
-                        <option disabled selected>--Выбрать марку пленки--</option>
-                        {
-                            filmMap.size && Array.from(filmMap.keys()).map(film => <option key={film} value={film}>{film}</option>)
-                        }
-                </select>
-                <label htmlFor="filmMark">Марка пленки</label>
-            </div>
-            <div className="form-floating">
-                <select className="form-select" id="filmThickness"
-                    value={thick} onChange={(event) => {setThick(event.target.value)}}>
-                        <option disabled selected>--Выбрать толщину пленки--</option>
-                        {
-                            filmThicks && filmThicks.map(thick => <option value={thick}>{thick}</option>)
-                        }
-                </select>
-                <label htmlFor="filmThickness">Толщина пленки, мкм</label>
-            </div>
-            <div className="form-floating">
-                <select className="form-select" id="filmColor"
-                    value={color} onChange={(event) => setColor(event.target.value)}>
-                        <option disabled selected>--Выбрать цвет пленки--</option>
-                        {
-                            filmColors && filmColors.map(color => <option value={color}>{color}</option>)
-                        }
-                </select>
-                <label htmlFor="filmColor">Цвет</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="width" placeholder="width"
-                    value={width} onChange={(event) => setWidth(event.target.value)}/>
-                <label htmlFor="width">Ширина, мм</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="minThickness" placeholder="minThickness"
-                    value={minThickness} onChange={(event) => setMinThickness(event.target.value)}/>
-                <label htmlFor="minThickness">Толщина min</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="maxThickness" placeholder="maxThickness"
-                    value={maxThickness} onChange={(event) => setMaxThickness(event.target.value)}/>
-                <label htmlFor="maxThickness">Толщина max</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="tensileStrengthMD" placeholder="tensileStrengthMD"
-                    value={tensileStrengthMD} onChange={(event) => setTensileStrengthMD(event.target.value)}/>
-                <label htmlFor="tensileStrengthMD">Прочность при разрыве вдоль, MPa</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="tensileStrengthTD" placeholder="tensileStrengthTD"
-                    value={tensileStrengthTD} onChange={(event) => setTensileStrengthTD(event.target.value)}/>
-                <label htmlFor="tensileStrengthTD">Прочность при разрыве поперек, MPa</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="elongationAtBreakMD" placeholder="elongationAtBreakMD"
-                    value={elongationAtBreakMD} onChange={(event) => setElongationAtBreakMD(event.target.value)}/>
-                <label htmlFor="elongationAtBreakMD">Удлинение при разрыве вдоль, %</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="elongationAtBreakTD" placeholder="elongationAtBreakTD"
-                    value={elongationAtBreakTD} onChange={(event) => setElongationAtBreakTD(event.target.value)}/>
-                <label htmlFor="elongationAtBreakTD">Удлинение при разрыве поперек, %</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="coefficientOfFrictionS" placeholder="coefficientOfFrictionS"
-                    value={coefficientOfFrictionS} onChange={(event) => setCoefficientOfFrictionS(event.target.value)}/>
-                <label htmlFor="coefficientOfFrictionS">Коэффициент трения статический</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="coefficientOfFrictionD" placeholder="coefficientOfFrictionD"
-                    value={coefficientOfFrictionD} onChange={(event) => setCoefficientOfFrictionD(event.target.value)}/>
-                <label htmlFor="coefficientOfFrictionD">Коэффициент трения динамический</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="lightTransmission" placeholder="lightTransmission"
-                    value={lightTransmission} onChange={(event) => setLightTransmission(event.target.value)}/>
-                <label htmlFor="lightTransmission">Светопропускание, %</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="coronaTreatment" placeholder="coronaTreatment"
-                    value={coronaTreatment} onChange={(event) => setCoronaTreatment(event.target.value)}/>
-                <label htmlFor="coronaTreatment">Активация, Дин</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control" id="standartQualityName" placeholder="standartQualityName"
-                    value={standartQualityName} onChange={(event) => setStandartQualityName(event.target.value)}/>
-                <label htmlFor="standartQualityName">Стандарт качества</label>
-            </div>
+            <form onSubmit={handleSubmit}>
+                <ControledInput type="text" id="orderNumber" text="Номер заказа" value={orderNumber} setValue={(text) => setOrderNumber(text)}/>
+                <ControledInput type="text" id="customer" text="Заказчик" value={customer} setValue={(text) => setCustomer(text)}/>
+                <ControledInput type="date" id="productionDate" text="Дата производства" value={productionDate} setValue={(text) => setProductionDate(text)}/>
+                <ControledInput type="number" id="brigadeNumber" text="Номер смены" value={brigadeNumber} setValue={(text) => setBrigadeNumber(text)}/>
+                <ControledSelect id="extruderName"
+                    text="Экструдер"
+                    value={extruderName} 
+                    setValue={(text) => setExtruderName(text)} 
+                    options={extrudersSelect}/>
+                <ControledSelect id="filmMark"
+                    text="Марка пленки"
+                    value={mark} 
+                    setValue={(text) => setMark(text)} 
+                    options={filmMarks}/>
+                <ControledSelect id="filmThickness" 
+                    text="Толщина пленки" 
+                    value={thick} 
+                    setValue={(text) => setThick(text)} 
+                    options={filmThicks}/>
+                <ControledSelect id="filmColor" 
+                    text="Цвет" 
+                    value={color} 
+                    setValue={(color) => setColor(color)} 
+                    options={filmColors}/>
+                <ControledInput type="number" id="width" text="Ширина, мм" value={width} setValue={(text) => setWidth(text)}/>
+                <ControledInput type="number" id="minThickness" text="Толщина min" value={minThickness} setValue={(text) => setMinThickness(text)}/>
+                <ControledInput type="number" id="maxThickness" text="Толщина max" value={maxThickness} setValue={(text) => setMaxThickness(text)}/>
+                <ControledInput type="number" id="tensileStrengthMD" text="Прочность при разрыве вдоль, MPa" value={tensileStrengthMD} setValue={(text) => setTensileStrengthMD(text)}/>
+                <ControledInput type="number" id="tensileStrengthTD" text="Прочность при разрыве поперек, MPa" value={tensileStrengthTD} setValue={(text) => setTensileStrengthTD(text)}/>
+                <ControledInput type="number" id="elongationAtBreakMD" text="Удлинение при разрыве вдоль, %" value={elongationAtBreakMD} setValue={(text) => setElongationAtBreakMD(text)}/>
+                <ControledInput type="number" id="elongationAtBreakTD" text="Удлинение при разрыве поперек, %" value={elongationAtBreakTD} setValue={(text) => setElongationAtBreakTD(text)}/>
+                <ControledInput type="number" id="coefficientOfFrictionS" text="Коэффициент трения статический" value={coefficientOfFrictionS} setValue={(text) => setCoefficientOfFrictionS(text)}/>
+                <ControledInput type="number" id="coefficientOfFrictionD" text="Коэффициент трения динамический" value={coefficientOfFrictionD} setValue={(text) => setCoefficientOfFrictionD(text)}/>
+                <ControledInput type="number" id="lightTransmission" text="Светопропускание, %" value={lightTransmission} setValue={(text) => setLightTransmission(text)}/>
+                <ControledInput type="number" id="coronaTreatment" text="Активация, Дин" value={coronaTreatment} setValue={(text) => setCoronaTreatment(text)}/>
+                <ControledInput type="number" id="standartQualityName" text="Стандарт качества" value={standartQualityName} setValue={(text) => setStandartQualityName(text)}/>
+                <button type="submit" class="btn btn-primary btn-lg">Сохранить</button>
+            </form>
         </div>
     )
 }

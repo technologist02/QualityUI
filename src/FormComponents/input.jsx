@@ -1,11 +1,10 @@
 export function Input(props) {
-    const {placeholder, text} = props
+    const {type, id, text} = props
 
     return (
-        <div className="form-floating">
-            <input type="text" className="form-control" id={placeholder} placeholder={placeholder}/>
-                 {/* value={value} onChange={(event) => Setvalue(event.target.value)}/> */}
-            <label htmlFor={placeholder}>{text}</label>
+        <div className="form-floating" style={{marginBottom:"0.5rem"}}>
+            <input type={type} className="form-control" id={id} placeholder={id}/>
+            <label htmlFor={id}>{text}</label>
         </div>
     )
 }

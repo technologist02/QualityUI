@@ -22,6 +22,8 @@ export const OrderQuality = ({order}) => {
         <td>{lightTransmission}</td>
         <td>{coronaTreatment}</td>
         <td>{standartQualityNameID}</td>
-        <td><button>Изменить</button></td>
+        <td>
+            <button type="button" className="btn btn-outline-warning">Изменить</button>
+        </td>
     </>)
 }
