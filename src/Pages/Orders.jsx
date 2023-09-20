@@ -1,10 +1,18 @@
-import { OrderQuality } from "../components/OrderQuality" 
+import { useContext, useEffect, useState } from "react";
+import { OrderQuality } from "../components/OrderQuality"
+import { DataContext } from "../Context/Context";
+import { ChangeOrderModal } from "../components/ChangeOrderModal";
+import { Preloader } from "../components/Preloader";
 
 export const Orders = (props) => {
     const {orders} = props;
-    
+    const {updateContextFilm, updateContextExtruders} = useContext(DataContext)
+    const [load, setLoad] = useState(true)
+    useEffect(() => {updateContextFilm(); updateContextExtruders(); setLoad(false)}, [])
+
     return(
     <div>
+        {/* {load ? <Preloader/> : <ChangeOrderModal/>} */}
         <table className="table table-warning table-bordered">
             <thead>
             <tr>
@@ -13,7 +21,10 @@ export const Orders = (props) => {
             <th scope="col">Дата</th>
             <th scope="col">№ смены</th>
             <th scope="col">Экструдер</th>
-            <th scope="col">Пленка</th>
+            <th scope="col">Марка пленки</th>
+            <th scope="col">Толщина пленки</th>
+            <th scope="col">Цвет</th>
+            {/* <th scope="col">Пленка</th> */}
             <th scope="col">Ширина</th>
             <th scope="col">Толщ. min</th>
             <th scope="col">Толщ. max</th>
@@ -30,7 +41,7 @@ export const Orders = (props) => {
             </thead>
             <tbody>
             {
-                (orders.map(order => <tr><OrderQuality order={order} /></tr>))
+                (orders.map(order => <tr key={order.id}><OrderQuality order={order} /></tr>))
                         //  : <tr><td>Ничего</td></tr>
             }
             </tbody>

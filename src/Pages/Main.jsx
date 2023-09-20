@@ -4,6 +4,7 @@ import { getExtruders } from "../api";
 import { getFilms } from "../api";
 import { useState, useEffect } from "react";
 import { Orders } from "./Orders";
+import { Preloader } from "../components/Preloader";
 
 export const Main = () => {
     const [orders, setOrders] = useState([]);
@@ -15,11 +16,15 @@ export const Main = () => {
         getOrders().then(data=>{
             setOrders(data); setLoading(false)})
     },[]);
+    // useEffect(() => {
+    //     getOrders().then(data=>{
+    //         setOrders(data); setLoading(false)})
+    // },[]);
 
     return (
         <div>
             {
-                loading ? <h3>Ололо</h3> : (<Orders orders={orders}/>)
+                loading ? <Preloader/> : (<Orders orders={orders}/>)
             }
         </div>
     )

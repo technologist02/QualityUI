@@ -4,7 +4,7 @@ import { changeFilm } from "../api";
 import { useContext } from "react";
 
 
-export const Modal = () => {
+export const AddFilm = () => {
     const {mark, thick, color, filmId, changeMark, changeThick, changeColor, clearFilmContext} = useContext(FilmChangeContext)
 
 

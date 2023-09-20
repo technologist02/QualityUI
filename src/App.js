@@ -6,7 +6,7 @@ import { Orders } from './Pages/Orders';
 import { Context } from './Context/Context';
 import { FilmItemContext } from './Context/FilmContext'; 
 import { Extruders } from './Pages/Extruders';
-import { Order } from './Pages/Order';
+import { Order } from './Pages/AddOrder';
 
 function App() {
   return (<Context>
@@ -17,7 +17,7 @@ function App() {
             <Route path="/" element={<Main/>} />
             <Route path="/Films" element={<FilmItemContext><Films/></FilmItemContext>}/>
             <Route path="/Extruders" element={<Extruders/>}/>
-            <Route path="/Order" element={<Order/>}/>
+            <Route path="/AddOrder" element={<Order/>}/>
             <Route path="/Orders" element={<Main/>}/>
           </Routes>
         </main>

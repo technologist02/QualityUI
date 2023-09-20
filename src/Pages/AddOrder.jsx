@@ -5,10 +5,12 @@ import { ControledSelect } from "../FormComponents/ControledSelect"
 import { createOrderQuality } from "../api"
 import { Order as order } from "../Entities/order"
 import { ControledInput } from "../FormComponents/ControledInput"
+import { Preloader } from "../components/Preloader"
 
 export const Order = () => {
 
     const {extruders, films} = useContext(DataContext)
+    const [load, setLoad] = useState(true);
 
     const [extruderName, setExtruderName] = useState("")
     const [mark, setMark] = useState()
@@ -37,8 +39,8 @@ export const Order = () => {
     const [coronaTreatment, setCoronaTreatment] = useState("")
     const [standartQualityName, setStandartQualityName] = useState("")
 
-    useEffect(() => {setFilmMap(getFilmMap(films))}, [films])
-    useEffect(() => {setExtrudersSelect(getExtruderNames())}, [extruders])
+    useEffect(() => {setFilmMap(getFilmMap(films)); setLoad(false)}, [])
+    useEffect(() => {setExtrudersSelect(getExtruderNames()); setLoad(false)}, [])
     useLayoutEffect(() => {setFilmMarks(getFilmMarks())}, [filmMap])
     useLayoutEffect(() => {setFilmThicks(getFilmThikness())}, [mark])
     useLayoutEffect(() => {setFilmColors(getFilmColor())}, [mark, thick])
@@ -99,6 +101,8 @@ export const Order = () => {
         const filmId = films.find(x => x.mark === mark && x.thickness === thick && x.color === color).id
         const extruderId = extruders.find(x => x.extruderName === extruderName).id
         const standartQualityNameId = 1
+        console.log(films)
+        console.log(extruders)
         const OrderQuality = new order(orderNumber, customer, productionDate, brigadeNumber, extruderId, filmId,  width, minThickness, maxThickness,
             tensileStrengthMD, tensileStrengthTD, elongationAtBreakMD, elongationAtBreakTD, coefficientOfFrictionS, coefficientOfFrictionD,
             lightTransmission, coronaTreatment, standartQualityNameId)
@@ -106,6 +110,7 @@ export const Order = () => {
     }
 
     return(
+        load ? <Preloader/> :
         <div style={{marginLeft:"1rem", maxWidth:500}}>
             <h3>Добавить данные по заказу</h3>
             <form onSubmit={handleSubmit}>

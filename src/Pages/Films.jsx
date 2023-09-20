@@ -3,7 +3,7 @@ import { Film as film } from "../Entities/film";
 import { Film } from "../components/FilmItem";
 import { DataContext } from "../Context/Context";
 import { FilmChangeContext } from "../Context/FilmContext";
-import { Modal } from "../components/modal";
+import { AddFilm } from "../components/AddFilm";
 import { ControledInput } from "../FormComponents/ControledInput";
 
 
@@ -17,7 +17,7 @@ export const Films = () => {
 
     return(
         <div style={{marginLeft:"1rem"}}>
-            <Modal></Modal>
+            <AddFilm></AddFilm>
             <button type="button" className="btn btn-primary mb-1" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Добавить пленку</button>
             <div className="row g-2 mb-1 collapse" id="collapseExample">
                 <div className="col-md">

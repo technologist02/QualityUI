@@ -6,7 +6,7 @@ export const Header = () => {
             <div className="container-fluid">
                 <ul className="nav">
                     <li className="nav-link"><NavLink to="/Orders">Заказы</NavLink></li>
-                    <li className="nav-link"><NavLink to="/Order">Добавить заказ</NavLink></li>
+                    <li className="nav-link"><NavLink to="/AddOrder">Добавить заказ</NavLink></li>
                     <li className="nav-link"><NavLink to="/Films">Марки Пленок</NavLink></li>
                     <li className="nav-link"><NavLink to="/Extruders">Экструдеры</NavLink></li>
                     <li className="nav-link"><NavLink to ="/about">About</NavLink></li>
