@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { DataContext } from "../Context/Context";
+import { getPassportQuality } from "../Api/api-orders";
 
 export const OrderQuality = ({order}) => {
     
@@ -46,6 +47,9 @@ export const OrderQuality = ({order}) => {
         <td>{standartQualityNameID}</td>
         <td>
             <button type="button" className="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Изменить</button>
+        </td>
+        <td>
+            <button type="button" className="btn btn-outline-info" onClick={() => getPassportQuality(id)}>Паспорт качества</button>
         </td>
     </>)
 }

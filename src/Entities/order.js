@@ -6,8 +6,8 @@ export class Order {
             this.customer = customer
             this.productionDate = productionDate
             this.brigadeNumber = brigadeNumber
-            this.extruderId = extruderId
-            this.filmId = filmId
+            this.extruderID = extruderId
+            this.filmID = filmId
             this.width = width
             this.minThickness = minThickness
             this.maxThickness = maxThickness

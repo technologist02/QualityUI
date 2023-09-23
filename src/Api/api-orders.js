@@ -21,3 +21,15 @@ export async function createOrderQuality(order) {
         alert("Что-то не так")
     }
 }
+export async function getPassportQuality(id) {
+    console.log(id);
+    const response = await fetch(`${API_URL}/OrderQuality/${id}`);
+    if (response.ok){
+        const blob = await response.blob();  
+        const link = document.createElement("a");  
+        link.href = URL.createObjectURL(blob);  
+        link.download = `${id}.xlsx`;  
+        document.body.appendChild(link);  
+        link.click();  
+    }
+}

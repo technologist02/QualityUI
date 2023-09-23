@@ -98,12 +98,13 @@ export const Order = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(customer)
-        const filmId = films.find(x => x.mark === mark && x.thickness === thick && x.color === color).id
-        const extruderId = extruders.find(x => x.extruderName === extruderName).id
-        const standartQualityNameId = 1
         console.log(films)
         console.log(extruders)
-        const OrderQuality = new order(orderNumber, customer, productionDate, brigadeNumber, extruderId, filmId,  width, minThickness, maxThickness,
+        const filmID = films.find(x => x.mark === mark && x.thickness === thick && x.color === color).id
+        const extruderID = extruders.find(x => x.extruderName === extruderName).id
+        const standartQualityNameId = 1
+        
+        const OrderQuality = new order(orderNumber, customer, productionDate, brigadeNumber, extruderID, filmID,  width, minThickness, maxThickness,
             tensileStrengthMD, tensileStrengthTD, elongationAtBreakMD, elongationAtBreakTD, coefficientOfFrictionS, coefficientOfFrictionD,
             lightTransmission, coronaTreatment, standartQualityNameId)
         createOrderQuality(OrderQuality)
