@@ -7,7 +7,6 @@ import { Order as order } from "../Entities/order"
 import { ControledInput } from "../FormComponents/ControledInput"
 import { Preloader } from "../components/Preloader"
 import { useParams } from "react-router-dom"
-import { getOrderById } from "../Api/api-orders"
 
 export const Order = () => {
 
@@ -46,7 +45,7 @@ export const Order = () => {
     const [coronaTreatment, setCoronaTreatment] = useState(order.coronaTreatment)
     const [standartQualityName, setStandartQualityName] = useState("")
 
-    useEffect(() => {getOrderById(id).then(data=>setOrder(data)); setLoad(false)}, [])
+    // useEffect(() => {setFilmMap(getFilmMap(films)); setLoad(false)}, [])
     useEffect(() => {setExtrudersSelect(getExtruderNames()); setLoad(false)}, [])
     useLayoutEffect(() => {setFilmMarks(getFilmMarks())}, [filmMap])
     useLayoutEffect(() => {setFilmThicks(getFilmThikness()); setFlag(true)}, [mark])

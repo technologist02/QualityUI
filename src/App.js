@@ -20,6 +20,7 @@ function App() {
             <Route path="/Extruders" element={<Extruders/>}/>
             <Route path="/Standarts" element={<StandartNames/>}/>
             <Route path="/AddOrder" element={<Order/>}/>
+            <Route path="/Orders/:id" element={<Order/>}/>
             <Route path="/Orders" element={<Main/>}/>
           </Routes>
         </main>
