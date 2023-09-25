@@ -1,8 +1,9 @@
 export class Film{
-    constructor(mark, thickness, color){
+    constructor(mark, thickness, color, density){
         this.mark = mark;
         this.thickness = thickness;
         this.color = color;
+        this.density = density;
     }
 }
 

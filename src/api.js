@@ -20,12 +20,13 @@ async function createFilm(film) {
     return response;
 }
 
-async function changeFilm(id, mark, thickness, color) {
+async function updateFilm(id, mark, thickness, color, density) {
     const film = {}
     film.id = id;
     film.mark = mark;
     film.thickness = thickness
     film.color = color;
+    film.density = density;
     const response = await fetch(`${API_URL}/Films`,{
         method: 'PATCH',
         body: JSON.stringify(film),
@@ -71,4 +72,4 @@ async function createOrderQuality(order) {
     //return response;
 }
 
-export {getOrders, getFilms, getExtruders, createExtruder, createFilm, changeFilm, createOrderQuality}
+export {getOrders, getFilms, getExtruders, createExtruder, createFilm, updateFilm, createOrderQuality}

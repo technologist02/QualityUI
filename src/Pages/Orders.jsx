@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import { OrderQuality } from "../components/OrderQuality"
+import { OrderQuality } from "../components/order-quality-components/OrderQuality"
 import { DataContext } from "../Context/Context";
-import { ChangeOrderModal } from "../components/ChangeOrderModal";
+import { ChangeOrderModal } from "../components/order-quality-components/ChangeOrderModal";
 import { Preloader } from "../components/Preloader";
 
 export const Orders = (props) => {
@@ -13,7 +13,7 @@ export const Orders = (props) => {
     return(
     <div>
         {/* {load ? <Preloader/> : <ChangeOrderModal/>} */}
-        <table className="table table-warning table-bordered">
+        <table className="table table-bordered">
             <thead>
             <tr>
             <th scope="col">№ заказа</th>
@@ -37,6 +37,8 @@ export const Orders = (props) => {
             <th scope="col">Свет, %</th>
             <th scope="col">Corona</th>
             <th scope="col">Стандарт качества</th>
+            <th>Изменить</th>
+            <th>Печать паспорта</th>
             </tr>
             </thead>
             <tbody>

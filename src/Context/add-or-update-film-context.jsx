@@ -7,6 +7,7 @@ export const FilmItemContext = (props) => {
     const [mark, setMark] = useState("");
     const [thick, setThick] = useState("");
     const [color, setColor] = useState("");
+    const [density, setDensity] = useState(0);
 
     function changeMark(mark) {
         setMark(mark);
@@ -20,10 +21,14 @@ export const FilmItemContext = (props) => {
     function changeFilmId(id) {
         setFilmId(id);
     }
+    function changeDensity(density) {
+        setDensity(density);
+    }
     function clearFilmContext() {
         setMark("");
         setThick("");
         setColor("");
+        setDensity(0);
         setFilmId("");
     }
 
@@ -31,10 +36,12 @@ export const FilmItemContext = (props) => {
         mark,
         thick,
         color,
+        density,
         filmId,
         changeMark,
         changeThick,
         changeColor,
+        changeDensity,
         changeFilmId,
         clearFilmContext
     }

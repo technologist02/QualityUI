@@ -1,18 +1,14 @@
-import { useEffect, useState, useContext } from "react"
-import { Extruder } from "../components/extruder-components/ExtruderItem"
-import { DataContext } from "../Context/Context"
-import { AddExtruder } from "../components/extruder-components/add-extruder-modal"
+import { ControledInput } from "../../FormComponents/ControledInput"
+import { DataContext } from "../../Context/Context"
+import { useContext } from "react"
 
 
-export const Extruders = () => {
-    const {extruders, addExtruder, updateContextExtruders} = useContext(DataContext)
-    const [newExtruder, setNewExtruder] = useState()
-
-    useEffect(() => {updateContextExtruders();}, [])
+export const AddExtruder = (props) => {
+    const {addExtruder} = useContext(DataContext);
+    const {newExtruder,  setNewExtruder} = props
 
     return (
         <div>
-            {/* <AddExtruder newExtruder={newExtruder} setNewExtruder={(event)=>setNewExtruder(event.target.value)}/> */}
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style={{marginBottom: 20}}>
                 Добавить Рабочий центр
             </button>
@@ -36,20 +32,6 @@ export const Extruders = () => {
                     </div>
                 </div>
             </div>
-
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>Рабочий центр</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        extruders.map(extruder => <Extruder key={extruder.id} extruder={extruder}/>)
-                    }
-                </tbody>
-            </table>
         </div>
-        
     )
 }

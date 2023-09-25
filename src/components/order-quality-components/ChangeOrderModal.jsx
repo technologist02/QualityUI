@@ -1,11 +1,11 @@
 import { useContext, useEffect, useLayoutEffect, useState } from "react"
-import { DataContext } from "../Context/Context"
-import { getFilmMap } from "../Entities/film"
-import { ControledSelect } from "../FormComponents/ControledSelect"
-import { createOrderQuality } from "../api"
-import { Order as order } from "../Entities/order"
-import { ControledInput } from "../FormComponents/ControledInput"
-import { Preloader } from "../components/Preloader"
+import { DataContext } from "../../Context/Context"
+import { getFilmMap } from "../../Entities/film"
+import { ControledSelect } from "../../FormComponents/ControledSelect"
+import { createOrderQuality } from "../../api"
+import { Order as order } from "../../Entities/order"
+import { ControledInput } from "../../FormComponents/ControledInput"
+import { Preloader } from "../Preloader"
 
 
 export const ChangeOrderModal = (order) => {

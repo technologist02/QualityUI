@@ -1,12 +1,14 @@
-import { FilmChangeContext } from "../Context/FilmContext";
-import { ControledInput } from "../FormComponents/ControledInput";
-import { changeFilm } from "../api";
+import { FilmChangeContext } from "../../Context/add-or-update-film-context";
+import { ControledInput } from "../../FormComponents/ControledInput";
+//import { updateFilm } from "../Api/api-film";
+//import { changeFilm } from "../api";
 import { useContext } from "react";
+import { DataContext } from "../../Context/Context";
 
 
-export const AddFilm = () => {
-    const {mark, thick, color, filmId, changeMark, changeThick, changeColor, clearFilmContext} = useContext(FilmChangeContext)
-
+export const UpdateFilm = () => {
+    const {mark, thick, color, density, filmId, changeMark, changeThick, changeColor, changeDensity, clearFilmContext} = useContext(FilmChangeContext)
+    const {changeFilm} = useContext(DataContext)
 
     return <>
                     <div className="modal-dialog modal-dialog-centered">
@@ -39,10 +41,17 @@ export const AddFilm = () => {
                                             value={color} 
                                             setValue={(text) => changeColor(text)}/>
                                     </div>
+                                    <div className="col-md">
+                                        <ControledInput type="number" 
+                                            id="density"
+                                            text="Плотность, г/см3"
+                                            value={density} 
+                                            setValue={(density) => changeDensity(density)}/>
+                                    </div>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => clearFilmContext()}>Закрыть</button>
-                                    <button type="button" className="btn btn-primary" onClick={() => {changeFilm(filmId, mark, thick, color); clearFilmContext()}}>Сохранить</button>
+                                    <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => {changeFilm(filmId, mark, thick, color, density); clearFilmContext()}}>Сохранить</button>
                                 </div>
                             </div>
                         </div>

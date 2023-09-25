@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { DataContext } from "../Context/Context";
-import { getPassportQuality } from "../Api/api-orders";
+import { DataContext } from "../../Context/Context";
+import { getPassportQuality } from "../../Api/api-orders";
 
 export const OrderQuality = ({order}) => {
     

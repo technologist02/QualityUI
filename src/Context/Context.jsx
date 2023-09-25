@@ -1,29 +1,50 @@
 import React,{createContext, useState} from "react";
-import { createExtruder, getExtruders, getFilms } from "../api";
-import { createFilm } from "../api";
+import { createExtruder, getExtruders } from "../api";
+import { getFilms, createFilm, updateFilm } from "../Api/api-film";
 import { getFilmMap } from "../Entities/film";
+import { createStandartName, getStandartName } from "../Api/api-standart-name";
 
 export const DataContext = createContext();
 
 export const Context = (props) => {
+
     const [films, setFilms] = useState([])
     const [orders, setOrders] = useState([])
     const [extruders, setExtruders] = useState([])
+    const [standartNames, setStandartNames] = useState([])
     const [filmMap, setFilmMap] = useState(new Map())
 
     async function updateContextFilm() {
-        await getFilms().then(data => {setFilms(data);setFilmMap(getFilmMap(films))});
+        await getFilms().then(data => {setFilms(data);setFilmMap(getFilmMap(data))});
     }
     async function updateContextExtruders() {
         await getExtruders().then(data => {setExtruders(data)})
     }
-    
+    async function updateContextStandartNames() {
+        await getStandartName().then(data => {setStandartNames(data)})
+    }
 
     async function addFilm(film){
         try{
             const response = await createFilm(film);
             if (response.ok){
                 alert('Пленка успешно добавлена');
+                updateContextFilm();
+            }
+            else{
+                alert("Что-то пошло не так")
+            }
+        }
+        catch{
+            alert("Oops!")
+        }
+    }
+
+    async function changeFilm(filmId, mark, thick, color, density){
+        try{
+            const response = await updateFilm(filmId, mark, thick, color, density);
+            if (response.ok){
+                alert("Изменения успешно проведены")
                 updateContextFilm();
             }
             else{
@@ -51,15 +72,35 @@ export const Context = (props) => {
             alert("Oops!")
         }
     }
-
+    
+    async function addStandartName(name, description){
+        try{
+            const response = await createStandartName(name, description);
+            if (response.ok){
+                alert('Стандарт качества успешно добавлен');
+                updateContextStandartNames();
+                
+            }
+            else{
+                alert("Что-то пошло не так")
+            }
+        }
+        catch{
+            alert("Oops!")
+        }
+    }
 
     const data = {
         films,
         filmMap,
+        standartNames,
         addFilm,
+        changeFilm,
         updateContextFilm,
         updateContextExtruders,
+        updateContextStandartNames,
         addExtruder,
+        addStandartName,
         orders,
         extruders
     }

@@ -1,5 +1,4 @@
 
-
 export const Extruder = ({extruder}) => {
     const {id, extruderName} = extruder;
 

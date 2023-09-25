@@ -16,12 +16,13 @@ export async function createFilm(film) {
     return response;
 }
 
-export async function changeFilm(id, mark, thickness, color) {
+export async function updateFilm(id, mark, thickness, color, density) {
     const film = {}
     film.id = id;
     film.mark = mark;
     film.thickness = thickness
     film.color = color;
+    film.density = density;
     const response = await fetch(`${API_URL}/Films`,{
         method: 'PATCH',
         body: JSON.stringify(film),
