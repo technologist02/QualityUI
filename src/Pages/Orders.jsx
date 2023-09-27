@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { OrderQuality } from "../components/order-quality-components/OrderQuality"
 import { DataContext } from "../Context/Context";
-import { ChangeOrderModal } from "../components/order-quality-components/ChangeOrderModal";
 import { Preloader } from "../components/Preloader";
 import { UpdateOrder } from "../components/order-quality-components/UpdateOrder";
 
@@ -13,7 +12,7 @@ export const Orders = (props) => {
 
     return(
     <div>
-        {/* {load ? <Preloader/> : <ChangeOrderModal/>} */}
+        {/* {load ? <Preloader/> : } */}
         <UpdateOrder/>
         <table className="table table-bordered">
             <thead>
