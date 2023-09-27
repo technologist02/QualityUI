@@ -22,6 +22,22 @@ export async function createOrderQuality(order) {
     }
 }
 
+export async function updateOrderQuality(order) {
+    const response = await fetch(`${API_URL}/OrderQuality`,{
+        method: 'PATCH',
+        body: JSON.stringify(order),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+          }
+    })
+    if (response.ok) {
+        alert("Данные заказа обновлены")
+    }
+    else(
+        alert("WTF?")
+    )
+}
+
 export async function getOrderById(id){
     const response = await fetch(`${API_URL}/OrderQuality/${id}`);
     return await response.json();

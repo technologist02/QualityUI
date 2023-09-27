@@ -8,12 +8,14 @@ import { FilmItemContext } from './Context/add-or-update-film-context';
 import { Extruders } from './Pages/Extruders';
 import { Order } from './Pages/AddOrder';
 import { StandartNames } from './Pages/StandartQualityNames';
+import { OrderItemContext } from './Context/add-or-update-order-context';
 
 function App() {
   return (<Context>
     <div className="App">
         <Header />
         <main className='container-fluid'>
+          <OrderItemContext>
           <Routes>
             <Route path="/" element={<Main/>} />
             <Route path="/Films" element={<FilmItemContext><Films/></FilmItemContext>}/>
@@ -23,6 +25,7 @@ function App() {
             <Route path="/Orders/:id" element={<Order/>}/>
             <Route path="/Orders" element={<Main/>}/>
           </Routes>
+          </OrderItemContext>
         </main>
     </div>
     </Context>

@@ -3,6 +3,7 @@ import { OrderQuality } from "../components/order-quality-components/OrderQualit
 import { DataContext } from "../Context/Context";
 import { ChangeOrderModal } from "../components/order-quality-components/ChangeOrderModal";
 import { Preloader } from "../components/Preloader";
+import { UpdateOrder } from "../components/order-quality-components/UpdateOrder";
 
 export const Orders = (props) => {
     const {orders} = props;
@@ -13,6 +14,7 @@ export const Orders = (props) => {
     return(
     <div>
         {/* {load ? <Preloader/> : <ChangeOrderModal/>} */}
+        <UpdateOrder/>
         <table className="table table-bordered">
             <thead>
             <tr>

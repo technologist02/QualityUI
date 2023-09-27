@@ -26,7 +26,11 @@ export const Film = ({film}) => {
             <td>{color}</td>
             <td>{density}</td>
             <td>
-                <button type="button" className="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => setData(id, mark, thickness, color)}>Изменить</button>
+                <button type="button" 
+                    className="btn btn-outline-warning" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#staticBackdrop" 
+                    onClick={() => setData(id, mark, thickness, color)}>Изменить</button>
             </td>
         </tr>
         </>

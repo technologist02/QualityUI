@@ -6,56 +6,49 @@ import { createOrderQuality } from "../api"
 import { Order as order } from "../Entities/order"
 import { ControledInput } from "../FormComponents/ControledInput"
 import { Preloader } from "../components/Preloader"
-import { useParams } from "react-router-dom"
-import { getOrderById } from "../Api/api-orders"
 
 export const Order = () => {
 
-    const {id} = useParams()
-    const [order, setOrder] = useState({})
-    const [flag, setFlag] = useState(order? false : true)
     const {extruders, films, filmMap} = useContext(DataContext)
-    const film = films.filter(film => film.id === order.filmID)
-    const extruder = extruders.filter(extr=>extr.id === order.extruderID)
     const [load, setLoad] = useState(true);
 
-    const [extruderName, setExtruderName] = useState(extruder.extruderName)
-    const [mark, setMark] = useState(film.id)
-    const [thick, setThick] = useState(film.thickness)
-    const [color, setColor] = useState(film.color)
+    const [extruderName, setExtruderName] = useState("")
+    const [mark, setMark] = useState()
+    const [thick, setThick] = useState()
+    const [color, setColor] = useState()
     const [extrudersSelect, setExtrudersSelect] = useState([])
     const [filmMarks, setFilmMarks] = useState([])
     const [filmThicks, setFilmThicks] = useState([])
     const [filmColors, setFilmColors] = useState([])
     //const [filmMap, setFilmMap] = useState(new Map())
 
-    const [orderNumber, setOrderNumber] = useState(order.orderNumber)
-    const [customer, setCustomer] = useState(order.customer)
-    const [productionDate, setProductionDate] = useState(order.productionDate)
-    const [brigadeNumber, setBrigadeNumber] = useState(order.brigadeNumber)
-    const [width, setWidth] = useState(order.width)
-    const [minThickness, setMinThickness] = useState(order.minThickness)
-    const [maxThickness, setMaxThickness] = useState(order.maxThickness)
-    const [tensileStrengthMD, setTensileStrengthMD] = useState(order.tensileStrengthMD)
-    const [tensileStrengthTD, setTensileStrengthTD] = useState(order.tensileStrengthTD)
-    const [elongationAtBreakMD, setElongationAtBreakMD] = useState(order.elongationAtBreakMD)
-    const [elongationAtBreakTD, setElongationAtBreakTD] = useState(order.elongationAtBreakTD)
-    const [coefficientOfFrictionS, setCoefficientOfFrictionS] = useState(order.coefficientOfFrictionS)
-    const [coefficientOfFrictionD, setCoefficientOfFrictionD] = useState(order.coefficientOfFrictionD)
-    const [lightTransmission, setLightTransmission] = useState(order.lightTransmission)
-    const [coronaTreatment, setCoronaTreatment] = useState(order.coronaTreatment)
+    const [orderNumber, setOrderNumber] = useState("")
+    const [customer, setCustomer] = useState("")
+    const [productionDate, setProductionDate] = useState("")
+    const [brigadeNumber, setBrigadeNumber] = useState("")
+    const [width, setWidth] = useState("")
+    const [minThickness, setMinThickness] = useState("")
+    const [maxThickness, setMaxThickness] = useState("")
+    const [tensileStrengthMD, setTensileStrengthMD] = useState("")
+    const [tensileStrengthTD, setTensileStrengthTD] = useState("")
+    const [elongationAtBreakMD, setElongationAtBreakMD] = useState("")
+    const [elongationAtBreakTD, setElongationAtBreakTD] = useState("")
+    const [coefficientOfFrictionS, setCoefficientOfFrictionS] = useState("")
+    const [coefficientOfFrictionD, setCoefficientOfFrictionD] = useState("")
+    const [lightTransmission, setLightTransmission] = useState("")
+    const [coronaTreatment, setCoronaTreatment] = useState("")
     const [standartQualityName, setStandartQualityName] = useState("")
 
-    useEffect(() => {getOrderById(id).then(data=>setOrder(data)); setLoad(false)}, [])
+    //useEffect(() => {setFilmMap(getFilmMap(films)); setLoad(false)}, [])
     useEffect(() => {setExtrudersSelect(getExtruderNames()); setLoad(false)}, [])
     useLayoutEffect(() => {setFilmMarks(getFilmMarks())}, [filmMap])
-    useLayoutEffect(() => {setFilmThicks(getFilmThikness()); setFlag(true)}, [mark])
+    useLayoutEffect(() => {setFilmThicks(getFilmThikness())}, [mark])
     useLayoutEffect(() => {setFilmColors(getFilmColor())}, [mark, thick])
 
     function getExtruderNames() {
         try{
             const array = Array.from(extruders.map(extruder => extruder.extruderName));
-            flag && setExtruderName(array[0]);
+            setExtruderName(array[0]);
             return Array.from(extruders.map(extruder => extruder.extruderName))
         }
         catch{
@@ -66,11 +59,9 @@ export const Order = () => {
     function getFilmMarks() {
         try{
             const array = Array.from(filmMap.keys())
-            if (flag) {
-                setMark(array[0]);
-                setThick();
-                setColor();
-            }
+            setMark(array[0]);
+            setThick();
+            setColor();
             return array
         }
         catch{
@@ -83,10 +74,8 @@ export const Order = () => {
     function getFilmThikness() {
         try{
             const array = Array.from(filmMap.get(mark).keys())
-            if (flag) {
-                setThick(array[0]);
-                setColor();
-            }
+            setThick(array[0]);
+            setColor();
             return array;
         }
         catch{
@@ -98,9 +87,7 @@ export const Order = () => {
     function getFilmColor(){
         try{
             const array = filmMap.get(mark).get(+thick)
-            if (flag) {
-                setColor(array[0]);
-            }
+            setColor(array[0]);
             return array;
         }
         catch{
