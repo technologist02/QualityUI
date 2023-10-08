@@ -107,6 +107,7 @@ export const Order = () => {
         const OrderQuality = new order(orderNumber, customer, productionDate, brigadeNumber, extruderID, filmID,  width, minThickness, maxThickness,
             tensileStrengthMD, tensileStrengthTD, elongationAtBreakMD, elongationAtBreakTD, coefficientOfFrictionS, coefficientOfFrictionD,
             lightTransmission, coronaTreatment, standartQualityNameId)
+        console.log(OrderQuality)
         createOrderQuality(OrderQuality)
     }
 

@@ -1,5 +1,5 @@
-export function ControledInput(props){
-    const {type, id, text, value, setValue} = props
+export function ControledInput({type, id, text, value, setValue}){
+    // const {type, id, text, value, setValue} = props
 
     return(
         <div className="form-floating" style={{marginBottom:"0.5rem"}}>

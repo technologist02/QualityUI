@@ -44,7 +44,7 @@ export async function getOrderById(id){
 }
 export async function getPassportQuality(id) {
     console.log(id);
-    const response = await fetch(`${API_URL}/OrderQuality/passport=${id}`);
+    const response = await fetch(`${API_URL}/OrderQuality/passport/${id}`);
     if (response.ok){
         const blob = await response.blob();  
         const link = document.createElement("a");  

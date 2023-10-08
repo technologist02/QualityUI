@@ -9,6 +9,7 @@ import { Extruders } from './Pages/Extruders';
 import { Order } from './Pages/AddOrder';
 import { StandartNames } from './Pages/StandartQualityNames';
 import { OrderItemContext } from './Context/add-or-update-order-context';
+import { UserRegistrationForm } from './Pages/UserRegistrationForm';
 
 function App() {
   return (<Context>
@@ -24,6 +25,7 @@ function App() {
             <Route path="/AddOrder" element={<Order/>}/>
             <Route path="/Orders/:id" element={<Order/>}/>
             <Route path="/Orders" element={<Main/>}/>
+            <Route path="/Registration" element={<UserRegistrationForm/>}/>
           </Routes>
           </OrderItemContext>
         </main>
