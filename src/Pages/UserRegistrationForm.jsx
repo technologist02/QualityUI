@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { ControledInput } from "../FormComponents/ControledInput"
-import { Registry } from "../Api/api-user"
+import { registry } from "../Api/api-user"
+import { User } from "../Entities/user"
 
 export const UserRegistrationForm = () => {
     const [name, setName] = useState("")
@@ -10,16 +11,14 @@ export const UserRegistrationForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if(pass!=confirmPass){
+        if(pass !== confirmPass){
             alert("Пароли не совпадают!!1")
         }
         else{
-            const user = {}
-            user.name = name
+            const user = new User(name, pass)
             user.email = email
-            user.password = pass
             console.log(user)
-            Registry(user);
+            registry(user);
         }
     }
 

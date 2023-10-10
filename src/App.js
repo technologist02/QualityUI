@@ -10,11 +10,12 @@ import { Order } from './Pages/AddOrder';
 import { StandartNames } from './Pages/StandartQualityNames';
 import { OrderItemContext } from './Context/add-or-update-order-context';
 import { UserRegistrationForm } from './Pages/UserRegistrationForm';
+import { LoginContext } from './Context/user-context';
 
 function App() {
   return (<Context>
     <div className="App">
-        <Header />
+        <LoginContext><Header /></LoginContext>
         <main className='container-fluid'>
           <OrderItemContext>
           <Routes>

@@ -7,17 +7,11 @@ export const OrderChangeContext = createContext();
 export const OrderItemContext = (props) => {
 
     const {films, extruders} = useContext(DataContext)
-
-    //const [order, setOrder] = useState(); 
     const [id, setId] = useState()
     const [extruderName, setExtruderName] = useState()
     const [mark, setMark] = useState()
     const [thick, setThick] = useState()
     const [color, setColor] = useState()
-    //const [extrudersSelect, setExtrudersSelect] = useState([])
-    // const [filmMarks, setFilmMarks] = useState([])
-    // const [filmThicks, setFilmThicks] = useState([])
-    // const [filmColors, setFilmColors] = useState([])
     const [orderNumber, setOrderNumber] = useState()
     const [customer, setCustomer] = useState()
     const [productionDate, setProductionDate] = useState()

@@ -1,31 +1,50 @@
 import { createContext, useState } from "react";
-import { autorizeUser } from "../Api/api-user";
+import { autorize, getUserData } from "../Api/api-user";
 
 export const UserContext = createContext()
 
 export const LoginContext = (props) => {
     const [login, setLogin] = useState(false)
-    const [userName, setUserName] = useState("")
+    const [username, setUsername] = useState("")
+    const [tokenKey, setTokenKey] = useState("")
 
     async function tryLoadUserData() {
-        sessionStorage.getItem(tokenKey)
+        try{
+            setTokenKey(sessionStorage.getItem("tokenKey"))
+            setUsername(sessionStorage.getItem("userName"))
+            setLogin(true)
+        }
+        catch(error){
+            console.log(error)
+        }
     }
     
-    async function autorizeUser(name, password) {
-        const data = await autorize(name, password)
+    async function autorizeUser(user) {
+        const response = await autorize(user)
         if (response.ok) {
-            sessionStorage.setItem(tokenKey, data.access_token);
-            //sessionStorage.setItem(userName, data.)
+            const data = await response.text();
+            console.log(data);
+            sessionStorage.setItem("tokenKey", data);
+            const userData = await getUserData(data)
+            const name = await userData.text()
+            console.log(name)
+            sessionStorage.setItem("username", name)
             setLogin(true)
-            // setUserName()
+            setUsername(name)
         }
+    }
+
+    function logout(){
+        sessionStorage.clear()
+        setLogin(false)
     }
 
     const data = {
         login,
-        userName,
+        username,
         autorizeUser,
-        tryLoadUserData
+        tryLoadUserData,
+        logout
     }
 
     return <UserContext.Provider value={data}>
