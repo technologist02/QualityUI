@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react"
+import { useContext } from "react"
 import { UserContext } from "../Context/user-context"
 
 
@@ -7,7 +7,7 @@ export const HelloUser = () => {
 
     return(
         <div>
-            <span className="btn btn-warning btn-sm">{username}</span>
+            <span style={{color:"yellow", fontSize:16}}>{username}</span>
             <button className="btn btn-primary btn-sm" style={{margin:10}} onClick={() => logout()}>Выйти</button>
         </div>
     )

@@ -3,16 +3,18 @@ import { createExtruder, getExtruders } from "../api";
 import { getFilms, createFilm, updateFilm } from "../Api/api-film";
 import { getFilmMap } from "../Entities/film";
 import { createStandartName, getStandartName } from "../Api/api-standart-name";
+import { useNavigate } from "react-router-dom";
 
 export const DataContext = createContext();
 
 export const Context = (props) => {
 
     const [films, setFilms] = useState([])
-    const [orders, setOrders] = useState([])
+    // const [orders, setOrders] = useState([])
     const [extruders, setExtruders] = useState([])
     const [standartNames, setStandartNames] = useState([])
     const [filmMap, setFilmMap] = useState(new Map())
+    const navigate = useNavigate();
 
     async function updateContextFilm() {
         await getFilms().then(data => {setFilms(data);setFilmMap(getFilmMap(data))});
@@ -27,15 +29,21 @@ export const Context = (props) => {
     async function addFilm(film){
         try{
             const response = await createFilm(film);
+            console.log(response.status)
             if (response.ok){
                 alert('Пленка успешно добавлена');
                 updateContextFilm();
+            }
+            else if(response.status === 401){
+                alert("Вы не авторизованы")
+                navigate("/Autorization")
             }
             else{
                 alert("Что-то пошло не так")
             }
         }
-        catch{
+        catch(error){
+            console.log(error)
             alert("Oops!")
         }
     }
@@ -101,7 +109,7 @@ export const Context = (props) => {
         updateContextStandartNames,
         addExtruder,
         addStandartName,
-        orders,
+        // orders,
         extruders
     }
 

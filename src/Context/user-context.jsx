@@ -6,13 +6,15 @@ export const UserContext = createContext()
 export const LoginContext = (props) => {
     const [login, setLogin] = useState(false)
     const [username, setUsername] = useState("")
-    const [tokenKey, setTokenKey] = useState("")
+    //const [tokenKey, setTokenKey] = useState("")
 
     async function tryLoadUserData() {
         try{
-            setTokenKey(sessionStorage.getItem("tokenKey"))
-            setUsername(sessionStorage.getItem("userName"))
+            const token = sessionStorage.getItem("tokenKey")
+            const userData = await getUserData(token)
+            const name = await userData.text()
             setLogin(true)
+            setUsername(name)
         }
         catch(error){
             console.log(error)
@@ -28,14 +30,14 @@ export const LoginContext = (props) => {
             const userData = await getUserData(data)
             const name = await userData.text()
             console.log(name)
-            sessionStorage.setItem("username", name)
+            //sessionStorage.setItem("username", name)
             setLogin(true)
             setUsername(name)
         }
     }
 
     function logout(){
-        sessionStorage.clear()
+        sessionStorage.removeItem("tokenKey")
         setLogin(false)
     }
 

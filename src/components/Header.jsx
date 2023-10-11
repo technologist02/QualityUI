@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 import { Login } from "./Login"
-import { useEffect, useContext } from "react"
+import { useContext } from "react"
 import { UserContext } from "../Context/user-context"
 import { HelloUser } from "./HelloUser"
 
