@@ -6,6 +6,7 @@ import { ControledInput } from "../../FormComponents/ControledInput"
 import { Preloader } from "../Preloader"
 import { OrderChangeContext } from "../../Context/add-or-update-order-context"
 import { updateOrderQuality } from "../../Api/api-orders"
+import { Extruder } from "../extruder-components/ExtruderItem"
 
 export const UpdateOrder = () => {
 
@@ -56,9 +57,9 @@ export const UpdateOrder = () => {
             return array
         }
         catch{
-            // changeMark();
-            // changeThick();
-            // changeColor();
+            changeMark();
+            changeThick();
+            changeColor();
             return []
         }
     }
@@ -97,8 +98,13 @@ export const UpdateOrder = () => {
         console.log(customer)
         console.log(films)
         console.log(extruders)
-        const filmID = films.find(x => x.mark === mark && x.thickness === thick && x.color === color).id
-        const extruderID = extruders.find(x => x.extruderName === extruderName).id
+        console.log(mark)
+        console.log(thick)
+        console.log(color)
+        const filmID = films.filter(x => x.mark === mark && x.thickness === +thick)[0]
+        console.log(filmID)
+        const extruderID = extruders.filter(x => x.extruderName === extruderName)[0]
+        console.log(extruderID)
         const standartQualityNameId = 1
         
         const OrderQuality = new order(orderNumber, customer, productionDate, brigadeNumber, extruderID, filmID,  width, minThickness, maxThickness,
@@ -141,7 +147,9 @@ export const UpdateOrder = () => {
                                     text="Толщина пленки" 
                                     value={thick} 
                                     setValue={(text) => changeThick(text)} 
-                                    options={filmThicks}/>
+                                    options={filmThicks}
+                                    changes={() => setFlag(true)}
+                                    />
                                 <ControledSelect id="filmColor" 
                                     text="Цвет" 
                                     value={color} 

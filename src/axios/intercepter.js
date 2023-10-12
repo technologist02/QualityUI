@@ -15,17 +15,17 @@ const checkTokenInterceptor = (config) => {
 
 api.interceptors.request.use(checkTokenInterceptor);
 
-const responseSuccessInterceptor = (response) => {
-    const data = response.data;
-     if (!data._meta.success) {
-      return { error: data.result };
-     }
-     return { response: data };
-}
+// const responseSuccessInterceptor = (response) => {
+//     const data = response.data;
+//      if (!data._meta.success) {
+//       return { error: data.result };
+//      }
+//      return { response: data };
+// }
 
-const networkErrorInterceptor = (error) => {
-    const responseError = error?.response?.data;
-    return { error: responseError || error };
-}
+// const networkErrorInterceptor = (error) => {
+//     const responseError = error?.response?.data;
+//     return { error: responseError || error };
+// }
 
-api.interceptors.response.use(responseSuccessInterceptor, networkErrorInterceptor)
+//api.interceptors.response.use(responseSuccessInterceptor, networkErrorInterceptor)
