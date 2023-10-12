@@ -30,7 +30,7 @@ export const Film = ({film}) => {
                     className="btn btn-outline-warning" 
                     data-bs-toggle="modal" 
                     data-bs-target="#staticBackdrop" 
-                    onClick={() => setData(id, mark, thickness, color)}>Изменить</button>
+                    onClick={() => setData(id, mark, thickness, color, density)}>Изменить</button>
             </td>
         </tr>
         </>

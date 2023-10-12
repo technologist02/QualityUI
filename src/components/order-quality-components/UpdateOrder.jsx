@@ -101,9 +101,9 @@ export const UpdateOrder = () => {
         console.log(mark)
         console.log(thick)
         console.log(color)
-        const filmID = films.filter(x => x.mark === mark && x.thickness === +thick)[0]
+        const filmID = films.find(x => x.mark === mark && x.thickness === +thick && x.color === color).id
         console.log(filmID)
-        const extruderID = extruders.filter(x => x.extruderName === extruderName)[0]
+        const extruderID = extruders.find(x => x.extruderName === extruderName).id
         console.log(extruderID)
         const standartQualityNameId = 1
         
@@ -141,14 +141,14 @@ export const UpdateOrder = () => {
                                     value={mark} 
                                     setValue={(text) => changeMark(text)} 
                                     options={filmMarks}
-                                    changes={() => setFlag(true)}
+                                    selectEffect={() => setFlag(true)}
                                     />
                                 <ControledSelect id="filmThickness" 
                                     text="Толщина пленки" 
                                     value={thick} 
                                     setValue={(text) => changeThick(text)} 
                                     options={filmThicks}
-                                    changes={() => setFlag(true)}
+                                    selectEffect={() => setFlag(true)}
                                     />
                                 <ControledSelect id="filmColor" 
                                     text="Цвет" 
