@@ -1,6 +1,7 @@
 import React,{createContext, useState} from "react";
-import { createExtruder, getExtruders } from "../api";
+import { createExtruder, getExtruders } from "../Api/api-extruder";
 import { getFilms, createFilm, updateFilm } from "../Api/api-film";
+import { getStandartFilms } from "../Api/api-standart-films";
 import { getFilmMap } from "../Entities/film";
 import { createStandartName, getStandartName } from "../Api/api-standart-name";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +14,7 @@ export const Context = (props) => {
     // const [orders, setOrders] = useState([])
     const [extruders, setExtruders] = useState([])
     const [standartNames, setStandartNames] = useState([])
+    const [standartFilms, setStandartFilms] = useState([])
     const [filmMap, setFilmMap] = useState(new Map())
     const navigate = useNavigate();
 
@@ -24,6 +26,9 @@ export const Context = (props) => {
     }
     async function updateContextStandartNames() {
         await getStandartName().then(data => {setStandartNames(data)})
+    }
+    async function updateContextStandartFilms() {
+        await getStandartFilms().then(data => {setStandartFilms(data)})
     }
 
     async function addFilm(film){
@@ -102,11 +107,13 @@ export const Context = (props) => {
         films,
         filmMap,
         standartNames,
+        standartFilms,
         addFilm,
         changeFilm,
         updateContextFilm,
         updateContextExtruders,
         updateContextStandartNames,
+        updateContextStandartFilms,
         addExtruder,
         addStandartName,
         // orders,

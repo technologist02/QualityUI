@@ -14,7 +14,8 @@ export const Header = () => {
                     <li className="nav-link"><NavLink to="/AddOrder">Добавить заказ</NavLink></li>
                     <li className="nav-link"><NavLink to="/Films">Марки Пленок</NavLink></li>
                     <li className="nav-link"><NavLink to="/Extruders">Экструдеры</NavLink></li>
-                    <li className="nav-link"><NavLink to="/Standarts">Стандарты качества</NavLink></li>
+                    <li className="nav-link"><NavLink to="/StandartFilms">Стандарты пленок</NavLink></li>
+                    <li className="nav-link"><NavLink to="/StandartNames">Стандарты качества</NavLink></li>
                     <li className="nav-link"><NavLink to ="/about">About</NavLink></li>
                     {/* <li><NavLink to ="/contacts">Contacts</NavLink></li> */}
                 </ul>
