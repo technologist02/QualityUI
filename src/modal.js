@@ -1,21 +1,40 @@
-import { FilmChangeContext } from "../../Context/add-or-update-film-context";
-import { ControledInput } from "../../FormComponents/ControledInput";
-import { useContext } from "react";
-import { DataContext } from "../../Context/Context";
 
+class Modal{
+    constructor(text) {
+        this.text = text
 
-export const UpdateFilm = () => {
-    const {mark, thick, color, density, filmId, changeMark, changeThick, changeColor, changeDensity, clearFilmContext} = useContext(FilmChangeContext)
-    const {changeFilm} = useContext(DataContext)
+        this.init();
+    }
 
-    return <>
-        <div className="modal-dialog modal-dialog-centered">
-            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    init(){
+        this.createMarkup();
+        this.modal = document.getElementById("filmModal");
+        this.closeBtn = this.modal.querySelector('.btn-close');
+        this.attachEvents();
+    }
+
+    attachEvents(){
+        this.closeFn =this.closeFn.bind(this);
+        this.closeBtn.addEventListener("click", this.closeFn)
+    }
+    detachEvents(){
+        this.closeBtn.removeEventListener('click', this.closeFn)
+    }
+    closeFn(){
+        this.detachEvents();
+        this.modal.remove();
+        this.modal = null;
+    }
+    
+    createMarkup(){
+        document.body.insertAdjacentHTML('beforeend',
+        <div className="modal-dialog modal-dialog-centered" id="filmModal" tabIndex="-1">
+            <div className="modal fade">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id="staticBackdropLabel">{`Изменить данные пленки \n ${mark} ${thick}мкм ${color}`} </h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" className="btn-close"></button>
                         </div>
                         <div className="modal-body">
                             <div className="col-md">
@@ -48,11 +67,14 @@ export const UpdateFilm = () => {
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => clearFilmContext()}>Закрыть</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => {changeFilm(filmId, mark, thick, color, density); clearFilmContext()}}>Сохранить</button>
+                            <button type="button" className="btn btn-secondary btn-close" onClick={() => clearFilmContext()}>Закрыть</button>
+                            <button type="button" className="btn btn-primary btn-close" onClick={() => {changeFilm(filmId, mark, thick, color, density); clearFilmContext()}}>Сохранить</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div></>
+        </div>
+        )
+    }
+
 }

@@ -6,7 +6,6 @@ import { ControledInput } from "../../FormComponents/ControledInput"
 import { Preloader } from "../Preloader"
 import { OrderChangeContext } from "../../Context/add-or-update-order-context"
 import { updateOrderQuality } from "../../Api/api-orders"
-import { Extruder } from "../extruder-components/ExtruderItem"
 
 export const UpdateOrder = () => {
 
@@ -22,14 +21,14 @@ export const UpdateOrder = () => {
 
     const [flag, setFlag] = useState(false)
     
-    const [load, setLoad] = useState(true);
+    // const [load, setLoad] = useState(true);
     const [extrudersSelect, setExtrudersSelect] = useState([])
     const [filmMarks, setFilmMarks] = useState([])
     const [filmThicks, setFilmThicks] = useState([])
     const [filmColors, setFilmColors] = useState([])
     const [standartQualityName, setStandartQualityName] = useState("")
 
-    useEffect(() => {setLoad(false); console.log("загрузка")}, [])
+    // useEffect(() => {setLoad(false); console.log("загрузка")}, [])
     useEffect(() => {setExtrudersSelect(getExtruderNames());}, [extruders])
     useLayoutEffect(() => {setFilmMarks(getFilmMarks()); console.log("отработали марки")}, [filmMap])
     useLayoutEffect(() => {setFilmThicks(getFilmThikness()); console.log("отработали толщины")}, [mark])
@@ -116,7 +115,6 @@ export const UpdateOrder = () => {
     }
 
     return(
-        load ? <Preloader/> :
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div className="modal fade" id="updateOrder" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="modal-dialog">

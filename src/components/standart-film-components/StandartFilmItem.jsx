@@ -9,7 +9,7 @@ export const StandartFilmItem = ({standart}) => {
         lightTransmission, coronaTreatment, standartQualityNameID} = standart;
 
     const film = films.find(film => film.id === filmID)
-    const standartName = standartNames.find(x=> x.id == standartQualityNameID)
+    const standartName = standartNames.find(x=> x.id === standartQualityNameID)
     return(
         <>
             <td>
