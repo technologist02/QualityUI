@@ -5,7 +5,7 @@ const extrudersAdapter = createEntityAdapter({
 });
 
 export const loadExtruders = createAsyncThunk(
-    '@@films/load-extruders',
+    '@@extruders/load-extruders',
     async (_, {
         extra: {client, api}
     }) => {
@@ -13,9 +13,14 @@ export const loadExtruders = createAsyncThunk(
     }
 )
 
-export const createExtruder = createAsyncThunk({
-
-})
+export const createExtruder = createAsyncThunk(
+    '@@extruders/create-extruder',
+    async (extruder, {
+        extra: {client, api}
+    }) => {
+        return client.post(api.EXTRUDERS, extruder)
+    }
+)
 
 const extrudersSlice = createSlice({
     name: '@@extruders',
