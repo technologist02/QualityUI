@@ -4,11 +4,8 @@ import { FilmChangeContext } from "../../Context/add-or-update-film-context";
 
 export const Film = ({film}) => {
     const {id, mark, thickness, color, density} = film;
-    // const [newMark, setNewMark] = useState("");
-    // const [thick, setThick] = useState();
-    // const [newColor, setNewColor] = useState("");
 
-    const {changeMark, changeThick, changeColor, changeFilmId, changeDensity, clearFilmContext} = useContext(FilmChangeContext)
+    const {changeMark, changeThick, changeColor, changeFilmId, changeDensity} = useContext(FilmChangeContext)
 
     function setData(id, mark, thickness, color, density) {
         changeFilmId(id);

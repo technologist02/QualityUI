@@ -3,16 +3,28 @@ import { Film } from "../components/film-components/FilmItem";
 import { DataContext } from "../Context/Context";
 import { UpdateFilm } from "../components/film-components/UpdateFilm";
 import { AddFilm } from "../components/film-components/AddFilm";
+import { useDispatch, useSelector } from "react-redux";
+import { filmsSelector, loadFilms } from "../features/films/films-slice";
+
 
 
 export const Films = () => {
+    const [isModalShow, setIsModalShow] = useState(false)
+    const dispatch = useDispatch()
+    const films2 = useSelector(filmsSelector.selectAll)
     const {films = [], updateContextFilm} = useContext(DataContext)
-    const [load, setLoad] = useState(true);
-    
-    useEffect(() => {updateContextFilm(); setLoad(false)}, []);
+    const {error, loading} = useSelector(state => state.films);
+
+    // const setModalData = (filmId, thickness, color, density) => {
+        
+    // }
+
+    useEffect(() => {updateContextFilm(); dispatch(loadFilms())}, [dispatch]);
 
     return(
         <div style={{marginLeft:"1rem"}}>
+            {error && <h2>{error}</h2>}
+            {loading === 'loading' && <h2>Loading...</h2>}
             <UpdateFilm/>
             <AddFilm/>
             <table className="table">
@@ -26,7 +38,7 @@ export const Films = () => {
                 </thead>
                 <tbody>
                     {
-                        films.map(film => <Film key={film.id} film={film}/>)
+                        films2.map(film => <Film key={film.id} film={film}/>)
                     }
                 </tbody>
             </table>

@@ -1,8 +1,11 @@
 
 class Modal{
-    constructor(text) {
+    constructor(text, mark, thick, color, density) {
         this.text = text
-
+        this.mark = mark
+        this.thick = thick
+        this.color = color
+        this.density = density
         this.init();
     }
 
@@ -41,28 +44,28 @@ class Modal{
                                 <ControledInput type="text" 
                                     id="mark"
                                     text="Марка"
-                                    value={mark} 
+                                    value={this.mark} 
                                     setValue={(text) => changeMark(text)}/>
                             </div>
                             <div className="col-md">
                                 <ControledInput type="text" 
                                     id="thick"
                                     text="Толщина"
-                                    value={thick} 
+                                    value={this.thick} 
                                     setValue={(text) => changeThick(text)}/>
                             </div>
                             <div className="col-md">
                                 <ControledInput type="text" 
                                     id="color"
                                     text="Цвет"
-                                    value={color} 
+                                    value={this.color} 
                                     setValue={(text) => changeColor(text)}/>
                             </div>
                             <div className="col-md">
                                 <ControledInput type="number" 
                                     id="density"
                                     text="Плотность, г/см3"
-                                    value={density} 
+                                    value={this.density} 
                                     setValue={(density) => changeDensity(density)}/>
                             </div>
                         </div>
@@ -76,5 +79,4 @@ class Modal{
         </div>
         )
     }
-
 }
