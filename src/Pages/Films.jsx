@@ -1,27 +1,18 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect} from "react";
 import { Film } from "../components/film-components/FilmItem";
-import { DataContext } from "../Context/Context";
-import { UpdateFilm } from "../components/film-components/UpdateFilm";
-import { AddFilm } from "../components/film-components/AddFilm";
 import { useDispatch, useSelector } from "react-redux";
 import { filmsSelector, loadFilms } from "../features/films/films-slice";
 import { FilmModal } from "../components/film-components/ModalFilm";
-//import { resetModal } from "../features/films/edit-film-slice";
 
 
 
 export const Films = () => {
     const dispatch = useDispatch()
     const films2 = useSelector(filmsSelector.selectAll)
-    //const {films = [], updateContextFilm} = useContext(DataContext)
     const {error, loading} = useSelector(state => state.films);
     const isModalShow = useSelector(state => state.editFilm.isModalShow)
 
-    // const setModalData = (filmId, thickness, color, density) => {
-        
-    // }
-
-    useEffect(() => {dispatch(loadFilms())}, []);
+    useEffect(() => {dispatch(loadFilms())}, [dispatch]);
 
     return(
         <div style={{marginLeft:"1rem"}}>

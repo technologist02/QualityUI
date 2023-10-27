@@ -5,11 +5,10 @@ const initialState = {
     film: {
         id: 0,
         mark: "",
-        thick: 0,
+        thickness: 0,
         color: "",
         density: 0
     }
-    
 }
 
 const editFilmSlice = createSlice({
@@ -23,7 +22,7 @@ const editFilmSlice = createSlice({
             state.film.mark = action.payload
         },
         setThick: (state, action) => {
-            state.film.thick = action.payload
+            state.film.thickness = action.payload
         },
         setColor: (state, action) => {
             state.film.color = action.payload

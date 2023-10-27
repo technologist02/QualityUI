@@ -36,7 +36,7 @@ const filmsSlice = createSlice({
     initialState: filmsAdapter.getInitialState({
         loading: 'idle',
         error: null
-      }),
+    }),
     reducers : {},
     extraReducers: builder => {
         builder
@@ -48,20 +48,11 @@ const filmsSlice = createSlice({
                 state.loading = 'loading';
                 state.error = null;
             })
-            // .addCase(loadFilms.rejected, (state, action) => {
-            //     state.loading = 'rejected';
-            //     state.error = action.payload || action.meta.error
-            // })
             .addCase(createFilm.fulfilled, (state, action) => {
                 filmsAdapter.addOne(state, action.payload.data)
             })
-            // .addCase(createFilm.rejected, (state, action) => {
-            //     //state.loading = 'rejected';
-            //     state.error = action.payload || action.meta.error
-            // })
             .addCase(updateFilm.fulfilled, (state, action) => {
-                //const updatedFilm = action.payload;
-                filmsAdapter.setOne(state, action.payload) 
+                filmsAdapter.setOne(state, action.payload.data) 
             })
             .addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
                 state.loading = 'rejected';

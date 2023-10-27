@@ -18,7 +18,8 @@ export const createExtruder = createAsyncThunk(
     async (extruder, {
         extra: {client, api}
     }) => {
-        return client.post(api.EXTRUDERS, extruder)
+        const newExtruder = {extruderName: extruder}
+        return client.post(api.EXTRUDERS, newExtruder)
     }
 )
 
@@ -33,7 +34,7 @@ const extrudersSlice = createSlice({
         builder
             .addCase(loadExtruders.fulfilled, (state, action) => {
                 state.loading = 'fulfilled';
-                loadExtruders.addMany(state, action.payload.data);
+                extrudersAdapter.addMany(state, action.payload.data);
             })
             .addCase(loadExtruders.pending, (state) => {
                 state.loading = 'loading';
@@ -43,8 +44,15 @@ const extrudersSlice = createSlice({
                 state.loading = 'rejected';
                 state.error = action.payload || action.meta.error
             })
+            .addCase(createExtruder.fulfilled, (state, action) => {
+                extrudersAdapter.setOne(state, action.payload.data)
+            })
+            .addCase(createExtruder.rejected, (state, action) => {
+                state.loading = 'rejected';
+                state.error = action.payload || action.meta.error
+            })
     }
 })
 
 export const extrudersReducer = extrudersSlice.reducer;
-export const extrudersSelector = loadExtruders.getSelectors(state => state.extruders);
+export const extrudersSelector = extrudersAdapter.getSelectors(state => state.extruders);

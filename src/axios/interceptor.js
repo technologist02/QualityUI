@@ -1,9 +1,8 @@
-import { API_URL } from "../config"
+// import { API_URL } from "../config"
 import axios from "axios"
 
-const api = axios.create({
-    baseURL: API_URL,
-})
+export const client = axios.create(
+)
 
 const checkTokenInterceptor = (config) => {
     const token = sessionStorage.getItem("tokenKey")
@@ -13,7 +12,7 @@ const checkTokenInterceptor = (config) => {
     return config
 }
 
-api.interceptors.request.use(checkTokenInterceptor);
+client.interceptors.request.use(checkTokenInterceptor);
 
 // const responseSuccessInterceptor = (response) => {
 //     const data = response.data;

@@ -7,7 +7,7 @@ import { Context } from './Context/Context';
 import { FilmItemContext } from './Context/add-or-update-film-context'; 
 import { Extruders } from './Pages/Extruders';
 import { Order } from './Pages/AddOrder';
-import { StandartNames } from './Pages/StandartQualityNames';
+import { StandartTitles } from './Pages/StandartQualityNames';
 import { OrderItemContext } from './Context/add-or-update-order-context';
 import { UserRegistrationForm } from './Pages/UserRegistrationForm';
 import { LoginContext } from './Context/user-context';
@@ -26,7 +26,7 @@ function App() {
             <Route path="/" element={<Main/>} />
             <Route path="/Films" element={<FilmItemContext><Films/></FilmItemContext>}/>
             <Route path="/Extruders" element={<Extruders/>}/>
-            <Route path="/StandartNames" element={<StandartNames/>}/>
+            <Route path="/StandartNames" element={<StandartTitles/>}/>
             <Route path="/StandartFilms" element={<StandartQualityFilms/>}/>
             <Route path="/AddOrder" element={<Order/>}/>
             <Route path="/Orders/:id" element={<Order/>}/>

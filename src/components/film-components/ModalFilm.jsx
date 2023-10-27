@@ -6,22 +6,17 @@ import { setMark, setThick, setColor, setDensity, resetModal } from "../../featu
 export const FilmModal = () => {
     const dispatch = useDispatch()
     const film = useSelector(state => state.editFilm.film)
-    // const changeFilm = () => {
-    //     const newFilm = new Film(markState, thickState, colorState, densityState);
-    //     newFilm.id = filmId;
-    //     dispatch(updateFilm(newFilm));
-    // }
 
     return(
-        <div>
-            <div className="modal-dialog modal-dialog-centered" tabIndex="-1">
-                <div>
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <h1>{`Изменить данные пленки \n ${film.mark} ${film.thick}мкм ${film.color}`} </h1>
-                            <button type="button" onClick={()=>dispatch(resetModal())}></button>
+        <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-dialog" id="modal-film" >
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header" style={{padding:3}}>
+                            <h1 className="modal-title fs-5" id="staticBackdropLabel">{`Изменить данные пленки \n ${film.mark} ${film.thickness}мкм ${film.color}`} </h1>
+                            <button type="button" className="btn-close" onClick={()=>dispatch(resetModal())}></button>
                         </div>
-                        <div>
+                        <div className="modal-body">
                             <div className="col-md">
                                 <ControledInput type="text" 
                                     id="mark"
@@ -33,7 +28,7 @@ export const FilmModal = () => {
                                 <ControledInput type="number" 
                                     id="thick"
                                     text="Толщина"
-                                    value={film.thick} 
+                                    value={film.thickness} 
                                     setValue={(text) => dispatch(setThick(text))}/>
                             </div>
                             <div className="col-md">
@@ -51,9 +46,17 @@ export const FilmModal = () => {
                                     setValue={(text) => dispatch(setDensity(text))}/>
                             </div>
                         </div>
-                        <div>
-                            <button type="button" className="btn btn-secondary" onClick={() => dispatch(resetModal())}>Закрыть</button>
-                            <button type="button" className="btn btn-primary" onClick={() => {dispatch(updateFilm(film)); dispatch(resetModal())}}>Сохранить</button>
+                        <div className="modal-footer">
+                            <button 
+                                type="button"
+                                className="btn btn-secondary"
+                                onClick={() => dispatch(resetModal())}>Закрыть
+                            </button>
+                            <button 
+                                type="button" 
+                                className="btn btn-primary"
+                                onClick={() => {dispatch(updateFilm(film)); dispatch(resetModal())}}>Сохранить
+                            </button>
                         </div>
                     </div>
                 </div>

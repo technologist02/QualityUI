@@ -1,14 +1,18 @@
-import { useEffect, useState, useContext } from "react"
-import { DataContext } from "../Context/Context"
+import { useEffect } from "react"
+//import { DataContext } from "../Context/Context"
 import { Standart } from "../components/standart-name-components/StandartItem"
+import { useDispatch, useSelector } from "react-redux"
+import { loadStandartTitles, standartTitlesSelector } from "../features/standart-titles/standart-titles-slice"
 
-export const StandartNames = () => {
-    
-    const {standartNames, updateContextStandartNames, addStandartName} = useContext(DataContext)
-    const [name, setName] = useState("")
-    const [description, SetDescription] = useState("")
+export const StandartTitles = () => {
+    const dispatch = useDispatch()
+    const standartTitles = useSelector(standartTitlesSelector.selectAll)
+    //const {standartNames, updateContextStandartNames, addStandartName} = useContext(DataContext)
+    // const [name, setName] = useState("")
+    // const [description, SetDescription] = useState("")
 
-    useEffect(() => {updateContextStandartNames();}, [])
+    console.log(standartTitles)
+    useEffect(() => {dispatch(loadStandartTitles())}, [dispatch])
     
     return (
         <div>
@@ -22,7 +26,7 @@ export const StandartNames = () => {
                 </thead>
                 <tbody>
                     {
-                        standartNames.map(standart => <Standart key={standart.id} standart={standart}/>)
+                        standartTitles.map(standart => <Standart key={standart.id} standart={standart}/>)
                     }
                 </tbody>
             </table>

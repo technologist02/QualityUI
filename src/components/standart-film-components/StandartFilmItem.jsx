@@ -1,15 +1,20 @@
-import { DataContext } from "../../Context/Context";
-import { useContext } from "react";
+import { useSelector } from "react-redux";
+// import { DataContext } from "../../Context/Context";
+// import { useContext } from "react";
+import { filmsSelector } from "../../features/films/films-slice";
+import { standartTitlesSelector } from "../../features/standart-titles/standart-titles-slice";
 
 
 export const StandartFilmItem = ({standart}) => {
-    const {films, standartNames} = useContext(DataContext)
+    const films = useSelector(filmsSelector.selectAll)
+    const standartTitles = useSelector(standartTitlesSelector.selectAll)
+    //const {films, standartNames} = useContext(DataContext)
     const {filmID, thicknessVariation,
         tensileStrengthMD, tensileStrengthTD, elongationAtBreakMD, elongationAtBreakTD, coefficientOfFrictionS, coefficientOfFrictionD,
         lightTransmission, coronaTreatment, standartQualityNameID} = standart;
 
     const film = films.find(film => film.id === filmID)
-    const standartName = standartNames.find(x=> x.id === standartQualityNameID)
+    const standartName = standartTitles.find(x=> x.id === standartQualityNameID)
     return(
         <>
             <td>

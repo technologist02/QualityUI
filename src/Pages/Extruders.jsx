@@ -1,14 +1,15 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState } from "react"
 import { Extruder } from "../components/extruder-components/ExtruderItem"
-import { DataContext } from "../Context/Context"
-import { AddExtruder } from "../components/extruder-components/add-extruder-modal"
+//import { AddExtruder } from "../components/extruder-components/add-extruder-modal"
+import { useDispatch, useSelector } from "react-redux"
+import { extrudersSelector, loadExtruders, createExtruder } from "../features/extruders/extruders-slice"
 
 
 export const Extruders = () => {
-    const {extruders, addExtruder, updateContextExtruders} = useContext(DataContext)
     const [newExtruder, setNewExtruder] = useState()
-
-    useEffect(() => {updateContextExtruders();}, [])
+    const dispatch = useDispatch();
+    const extruders = useSelector(extrudersSelector.selectAll)
+    useEffect(() => {dispatch(loadExtruders())}, [dispatch])
 
     return (
         <div>
@@ -31,7 +32,7 @@ export const Extruders = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => addExtruder(newExtruder)}>Сохранить</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => dispatch(createExtruder(newExtruder))}>Сохранить</button>
                         </div>
                     </div>
                 </div>

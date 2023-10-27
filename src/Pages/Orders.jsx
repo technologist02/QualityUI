@@ -3,12 +3,20 @@ import { OrderQuality } from "../components/order-quality-components/OrderQualit
 import { DataContext } from "../Context/Context";
 import { Preloader } from "../components/Preloader";
 import { UpdateOrder } from "../components/order-quality-components/UpdateOrder";
+import { useDispatch, useSelector } from "react-redux";
+import { loadOrders, ordersSelector } from "../features/orders/orders-slice";
+import { filmsSelector, loadFilms } from "../features/films/films-slice";
+import { extrudersSelector, loadExtruders } from "../features/extruders/extruders-slice";
 
-export const Orders = (props) => {
-    const {orders} = props;
-    const {updateContextFilm, updateContextExtruders} = useContext(DataContext)
+export const Orders = () => {
+    const dispatch = useDispatch()
+    const orders2 = useSelector(ordersSelector.selectAll)
+    const films = useSelector(filmsSelector.selectAll)
+    const extruders = useSelector(extrudersSelector.selectAll)
+    //const {orders} = props;
+    //const {updateContextFilm, updateContextExtruders} = useContext(DataContext)
     const [load, setLoad] = useState(true)
-    useEffect(() => {updateContextFilm(); updateContextExtruders(); setLoad(false)}, [])
+    useEffect(() => {dispatch(loadFilms()); dispatch(loadExtruders()); dispatch(loadOrders()); setLoad(false)}, [])
 
     return(
     <div>
@@ -44,7 +52,7 @@ export const Orders = (props) => {
             </thead>
             <tbody>
             {
-                (orders.map(order => <tr key={order.id}><OrderQuality order={order} /></tr>))
+                (orders2.map(order => <tr key={order.id}><OrderQuality order={order} films={films} extruders={extruders}/></tr>))
                         //  : <tr><td>Ничего</td></tr>
             }
             </tbody>

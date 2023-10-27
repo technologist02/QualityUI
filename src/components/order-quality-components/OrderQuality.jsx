@@ -1,11 +1,15 @@
 import { useContext } from "react";
-import { DataContext } from "../../Context/Context";
+//import { DataContext } from "../../Context/Context";
 import { getPassportQuality } from "../../Api/api-orders";
 import { OrderChangeContext } from "../../Context/add-or-update-order-context";
+import { useDispatch, useSelector } from "react-redux";
+import { filmsSelector } from "../../features/films/films-slice";
 
-export const OrderQuality = ({order}) => {
-    
-    const {films, extruders} = useContext(DataContext)
+export const OrderQuality = ({order, films, extruders}) => {
+    const dispatch = useDispatch()
+    // const films2 = useSelector(filmsSelector.selectAll)
+    // const extruders = useSelector()
+    // const {films, extruders} = useContext(DataContext)
     const {id, orderNumber, customer, productionDate, brigadeNumber, extruderID, filmID, width, minThickness, maxThickness,
          tensileStrengthMD, tensileStrengthTD, elongationAtBreakMD, elongationAtBreakTD, coefficientOfFrictionS, coefficientOfFrictionD,
          lightTransmission, coronaTreatment, standartQualityNameID} = order;
