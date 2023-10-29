@@ -1,160 +1,251 @@
-import { useContext, useEffect, useLayoutEffect, useState } from "react"
-import { DataContext } from "../Context/Context"
-import { getFilmMap } from "../Entities/film"
-import { ControledSelect } from "../FormComponents/ControledSelect"
-import { createOrderQuality } from "../Api/api-orders"
-//import { createOrderQuality } from "../api"
-import { Order as order } from "../Entities/order"
-import { ControledInput } from "../FormComponents/ControledInput"
-import { Preloader } from "../components/Preloader"
+import { useEffect } from "react";
+import { ControledSelect } from "../FormComponents/ControledSelect";
+import { ControledInput } from "../FormComponents/ControledInput";
+import { Preloader } from "../components/Preloader";
+import { createOrder } from "../features/orders/orders-slice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    chooseColor,
+    chooseMark,
+    chooseThickness,
+    setOrderNumber,
+    setCustomer,
+    setProductionDate,
+    setBrigadeNumber,
+    setExtruderName,
+    setWidth,
+    setMinThickness,
+    setMaxThickness,
+    setTensileStrengthMD,
+    setTensileStrengthTD,
+    setElongationAtBreakMD,
+    setElongationAtBreakTD,
+    setCoefficientOfFrictionS,
+    setCoefficientOfFrictionD,
+    setLightTransmission,
+    setCoronaTreatment,
+    setStandartTitle,
+} from "../features/orders/edit-orders-slice";
+import {
+    extrudersSelector,
+    loadExtruders,
+} from "../features/extruders/extruders-slice";
+import { loadFilms } from "../features/films/films-slice";
+import {
+    loadStandartTitles,
+    standartTitlesSelector,
+} from "../features/standart-titles/standart-titles-slice";
 
 export const Order = () => {
+    const dispatch = useDispatch();
+    const { loading } = useSelector((state) => state.films);
+    const extruders = useSelector((state) => state.editOrder.extruders);
+    const extrs = useSelector(extrudersSelector.selectAll);
+    const films = useSelector((state) => state.editOrder.films);
+    const marks = useSelector((state) => state.editOrder.filmsData.marks);
+    const thicks = useSelector((state) => state.editOrder.filmsData.thicks);
+    const colors = useSelector((state) => state.editOrder.filmsData.colors);
+    const order = useSelector((state) => state.editOrder.order);
+    const standartTitles = useSelector(standartTitlesSelector.selectAll);
 
-    const {extruders, films, filmMap} = useContext(DataContext)
-    const [load, setLoad] = useState(true);
+    useEffect(() => {
+        dispatch(loadExtruders());
+        dispatch(loadStandartTitles());
+        dispatch(loadFilms());
+    }, [dispatch]);
 
-    const [extruderName, setExtruderName] = useState("")
-    const [mark, setMark] = useState()
-    const [thick, setThick] = useState()
-    const [color, setColor] = useState()
-    const [extrudersSelect, setExtrudersSelect] = useState([])
-    const [filmMarks, setFilmMarks] = useState([])
-    const [filmThicks, setFilmThicks] = useState([])
-    const [filmColors, setFilmColors] = useState([])
-    //const [filmMap, setFilmMap] = useState(new Map())
-
-    const [orderNumber, setOrderNumber] = useState("")
-    const [customer, setCustomer] = useState("")
-    const [productionDate, setProductionDate] = useState("")
-    const [brigadeNumber, setBrigadeNumber] = useState("")
-    const [width, setWidth] = useState("")
-    const [minThickness, setMinThickness] = useState("")
-    const [maxThickness, setMaxThickness] = useState("")
-    const [tensileStrengthMD, setTensileStrengthMD] = useState("")
-    const [tensileStrengthTD, setTensileStrengthTD] = useState("")
-    const [elongationAtBreakMD, setElongationAtBreakMD] = useState("")
-    const [elongationAtBreakTD, setElongationAtBreakTD] = useState("")
-    const [coefficientOfFrictionS, setCoefficientOfFrictionS] = useState("")
-    const [coefficientOfFrictionD, setCoefficientOfFrictionD] = useState("")
-    const [lightTransmission, setLightTransmission] = useState("")
-    const [coronaTreatment, setCoronaTreatment] = useState("")
-    const [standartQualityName, setStandartQualityName] = useState("")
-
-    //useEffect(() => {setFilmMap(getFilmMap(films)); setLoad(false)}, [])
-    useEffect(() => {setExtrudersSelect(getExtruderNames()); setLoad(false)}, [])
-    useLayoutEffect(() => {setFilmMarks(getFilmMarks())}, [filmMap])
-    useLayoutEffect(() => {setFilmThicks(getFilmThikness())}, [mark])
-    useLayoutEffect(() => {setFilmColors(getFilmColor())}, [mark, thick])
-
-    function getExtruderNames() {
-        try{
-            const array = Array.from(extruders.map(extruder => extruder.extruderName));
-            setExtruderName(array[0]);
-            return Array.from(extruders.map(extruder => extruder.extruderName))
-        }
-        catch{
-            setExtruderName();
-            return []
-        }
-    }
-    function getFilmMarks() {
-        try{
-            const array = Array.from(filmMap.keys())
-            setMark(array[0]);
-            setThick();
-            setColor();
-            return array
-        }
-        catch{
-            setMark();
-            setThick();
-            setColor();
-            return []
-        }
-    }
-    function getFilmThikness() {
-        try{
-            const array = Array.from(filmMap.get(mark).keys())
-            setThick(array[0]);
-            setColor();
-            return array;
-        }
-        catch{
-            setThick();
-            setColor();
-            return []
-        } 
-    }
-    function getFilmColor(){
-        try{
-            const array = filmMap.get(mark).get(+thick)
-            setColor(array[0]);
-            return array;
-        }
-        catch{
-            setColor();
-            return []
-        }
-    }
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(customer)
-        console.log(films)
-        console.log(extruders)
-        const filmID = films.find(x => x.mark === mark && x.thickness === thick && x.color === color).id
-        const extruderID = extruders.find(x => x.extruderName === extruderName).id
-        const standartQualityNameId = 1
-        
-        const OrderQuality = new order(orderNumber, customer, productionDate, brigadeNumber, extruderID, filmID,  width, minThickness, maxThickness,
-            tensileStrengthMD, tensileStrengthTD, elongationAtBreakMD, elongationAtBreakTD, coefficientOfFrictionS, coefficientOfFrictionD,
-            lightTransmission, coronaTreatment, standartQualityNameId)
-        console.log(OrderQuality)
-        createOrderQuality(OrderQuality)
-    }
+        // console.log(customer)
+        console.log(films);
+        console.log(extruders);
+        const film = films.find(
+            (x) =>
+                x.mark === order.filmMark &&
+                x.thickness === +order.filmThick &&
+                x.color === order.filmColor
+        );
+        const filmID = film.id;
+        console.log(filmID);
+        const extruderID = extrs.find(
+            (x) => x.extruderName === order.extruderName
+        ).id;
+        console.log(extruderID);
+        const standartQualityNameId = standartTitles.find(
+            (x) => x.Name === order.standartTitle
+        );
 
-    return(
-        load ? <Preloader/> :
-        <div style={{marginLeft:"1rem", maxWidth:500}}>
+        const order2 = { ...order, extruderID, filmID, standartQualityNameId };
+        delete order2.filmMark;
+        delete order2.extruderName;
+        delete order2.filmThick;
+        delete order2.filmColor;
+        delete order2.id;
+        delete order2.standartTitle;
+        console.log(order2);
+        dispatch(createOrder(order2));
+    };
+
+    return loading === "loading" ? (
+        <Preloader />
+    ) : (
+        <div style={{ marginLeft: "1rem", maxWidth: 500 }}>
             <h3>Добавить данные по заказу</h3>
             <form onSubmit={handleSubmit}>
-                <ControledInput type="text" id="orderNumber" text="Номер заказа" value={orderNumber} setValue={(text) => setOrderNumber(text)}/>
-                <ControledInput type="text" id="customer" text="Заказчик" value={customer} setValue={(text) => setCustomer(text)}/>
-                <ControledInput type="date" id="productionDate" text="Дата производства" value={productionDate} setValue={(text) => setProductionDate(text)}/>
-                <ControledInput type="number" id="brigadeNumber" text="Номер смены" value={brigadeNumber} setValue={(text) => setBrigadeNumber(text)}/>
-                <ControledSelect id="extruderName"
+                <ControledInput
+                    type="text"
+                    id="orderNumber"
+                    text="Номер заказа"
+                    value={order.orderNumber}
+                    setValue={(text) => dispatch(setOrderNumber(text))}
+                />
+                <ControledInput
+                    type="text"
+                    id="customer"
+                    text="Заказчик"
+                    value={order.customer}
+                    setValue={(text) => dispatch(setCustomer(text))}
+                />
+                <ControledInput
+                    type="date"
+                    id="productionDate"
+                    text="Дата производства"
+                    value={order.productionDate}
+                    setValue={(text) => dispatch(setProductionDate(text))}
+                />
+                <ControledInput
+                    type="number"
+                    id="brigadeNumber"
+                    text="Номер смены"
+                    value={order.brigadeNumber}
+                    setValue={(text) => dispatch(setBrigadeNumber(text))}
+                />
+                <ControledSelect
+                    id="extruderName"
                     text="Экструдер"
-                    value={extruderName} 
-                    setValue={(text) => setExtruderName(text)} 
-                    options={extrudersSelect}/>
-                <ControledSelect id="filmMark"
+                    value={order.extruderName}
+                    setValue={(text) => dispatch(setExtruderName(text))}
+                    options={extruders}
+                />
+                <ControledSelect
+                    id="filmMark"
                     text="Марка пленки"
-                    value={mark} 
-                    setValue={(text) => setMark(text)} 
-                    options={filmMarks}/>
-                <ControledSelect id="filmThickness" 
-                    text="Толщина пленки" 
-                    value={thick} 
-                    setValue={(text) => setThick(text)} 
-                    options={filmThicks}/>
-                <ControledSelect id="filmColor" 
-                    text="Цвет" 
-                    value={color} 
-                    setValue={(color) => setColor(color)} 
-                    options={filmColors}/>
-                <ControledInput type="number" id="width" text="Ширина, мм" value={width} setValue={(text) => setWidth(text)}/>
-                <ControledInput type="number" id="minThickness" text="Толщина min" value={minThickness} setValue={(text) => setMinThickness(text)}/>
-                <ControledInput type="number" id="maxThickness" text="Толщина max" value={maxThickness} setValue={(text) => setMaxThickness(text)}/>
-                <ControledInput type="number" id="tensileStrengthMD" text="Прочность при разрыве вдоль, MPa" value={tensileStrengthMD} setValue={(text) => setTensileStrengthMD(text)}/>
-                <ControledInput type="number" id="tensileStrengthTD" text="Прочность при разрыве поперек, MPa" value={tensileStrengthTD} setValue={(text) => setTensileStrengthTD(text)}/>
-                <ControledInput type="number" id="elongationAtBreakMD" text="Удлинение при разрыве вдоль, %" value={elongationAtBreakMD} setValue={(text) => setElongationAtBreakMD(text)}/>
-                <ControledInput type="number" id="elongationAtBreakTD" text="Удлинение при разрыве поперек, %" value={elongationAtBreakTD} setValue={(text) => setElongationAtBreakTD(text)}/>
-                <ControledInput type="number" id="coefficientOfFrictionS" text="Коэффициент трения статический" value={coefficientOfFrictionS} setValue={(text) => setCoefficientOfFrictionS(text)}/>
-                <ControledInput type="number" id="coefficientOfFrictionD" text="Коэффициент трения динамический" value={coefficientOfFrictionD} setValue={(text) => setCoefficientOfFrictionD(text)}/>
-                <ControledInput type="number" id="lightTransmission" text="Светопропускание, %" value={lightTransmission} setValue={(text) => setLightTransmission(text)}/>
-                <ControledInput type="number" id="coronaTreatment" text="Активация, Дин" value={coronaTreatment} setValue={(text) => setCoronaTreatment(text)}/>
-                <ControledInput type="number" id="standartQualityName" text="Стандарт качества" value={standartQualityName} setValue={(text) => setStandartQualityName(text)}/>
-                <button type="submit" class="btn btn-primary btn-lg">Сохранить</button>
+                    value={order.filmMark}
+                    setValue={(text) => {
+                        dispatch(chooseMark(text));
+                    }}
+                    options={marks}
+                />
+                <ControledSelect
+                    id="filmThickness"
+                    text="Толщина пленки"
+                    value={order.filmThick}
+                    setValue={(text) => {
+                        dispatch(chooseThickness(text));
+                    }}
+                    options={thicks}
+                />
+                <ControledSelect
+                    id="filmColor"
+                    text="Цвет"
+                    value={order.filmColor}
+                    setValue={(color) => {
+                        dispatch(chooseColor(color));
+                    }}
+                    options={colors}
+                />
+                <ControledInput
+                    type="number"
+                    id="width"
+                    text="Ширина, мм"
+                    value={order.width}
+                    setValue={(text) => dispatch(setWidth(text))}
+                />
+                <ControledInput
+                    type="number"
+                    id="minThickness"
+                    text="Толщина min"
+                    value={order.minThickness}
+                    setValue={(text) => dispatch(setMinThickness(text))}
+                />
+                <ControledInput
+                    type="number"
+                    id="maxThickness"
+                    text="Толщина max"
+                    value={order.maxThickness}
+                    setValue={(text) => dispatch(setMaxThickness(text))}
+                />
+                <ControledInput
+                    type="number"
+                    id="tensileStrengthMD"
+                    text="Прочность при разрыве вдоль, MPa"
+                    value={order.tensileStrengthMD}
+                    setValue={(text) => dispatch(setTensileStrengthMD(text))}
+                />
+                <ControledInput
+                    type="number"
+                    id="tensileStrengthTD"
+                    text="Прочность при разрыве поперек, MPa"
+                    value={order.tensileStrengthTD}
+                    setValue={(text) => dispatch(setTensileStrengthTD(text))}
+                />
+                <ControledInput
+                    type="number"
+                    id="elongationAtBreakMD"
+                    text="Удлинение при разрыве вдоль, %"
+                    value={order.elongationAtBreakMD}
+                    setValue={(text) => dispatch(setElongationAtBreakMD(text))}
+                />
+                <ControledInput
+                    type="number"
+                    id="elongationAtBreakTD"
+                    text="Удлинение при разрыве поперек, %"
+                    value={order.elongationAtBreakTD}
+                    setValue={(text) => dispatch(setElongationAtBreakTD(text))}
+                />
+                <ControledInput
+                    type="number"
+                    id="coefficientOfFrictionS"
+                    text="Коэффициент трения статический"
+                    value={order.coefficientOfFrictionS}
+                    setValue={(text) =>
+                        dispatch(setCoefficientOfFrictionS(text))
+                    }
+                />
+                <ControledInput
+                    type="number"
+                    id="coefficientOfFrictionD"
+                    text="Коэффициент трения динамический"
+                    value={order.coefficientOfFrictionD}
+                    setValue={(text) =>
+                        dispatch(setCoefficientOfFrictionD(text))
+                    }
+                />
+                <ControledInput
+                    type="number"
+                    id="lightTransmission"
+                    text="Светопропускание, %"
+                    value={order.lightTransmission}
+                    setValue={(text) => dispatch(setLightTransmission(text))}
+                />
+                <ControledInput
+                    type="number"
+                    id="coronaTreatment"
+                    text="Активация, Дин"
+                    value={order.coronaTreatment}
+                    setValue={(text) => dispatch(setCoronaTreatment(text))}
+                />
+                <ControledSelect
+                    id="standartTitles"
+                    text="Стандарт качества"
+                    value={order.standartTitle}
+                    setValue={(text) => dispatch(setStandartTitle(text))}
+                    options={standartTitles.map((title) => title.name)}
+                />
+                <button type="submit" className="btn btn-primary btn-lg">
+                    Сохранить
+                </button>
             </form>
         </div>
-    )
-}
+    );
+};

@@ -7,15 +7,22 @@ import { extrudersReducer } from "../features/extruders/extruders-slice";
 import { standartFilmsReducer } from "../features/standart-films/standart-films-slice";
 import { standartTitlesReducer } from "../features/standart-titles/standart-titles-slice";
 import { ordersReducer } from "../features/orders/orders-slice";
+import { appStatusLoadReducer } from "../features/app-status-loading.slice";
+import { editOrderReducer } from "../features/orders/edit-orders-slice";
+import { filmsMapReducer } from "../features/films/films-map-slice";
+
 
 export const store = configureStore({
     reducer: {
       films: filmsReducer,
       editFilm: editFilmReducer,
+      filmsMap: filmsMapReducer,
       extruders: extrudersReducer,
       standartFilms: standartFilmsReducer,
       standartTitles: standartTitlesReducer,
       orders: ordersReducer,
+      editOrder: editOrderReducer,
+      appStatusLoad: appStatusLoadReducer,
     //   filter: filterReducer,
     },
     devTools: true,

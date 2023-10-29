@@ -35,7 +35,7 @@ const filmsSlice = createSlice({
     name: '@@films',
     initialState: filmsAdapter.getInitialState({
         loading: 'idle',
-        error: null
+        error: null,
     }),
     reducers : {},
     extraReducers: builder => {

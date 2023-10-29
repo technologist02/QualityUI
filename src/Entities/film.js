@@ -20,3 +20,21 @@ export function getFilmMap(films) {
     }
     return filmMap
 }
+
+export function filmsParse(films) {
+    const marks = new Set();
+    const thicks = new Set();
+    const colors = new Set();
+
+    for (let film of films) {
+        marks.add(film.mark);
+        thicks.add(film.thickness);
+        colors.add(film.color);
+    }
+
+    return {
+        marks: Array.from(marks),
+        thicks: Array.from(thicks),
+        colors: Array.from(colors)
+    }
+}   

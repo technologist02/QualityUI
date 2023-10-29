@@ -1,50 +1,56 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { filmsParse } from "../../Entities/film";
+import { loadFilms } from "../films/films-slice";
+import { loadExtruders } from "../extruders/extruders-slice";
 
 const initialState = {
     isModalShow: false,
     order: {
         id: 0,
-        orderNumber : "",
-        customer: "",
-        productionDate: "",
-        brigadeNumber: "",
-        extruderName : "",
-        filmMark: "",
-        filmThick: "",
-        filmColor: "",
-        width: "",
-        minThickness: "",
-        maxThickness: "",
-        tensileStrengthMD: "",
-        tensileStrengthTD: "",
-        elongationAtBreakMD: "",
-        elongationAtBreakTD: "",
-        coefficientOfFrictionS: "",
-        coefficientOfFrictionD: "",
-        lightTransmission: "",
-        coronaTreatment: "",
-        standartQualityNameID: ""
-    }
+        orderNumber : null,
+        customer: null,
+        productionDate: null,
+        brigadeNumber: null,
+        extruderName : null,
+        filmMark: null,
+        filmThick: null,
+        filmColor: null,
+        width: null,
+        minThickness: null,
+        maxThickness: null,
+        tensileStrengthMD: null,
+        tensileStrengthTD: null,
+        elongationAtBreakMD: null,
+        elongationAtBreakTD: null,
+        coefficientOfFrictionS: null,
+        coefficientOfFrictionD: null,
+        lightTransmission: null,
+        coronaTreatment: null,
+        standartTitle: null
+    },
+    filmsData : {
+        marks: [],
+        thicks: [],
+        colors: []
+    },
+    currentFilmsValues : {
+        mark: "",
+        thick: "",
+        color: ""
+    },
+    films: [],
+    extruders: []
 }
 
-const editFilmSlice = createSlice({
-    name: '@@edit-film',
+const editOrderSlice = createSlice({
+    name: '@@edit-order',
     initialState: initialState,
     reducers: {
         setOrderId: (state, action) => {
             state.order.id = action.payload
         },
         setOrderNumber: (state, action) => {
-            state.order.id = action.payload
-        },
-        setFilmMark : (state, action) => {
-            state.order.filmMark = action.payload
-        },
-        setFilmThick: (state, action) => {
-            state.order.filmThick = action.payload
-        },
-        setFilmColor: (state, action) => {
-            state.order.filmColor = action.payload
+            state.order.orderNumber = action.payload
         },
         setCustomer: (state, action) => {
             state.order.customer = action.payload
@@ -91,16 +97,82 @@ const editFilmSlice = createSlice({
         setCoronaTreatment: (state, action) => {
             state.order.coronaTreatment = action.payload
         },
-        setStandartQualityNameID: (state, action) => {
-            state.order.standartQualityNameID = action.payload
+        setStandartTitle: (state, action) => {
+            state.order.standartTitle = action.payload
         },
-        // showFilmModal: (state, action) => {
-        //     state.isModalShow = true;
-        //     state.extruderName = action.payload
-        // },
-        resetModal: () => {
-            return initialState
+        setOrderModal: (state, action) => {
+            //state.isModalShow = true;
+            state.order = action.payload
+            state.filmsData.thicks = filmsParse(state.films
+                .filter(film => film.mark === action.payload.filmMark)).thicks;
+            state.order.filmThick = action.payload.filmThick;
+            state.filmsData.colors = filmsParse(state.films
+                .filter(film => film.mark === action.payload.filmMark && film.thickness === +state.order.filmThick)).colors;
+            state.order.filmThick = +action.payload.filmThick;
+        },
+        chooseMark: (state, action) => {
+            state.order.filmMark = action.payload;
+            state.order.filmThick = "";
+            state.order.filmColor = "";
+            state.filmsData.thicks = filmsParse(state.films
+                .filter(film => film.mark === action.payload)).thicks;
+            // if (state.filmsData.thicks) {
+            //     state.order.filmThick = state.filmsData.thicks[0];
+            // }
+        },
+        chooseThickness: (state, action) => {
+            state.order.filmThick = action.payload;
+            state.order.filmColor = "";
+            state.filmsData.colors = filmsParse(state.films
+                .filter(film => film.mark === state.order.filmMark && film.thickness === +action.payload)).colors;
+            // if(state.filmsData.colors) {
+            //     state.order.filmColor = state.filmsData.colors[0];
+            // } 
+        },
+        chooseColor: (state, action) => {
+            state.order.filmColor = action.payload
+        },
+        resetModal: (state,action) => {
+            state.order = {}
         }
+    },
+    extraReducers: builder => {
+        builder
+            .addCase(loadFilms.fulfilled, (state, action) => {
+                state.films = action.payload.data;
+                state.filmsData.marks = filmsParse(action.payload.data).marks;
+                // if (state.filmsData.marks) {
+                //     state.order.filmMark = state.filmsData.marks[0]
+                // }
+            })
+            .addCase(loadExtruders.fulfilled, (state, action) => {
+                state.extruders = action.payload.data.map(extruder => extruder.extruderName);
+            })
     }
 })
 
+export const { setOrderId,
+    setOrderNumber,
+    setCustomer,
+    setProductionDate,
+    setBrigadeNumber,
+    setExtruderName,
+    setWidth,
+    setMinThickness,
+    setMaxThickness,
+    setTensileStrengthMD,
+    setTensileStrengthTD,
+    setElongationAtBreakMD,
+    setElongationAtBreakTD,
+    setCoefficientOfFrictionS,
+    setCoefficientOfFrictionD,
+    setLightTransmission,
+    setCoronaTreatment,
+    setStandartTitle,
+    setOrderModal,
+    resetModal,
+    chooseMark,
+    chooseThickness,
+    chooseColor } = editOrderSlice.actions;
+
+export const editOrderReducer = editOrderSlice.reducer;
