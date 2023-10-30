@@ -8,6 +8,7 @@ import {
     setOrderNumberFilter,
     setExtruderFilter,
     clearFilters,
+    setWidthFilter,
 } from "../../features/orders/orders-slice";
 
 export const OrderFilters = () => {
@@ -19,6 +20,7 @@ export const OrderFilters = () => {
         filmMarkFilter,
         filmThicknessFilter,
         filmColorFilter,
+        widthFilter
     } = useSelector((state) => state.orders.filters);
 
     return (
@@ -41,7 +43,7 @@ export const OrderFilters = () => {
                     dispatch(setCustomerFilter(e));
                 }}
             />
-            <ControledInput
+            {/* <ControledInput
                 type="text"
                 id="ExtruderName"
                 text="Экструдер"
@@ -49,8 +51,8 @@ export const OrderFilters = () => {
                 setValue={(e) => {
                     dispatch(setExtruderFilter(e));
                 }}
-            />
-            <ControledInput
+            /> */}
+            {/* <ControledInput
                 type="text"
                 id="FilmMark"
                 text="Марка пленки"
@@ -58,8 +60,8 @@ export const OrderFilters = () => {
                 setValue={(e) => {
                     dispatch(setFilmMarkFilter(e));
                 }}
-            />
-            <ControledInput
+            /> */}
+            {/* <ControledInput
                 type="text"
                 id="FilmThickness"
                 text="Толщина пленки"
@@ -67,14 +69,23 @@ export const OrderFilters = () => {
                 setValue={(e) => {
                     dispatch(setFilmThicknessFilter(e));
                 }}
-            />
-            <ControledInput
+            /> */}
+            {/* <ControledInput
                 type="text"
                 id="FilmColor"
                 text="Цвет пленки"
                 value={filmColorFilter}
                 setValue={(e) => {
                     dispatch(setFilmColorFilter(e));
+                }}
+            /> */}
+            <ControledInput
+                type="text"
+                id="Width"
+                text="Ширина"
+                value={widthFilter}
+                setValue={(e) => {
+                    dispatch(setWidthFilter(e));
                 }}
             />
             <button

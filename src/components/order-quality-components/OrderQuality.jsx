@@ -1,12 +1,18 @@
 import { getPassportQuality } from "../../Api/api-orders";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setOrderModal } from "../../features/orders/edit-orders-slice";
+import { filmsSelector } from "../../features/films/films-slice";
+import { extrudersSelector } from "../../features/extruders/extruders-slice";
+import { standartTitlesSelector } from "../../features/standart-titles/standart-titles-slice";
 
-export const OrderQuality = ({order, films, extruders, standartTitles}) => {
+export const OrderQuality = ({order}) => {
     const dispatch = useDispatch()
     const {id, orderNumber, customer, productionDate, brigadeNumber, extruderID, filmID, width, minThickness, maxThickness,
          tensileStrengthMD, tensileStrengthTD, elongationAtBreakMD, elongationAtBreakTD, coefficientOfFrictionS, coefficientOfFrictionD,
          lightTransmission, coronaTreatment, standartQualityNameID} = order;
+    const films = useSelector(filmsSelector.selectAll)
+    const extruders = useSelector(extrudersSelector.selectAll)
+    const standartTitles = useSelector(standartTitlesSelector.selectAll)
     const extruder = extruders.find(extr => extr.id === extruderID)
     const film = films.find(film => film.id === filmID)
     const standartTitle = standartTitles.find(title => title.id === standartQualityNameID)
@@ -37,7 +43,7 @@ export const OrderQuality = ({order, films, extruders, standartTitles}) => {
 
     return (<>
         <td>{orderNumber}</td>
-        <td>{customer}</td>
+        <td>{customer ? customer: "-"}</td>
         <td>{productionDate}</td>
         <td>{brigadeNumber}</td>
         <td>

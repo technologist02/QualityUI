@@ -11,6 +11,7 @@ const filters = {
     filmMarkFilter: "",
     filmThicknessFilter: "",
     filmColorFilter: "",
+    widthFilter: ""
 }
 
 export const loadOrders = createAsyncThunk(
@@ -66,6 +67,9 @@ const ordersSlice = createSlice({
         setFilmColorFilter: (state, action) => {
             state.filters.filmColorFilter = action.payload
         },
+        setWidthFilter : (state, action) => {
+            state.filters.widthFilter = action.payload
+        },
         clearFilters: (state) => {
             state.filters = filters
         }
@@ -93,22 +97,22 @@ const ordersSlice = createSlice({
     }
 })
 
-export const {setOrderNumberFilter, setCustomerFilter, setFilmMarkFilter, setFilmThicknessFilter, setFilmColorFilter, clearFilters, setExtruderFilter} = ordersSlice.actions
+export const {setOrderNumberFilter, setWidthFilter, setCustomerFilter, setFilmMarkFilter, setFilmThicknessFilter, setFilmColorFilter, clearFilters, setExtruderFilter} = ordersSlice.actions
 export const ordersReducer = ordersSlice.reducer;
 export const ordersSelector = ordersAdapter.getSelectors(state => state.orders);
 
-export const visibleOrdersSelector = (orders, films, extruders, filters) => {
-    const extrudersSet = new Set(extruders.filter(extruder => extruder.extruderName.toLowerCase().includes(filters.extruderFilter.toLowerCase())).map(e=>e.id))
-    const filteredFilms = new Set(films.filter(
-        film => film.mark.toLowerCase().includes(filters.filmMarkFilter.toLowerCase())
-            && film.thickness.toString().toLowerCase().includes(filters.filmThicknessFilter.toLowerCase())
-            && film.color.toLowerCase().includes(filters.filmColorFilter.toLowerCase())
-            ).map(film => film.id));
-    console.log(filteredFilms)
+export const visibleOrdersSelector = (orders, filters) => {
+    // const extrudersSet = new Set(extruders.filter(extruder => extruder.extruderName.toLowerCase().includes(filters.extruderFilter.toLowerCase())).map(e=>e.id))
+    // const filteredFilms = new Set(films.filter(
+    //     film => film.mark.toLowerCase().includes(filters.filmMarkFilter.toLowerCase())
+    //         && film.thickness.toString().toLowerCase().includes(filters.filmThicknessFilter.toLowerCase())
+    //         && film.color.toLowerCase().includes(filters.filmColorFilter.toLowerCase())
+    //         ).map(film => film.id));
     return orders.filter(order => 
-        extrudersSet.has(order.extruderID)
-            && order.orderNumber.toString().toLowerCase().includes(filters.orderNumberFilter.toLowerCase())
-            && order.customer.toLowerCase().includes(filters.customerFilter.toLowerCase())
-            && filteredFilms.has(order.filmID) 
+        // extrudersSet.has(order.extruderID)
+            // && filteredFilms.has(order.filmID)
+            order.orderNumber.toString().toLowerCase().includes(filters.orderNumberFilter.toLowerCase())
+            // && order.customer.toLowerCase().includes(filters.customerFilter.toLowerCase())
+            && order.width.toString().toLowerCase().includes(filters.widthFilter.toString().toLowerCase())
     );
 }
