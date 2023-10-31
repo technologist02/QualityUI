@@ -112,7 +112,7 @@ export const visibleOrdersSelector = (orders, filters) => {
         // extrudersSet.has(order.extruderID)
             // && filteredFilms.has(order.filmID)
             order.orderNumber.toString().toLowerCase().includes(filters.orderNumberFilter.toLowerCase())
-            // && order.customer.toLowerCase().includes(filters.customerFilter.toLowerCase())
+            && order.customer.toLowerCase().includes(filters.customerFilter.toLowerCase())
             && order.width.toString().toLowerCase().includes(filters.widthFilter.toString().toLowerCase())
     );
 }

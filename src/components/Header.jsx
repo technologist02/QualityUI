@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom"
 import { Login } from "./Login"
-import { useContext } from "react"
-import { UserContext } from "../Context/user-context"
 import { HelloUser } from "./HelloUser"
+import { useSelector } from "react-redux"
 
 export const Header = () => {
-    const {login} = useContext(UserContext)
+
+    const isAuth = useSelector(state => state.user.isUserAuth)
+
     return(
         <nav className="navbar navbar-dark bg-dark" style={{marginBottom:20}}>
             <div className="container-fluid">
@@ -19,7 +20,7 @@ export const Header = () => {
                     <li className="nav-link"><NavLink to ="/about">About</NavLink></li>
                     {/* <li><NavLink to ="/contacts">Contacts</NavLink></li> */}
                 </ul>
-                {login ? <HelloUser/> : <Login/>}
+                {isAuth ? <HelloUser/> : <Login/>}
             </div>
         </nav>
     )

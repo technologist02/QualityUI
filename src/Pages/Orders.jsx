@@ -20,11 +20,7 @@ export const Orders = () => {
         statusStandartTitles,
     } = useSelector((state) => state.appStatusLoad.statusLoad);
     const { error } = useSelector((state) => state.orders);
-    // const films = useSelector(filmsSelector.selectAll);
     const activeFilters = useSelector(state => state.orders.filters)
-    // const extruders = useSelector(extrudersSelector.selectAll);
-    //const standartTitles = useSelector(standartTitlesSelector.selectAll);
-    //const orders = useSelector(ordersSelector.selectAll)
     const orders = visibleOrdersSelector(useSelector(ordersSelector.selectAll), activeFilters);
     
     useEffect(() => {
@@ -35,11 +31,11 @@ export const Orders = () => {
         dispatch(loadOrders());
     }, [dispatch]);
     const load =
-        statusFilms &&
-        statusExtruders &&
-        statusOrders &&
-        statusStandartFilms &&
-        statusStandartTitles;
+        statusFilms === 'fulfilled' &&
+        statusExtruders === 'fulfilled' &&
+        statusOrders === 'fulfilled' &&
+        statusStandartFilms === 'fulfilled' &&
+        statusStandartTitles === 'fulfilled';
     //console.log(load)
     return (
         <div>

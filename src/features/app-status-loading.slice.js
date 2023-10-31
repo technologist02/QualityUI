@@ -7,11 +7,11 @@ import { loadStandartTitles } from "./standart-titles/standart-titles-slice";
 
 const initialState = {
     statusLoad:{
-        statusFilms: false,
-        statusExtruders: false,
-        statusOrders: false,
-        statusStandartFilms: false,
-        statusStandartTitles: false
+        statusFilms: 'idle',
+        statusExtruders: 'idle',
+        statusOrders: 'idle',
+        statusStandartFilms: 'idle',
+        statusStandartTitles: 'idle'
     }
 }
 
@@ -22,19 +22,34 @@ const appStatusLoadSlice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(loadFilms.fulfilled, (state, action) => {
-                state.statusLoad.statusFilms = true
+                state.statusLoad.statusFilms = 'fulfilled'
+            })
+            .addCase(loadFilms.pending, (state, action) => {
+                state.statusLoad.statusFilms = 'loading'
             })
             .addCase(loadExtruders.fulfilled, (state, action) => {
-                state.statusLoad.statusExtruders = true
+                state.statusLoad.statusExtruders = 'fulfilled'
+            })
+            .addCase(loadExtruders.pending, (state, action) => {
+                state.statusLoad.statusFilms = 'loading'
             })
             .addCase(loadOrders.fulfilled, (state, action) => {
-                state.statusLoad.statusOrders = true
+                state.statusLoad.statusOrders = 'fulfilled'
             },)
+            .addCase(loadOrders.pending, (state, action) => {
+                state.statusLoad.statusFilms = 'loading'
+            })
             .addCase(loadStandartFilms.fulfilled, (state, action) => {
-                state.statusLoad.statusStandartFilms = true
+                state.statusLoad.statusStandartFilms = 'fulfilled'
+            })
+            .addCase(loadStandartFilms.pending, (state, action) => {
+                state.statusLoad.statusFilms = 'loading'
             })
             .addCase(loadStandartTitles.fulfilled, (state, action) => {
-                state.statusLoad.statusStandartTitles = true
+                state.statusLoad.statusStandartTitles = 'fulfilled'
+            })
+            .addCase(loadStandartTitles.pending, (state, action) => {
+                state.statusLoad.statusFilms = 'loading'
             })
     }
 })

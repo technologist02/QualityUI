@@ -2,26 +2,34 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 
 const initialState = {
     isUserAuth: false,
-    user: {},
+    user: "",
 }
 
-// export const loadUserData = createAsyncThunk(
-//     "@@users/load-user-data",
-//     async (token="", {
-//         extra: {client, api}
-//     }) => {
-//         return client.get(api.USERS_DATA, token)
-//     }
-// )
+export const loadUserData = createAsyncThunk(
+    "@@users/load-user-data",
+    async (_, {
+        extra: {client, api}
+    }) => {
+        return client.get(api.USERS_DATA)
+    }
+)
 
 export const authorizeUser = createAsyncThunk(
     "@@users/autorize-user",
     async (user, {
+        dispatch,
         extra: {client, api}
     }) => {
-        const token = await client.post(api.USERS_AUTH, user).data
-        sessionStorage.setItem("tokenKey", token);
-        return client.get(api.USERS_DATA, token)
+        const response = await client.post(api.USERS_AUTH, user);
+        console.log(response)
+        if (response.status === 201){
+            const token = response.data;
+            sessionStorage.setItem("tokenKey", token);
+            dispatch(loadUserData())
+        }
+        else {
+            window.location.href = "/Autorization"
+        }
     }
 )
 
@@ -39,26 +47,23 @@ const userSlice = createSlice({
     initialState: initialState,
     reducers: {
         Logout: (state, action) => {
-            state.isUserAuth = false;
             sessionStorage.removeItem("tokenKey");
             return initialState
         }
     },
     extraReducers: builder => {
         builder
-            .addCase(registryUser.fulfilled, (state, action) => {
+            // .addCase(registryUser.fulfilled, (state, action) => {
 
-            })
-            .addCase(authorizeUser.fulfilled, (state, action) => {
-                console.log(action)
+            // })
+            // .addCase(authorizeUser.fulfilled, (state, action) => {
+            //     console.log(action)
+            //     state.isUserAuth = true;
+            // })
+            .addCase(loadUserData.fulfilled, (state, action) => {
                 state.isUserAuth = true;
                 state.user = action.payload.data
-                
             })
-            // .addCase(loadUserData.fulfilled, (state, action) => {
-            //     state.isUserAuth = true;
-            //     state.user = action.payload.data
-            // })
             .addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
                 alert(action.error.message);
                 state.loading = 'rejected';
@@ -67,4 +72,5 @@ const userSlice = createSlice({
     }
 })
 
+export const {Logout} = userSlice.actions;
 export const userReducer = userSlice.reducer;

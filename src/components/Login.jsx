@@ -1,11 +1,12 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { NavLink } from "react-router-dom"
-import { UserContext } from "../Context/user-context"
 import { User } from "../Entities/user"
+import { useDispatch } from "react-redux"
+import { authorizeUser } from "../features/users/users-slice"
 
 
 export const Login = () => {
-    const {login, autorizeUser} = useContext(UserContext)
+    const dispatch = useDispatch()
     const [name, setName] = useState("")
     const [pass, setPass] = useState("")
 
@@ -15,11 +16,7 @@ export const Login = () => {
             alert("Введите логин и пароль!")
         }
         else{
-            autorizeUser(new User(name, pass))
-            if (login) {
-                setName("");
-                setPass("")
-            }
+            dispatch(authorizeUser(new User(name, pass)))
         }
     }
     return(

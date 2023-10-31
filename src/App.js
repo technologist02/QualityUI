@@ -2,13 +2,9 @@ import { Main } from './Pages/Main';
 import { Header } from './components/Header';
 import { Route, Routes } from "react-router-dom";
 import { Films } from './Pages/Films';
-//import { Orders } from './Pages/Orders';
-import { Context } from './Context/Context';
-//import { FilmItemContext } from './Context/add-or-update-film-context'; 
 import { Extruders } from './Pages/Extruders';
 import { Order } from './Pages/AddOrder';
 import { StandartTitles } from './Pages/StandartQualityNames';
-//import { OrderItemContext } from './Context/add-or-update-order-context';
 import { UserRegistrationForm } from './Pages/UserRegistrationForm';
 import { LoginContext } from './Context/user-context';
 import { LoginPage } from './Pages/LoginPage';
@@ -18,7 +14,6 @@ import { AutorizePage } from './Pages/AutorizePage';
 function App() {
   return (
     <LoginContext>
-      <Context>
       <div className="App">
         <Header />
         <main className='container-fluid'>
@@ -37,7 +32,6 @@ function App() {
           </Routes>
         </main>
       </div>
-      </Context>
     </LoginContext>
   );
 }

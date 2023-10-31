@@ -10,13 +10,10 @@ export const OrderQuality = ({order}) => {
     const {id, orderNumber, customer, productionDate, brigadeNumber, extruderID, filmID, width, minThickness, maxThickness,
          tensileStrengthMD, tensileStrengthTD, elongationAtBreakMD, elongationAtBreakTD, coefficientOfFrictionS, coefficientOfFrictionD,
          lightTransmission, coronaTreatment, standartQualityNameID} = order;
-    const films = useSelector(filmsSelector.selectAll)
-    const extruders = useSelector(extrudersSelector.selectAll)
-    const standartTitles = useSelector(standartTitlesSelector.selectAll)
-    const extruder = extruders.find(extr => extr.id === extruderID)
-    const film = films.find(film => film.id === filmID)
-    const standartTitle = standartTitles.find(title => title.id === standartQualityNameID)
-    
+    const film = useSelector(state => filmsSelector.selectById(state, filmID))
+    const extruder = useSelector(state => extrudersSelector.selectById(state, extruderID))
+    const standartTitle = useSelector(state => standartTitlesSelector.selectById(state, standartQualityNameID))
+
     const orderView =  {
         id: id,
         orderNumber : orderNumber,

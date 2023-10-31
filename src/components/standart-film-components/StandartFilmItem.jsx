@@ -1,4 +1,8 @@
-export const StandartFilmItem = ({ standart, films, standartTitles }) => {
+import { useSelector } from "react-redux";
+import { filmsSelector } from "../../features/films/films-slice";
+import { standartTitlesSelector } from "../../features/standart-titles/standart-titles-slice";
+
+export const StandartFilmItem = ({ standart }) => {
     const {
         filmID,
         thicknessVariation,
@@ -12,11 +16,8 @@ export const StandartFilmItem = ({ standart, films, standartTitles }) => {
         coronaTreatment,
         standartQualityNameID,
     } = standart;
-
-    const film = films.find((film) => film.id === filmID);
-    const standartName = standartTitles.find(
-        (x) => x.id === standartQualityNameID
-    );
+    const film = useSelector(state => filmsSelector.selectById(state, filmID))
+    const standartName = useSelector(state => standartTitlesSelector.selectById(state, standartQualityNameID));
 
     return (
         <>
