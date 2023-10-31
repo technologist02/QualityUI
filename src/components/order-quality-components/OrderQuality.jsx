@@ -45,7 +45,7 @@ export const OrderQuality = ({order}) => {
         <td>{orderNumber}</td>
         <td>{customer ? customer: "-"}</td>
         <td>{productionDate}</td>
-        <td>{brigadeNumber}</td>
+        {/* <td>{brigadeNumber}</td> */}
         <td>
             {extruder ? extruder.extruderName : "-"}
         </td>
@@ -67,7 +67,7 @@ export const OrderQuality = ({order}) => {
         <td>{elongationAtBreakTD}</td>
         <td>{coefficientOfFrictionS}</td>
         <td>{coefficientOfFrictionD}</td>
-        <td>{lightTransmission}</td>
+        {/* <td>{lightTransmission}</td> */}
         <td>{coronaTreatment}</td>
         <td>{standartTitle? standartTitle.name: "-"}</td>
         <td>

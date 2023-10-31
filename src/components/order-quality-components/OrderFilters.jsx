@@ -2,11 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { ControledInput } from "../../FormComponents/ControledInput";
 import {
     setCustomerFilter,
-    setFilmColorFilter,
-    setFilmMarkFilter,
-    setFilmThicknessFilter,
+    // setFilmColorFilter,
+    // setFilmMarkFilter,
+    // setFilmThicknessFilter,
     setOrderNumberFilter,
-    setExtruderFilter,
+    // setExtruderFilter,
     clearFilters,
     setWidthFilter,
 } from "../../features/orders/orders-slice";
@@ -16,10 +16,10 @@ export const OrderFilters = () => {
     const {
         orderNumberFilter,
         customerFilter,
-        extruderFilter,
-        filmMarkFilter,
-        filmThicknessFilter,
-        filmColorFilter,
+        // extruderFilter,
+        // filmMarkFilter,
+        // filmThicknessFilter,
+        // filmColorFilter,
         widthFilter
     } = useSelector((state) => state.orders.filters);
 

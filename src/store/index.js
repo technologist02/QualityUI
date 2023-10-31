@@ -10,6 +10,7 @@ import { ordersReducer } from "../features/orders/orders-slice";
 import { appStatusLoadReducer } from "../features/app-status-loading.slice";
 import { editOrderReducer } from "../features/orders/edit-orders-slice";
 import { filmsMapReducer } from "../features/films/films-map-slice";
+import { userReducer } from "../features/users/users-slice";
 
 
 export const store = configureStore({
@@ -23,6 +24,7 @@ export const store = configureStore({
       orders: ordersReducer,
       editOrder: editOrderReducer,
       appStatusLoad: appStatusLoadReducer,
+      user: userReducer,
     //   filter: filterReducer,
     },
     devTools: true,

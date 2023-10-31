@@ -56,7 +56,7 @@ const filmsSlice = createSlice({
             })
             .addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
                 state.loading = 'rejected';
-                state.error = action.payload || action.error.message;
+                state.error = action.error.message ||action.payload;
             })
     }
 })

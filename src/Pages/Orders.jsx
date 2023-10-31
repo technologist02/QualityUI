@@ -56,7 +56,7 @@ export const Orders = () => {
                                 <th scope="col">№ заказа</th>
                                 <th scope="col">Заказчик</th>
                                 <th scope="col">Дата</th>
-                                <th scope="col">№ смены</th>
+                                {/* <th scope="col">№ смены</th> */}
                                 <th scope="col">Экструдер</th>
                                 <th scope="col">Марка пленки</th>
                                 <th scope="col">Толщина пленки</th>
@@ -70,7 +70,7 @@ export const Orders = () => {
                                 <th scope="col">E TD, %</th>
                                 <th scope="col">CoF s</th>
                                 <th scope="col">CoF d</th>
-                                <th scope="col">Свет, %</th>
+                                {/* <th scope="col">Свет, %</th> */}
                                 <th scope="col">Corona</th>
                                 <th scope="col">Стандарт качества</th>
                                 <th>Изменить</th>

@@ -1,4 +1,3 @@
-// import { API_URL } from "../config"
 import axios from "axios"
 
 export const client = axios.create(
@@ -14,17 +13,14 @@ const checkTokenInterceptor = (config) => {
 
 client.interceptors.request.use(checkTokenInterceptor);
 
-// const responseSuccessInterceptor = (response) => {
-//     const data = response.data;
-//      if (!data._meta.success) {
-//       return { error: data.result };
-//      }
-//      return { response: data };
-// }
+const SuccessInterceptor = (response) => {
+    return response
+};
 
-// const networkErrorInterceptor = (error) => {
-//     const responseError = error?.response?.data;
-//     return { error: responseError || error };
-// }
-
-//api.interceptors.response.use(responseSuccessInterceptor, networkErrorInterceptor)
+const ErrorInterceptor = (error) => {
+    if (error.response.status === 401){
+        window.location.href = "/Autorization"    
+    }
+    return Promise.reject(error);
+}
+client.interceptors.response.use(SuccessInterceptor, ErrorInterceptor);
