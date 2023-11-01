@@ -1,12 +1,21 @@
 import { NavLink } from "react-router-dom"
 import { Login } from "./Login"
 import { HelloUser } from "./HelloUser"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { loadUserData } from "../features/users/users-slice"
+import { useEffect } from "react"
 
 export const Header = () => {
-
     const isAuth = useSelector(state => state.user.isUserAuth)
-
+    const dispatch = useDispatch()
+    const token = sessionStorage.getItem("tokenkey")
+    
+    useEffect(() => {
+        if (token) {
+            dispatch(loadUserData())
+        }
+    }, [token, dispatch])
+    console.log(token)
     return(
         <nav className="navbar navbar-dark bg-dark" style={{marginBottom:20}}>
             <div className="container-fluid">

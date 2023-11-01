@@ -1,9 +1,10 @@
-import { getPassportQuality } from "../../Api/api-orders";
+//import { getPassportQuality } from "../../Api/api-orders";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrderModal } from "../../features/orders/edit-orders-slice";
 import { filmsSelector } from "../../features/films/films-slice";
 import { extrudersSelector } from "../../features/extruders/extruders-slice";
 import { standartTitlesSelector } from "../../features/standart-titles/standart-titles-slice";
+import { loadPassportQuality } from "../../features/orders/orders-slice";
 
 export const OrderQuality = ({order}) => {
     const dispatch = useDispatch()
@@ -74,7 +75,7 @@ export const OrderQuality = ({order}) => {
                 data-bs-target="#updateOrder" onClick={()=>dispatch(setOrderModal(orderView))}>Изменить</button> 
         </td>
         <td>
-            <button type="button" className="btn btn-outline-info" onClick={() => getPassportQuality(id)}>Паспорт качества</button>
+            <button type="button" className="btn btn-outline-info" onClick={() => dispatch(loadPassportQuality(id))}>Паспорт качества</button>
         </td>
     </>)
 }

@@ -1,17 +1,16 @@
 
-class Modal{
-    constructor(text, mark, thick, color, density) {
-        this.text = text
-        this.mark = mark
-        this.thick = thick
-        this.color = color
-        this.density = density
+export class Modal{
+    constructor(error) {
+        this.error = error
+        // this.text = text
+        // this.status = status
+        // this.data = data
         this.init();
     }
 
     init(){
         this.createMarkup();
-        this.modal = document.getElementById("filmModal");
+        this.modal = document.getElementById("modal-film");
         this.closeBtn = this.modal.querySelector('.btn-close');
         this.attachEvents();
     }
@@ -30,10 +29,31 @@ class Modal{
     }
     
     createMarkup(){
-        document.body.insertAdjacentHTML('beforeend',
-        <div>
-  
-        </div>
+        document.body.insertAdjacentHTML('beforeend', `
+        <div id="modal-film" class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" >
+                        <h4>${this.error.message} </h4>
+                        <button
+                            type="button"
+                            class="btn-close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md">
+                            <h6>Status Code: ${this.error.response.status}</h6>
+                        </div>
+                        <div class="col-md">
+                            <h6>Status Text: ${this.error.response.statusText}</h6>
+                        </div>
+                        <div class="col-md">
+                            <h6>Text: ${this.error.response.data}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`
         )
     }
 }

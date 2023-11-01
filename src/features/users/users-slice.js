@@ -3,6 +3,7 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 const initialState = {
     isUserAuth: false,
     user: "",
+    token : "",
 }
 
 export const loadUserData = createAsyncThunk(
@@ -25,7 +26,8 @@ export const authorizeUser = createAsyncThunk(
         if (response.status === 201){
             const token = response.data;
             sessionStorage.setItem("tokenKey", token);
-            dispatch(loadUserData())
+            dispatch(loadUserData());
+            return token;
         }
         else {
             window.location.href = "/Autorization"
@@ -56,10 +58,9 @@ const userSlice = createSlice({
             // .addCase(registryUser.fulfilled, (state, action) => {
 
             // })
-            // .addCase(authorizeUser.fulfilled, (state, action) => {
-            //     console.log(action)
-            //     state.isUserAuth = true;
-            // })
+            .addCase(authorizeUser.fulfilled, (state, action) => {
+                state.token = action.payload;
+            })
             .addCase(loadUserData.fulfilled, (state, action) => {
                 state.isUserAuth = true;
                 state.user = action.payload.data
@@ -67,7 +68,7 @@ const userSlice = createSlice({
             .addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
                 alert(action.error.message);
                 state.loading = 'rejected';
-                state.error = action.error.message ||action.payload;
+                state.error = action.error.message || action.payload;
             })
     }
 })

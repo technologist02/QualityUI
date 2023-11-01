@@ -1,12 +1,18 @@
-import { useState, useContext } from "react"
+import { useState } from "react"
 import { ControledInput } from "../FormComponents/ControledInput"
 import { User } from "../Entities/user"
-import { UserContext } from "../Context/user-context"
+import { useDispatch, useSelector } from "react-redux"
+import { authorizeUser } from "../features/users/users-slice"
+import { useNavigate } from "react-router-dom"
+
+
 
 export const LoginPage = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const isUserAuth = useSelector(state => state.user.isUserAuth)
     const [name, setName] = useState("")
     const [pass, setPass] = useState("")
-    const {login, autorizeUser} = useContext(UserContext)
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -14,12 +20,13 @@ export const LoginPage = () => {
             alert("Введите логин и пароль!")
         }
         else{
-            autorizeUser(new User(name, pass))
-            if (login) {
-                setName("");
-                setPass("")
-            }
+            dispatch(authorizeUser(new User(name, pass)))
         }      
+    }
+
+    if (isUserAuth) {
+        console.log(isUserAuth)
+        navigate("/Orders")
     }
 
     return(

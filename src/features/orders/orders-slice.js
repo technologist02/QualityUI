@@ -41,6 +41,15 @@ export const updateOrder = createAsyncThunk(
     }
 )
 
+export const loadPassportQuality = createAsyncThunk(
+    '@@orders/load-passport-quality',
+    async(id, {
+        extra: {client, api}
+    }) => {
+        return client.get(api.PASSPORT+"/"+id, {responseType: 'blob'})
+    }
+)
+
 const ordersSlice = createSlice({
     name: '@@orders',
     initialState: ordersAdapter.getInitialState({
@@ -90,6 +99,16 @@ const ordersSlice = createSlice({
             .addCase(updateOrder.fulfilled, (state, action) => {
                 ordersAdapter.setOne(state, action.payload.data) 
             })
+            .addCase(loadPassportQuality.fulfilled, (state, action) => {
+                console.log(action)
+                const id = action.meta.arg
+                const blob = action.payload.data;  
+                const link = document.createElement("a");  
+                link.href = URL.createObjectURL(blob);  
+                link.download = `${id}.xlsx`;  
+                document.body.appendChild(link);  
+                link.click(); 
+            })
             .addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
                 state.loading = 'rejected';
                 state.error = action.payload || action.error.message;
@@ -112,7 +131,7 @@ export const visibleOrdersSelector = (orders, filters) => {
         // extrudersSet.has(order.extruderID)
             // && filteredFilms.has(order.filmID)
             order.orderNumber.toString().toLowerCase().includes(filters.orderNumberFilter.toLowerCase())
-            && order.customer.toLowerCase().includes(filters.customerFilter.toLowerCase())
+            // && order.customer.toLowerCase().includes(filters.customerFilter.toLowerCase())
             && order.width.toString().toLowerCase().includes(filters.widthFilter.toString().toLowerCase())
     );
 }

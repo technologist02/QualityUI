@@ -1,4 +1,5 @@
 import axios from "axios"
+import { Modal } from "../modal"
 
 export const client = axios.create(
 )
@@ -18,9 +19,12 @@ const SuccessInterceptor = (response) => {
 };
 
 const ErrorInterceptor = (error) => {
+    console.log(error)
     if (error.response.status === 401){
         window.location.href = "/Autorization"    
     }
+    const foo = () => { new Modal(error)}
+    foo();
     return Promise.reject(error);
 }
 client.interceptors.response.use(SuccessInterceptor, ErrorInterceptor);
