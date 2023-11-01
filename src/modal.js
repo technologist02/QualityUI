@@ -41,13 +41,10 @@ export class Modal{
                         ></button>
                     </div>
                     <div class="modal-body">
-                        <div class="col-md">
+                        <div class="col-md error-item">
                             <h6>Status Code: ${this.error.response.status}</h6>
                         </div>
-                        <div class="col-md">
-                            <h6>Status Text: ${this.error.response.statusText}</h6>
-                        </div>
-                        <div class="col-md">
+                        <div class="col-md error-item">
                             <h6>Text: ${this.error.response.data}</h6>
                         </div>
                     </div>

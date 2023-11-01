@@ -3,7 +3,7 @@ function stub(){}
 
 export function ControledSelect({id, text, value, setValue, options, selectEffect = stub}){
     return (
-        <div className="form-floating" style={{marginBottom:"0.5rem"}}>
+        <div className="form-floating" style={{margin:"0.25rem"}}>
                 <select className="form-select" id={id}
                     value={value} onChange={(event) => {setValue(event.target.value); selectEffect()}}>
                         <option selected>--Выбрать {text.toLowerCase()}--</option>
