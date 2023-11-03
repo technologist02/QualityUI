@@ -8,20 +8,33 @@ import {
     setDensity,
     resetModal,
 } from "../../features/films/edit-film-slice";
+import { useEffect } from "react";
 
 export const FilmModal = () => {
     const dispatch = useDispatch();
     const film = useSelector((state) => state.editFilm.film);
 
+    useEffect(() => {
+        const b = document.querySelector("body")
+        b.style.overflow = "hidden"
+        b.style.paddingRight = "16px"
+        return () => {
+            b.style.overflow = "";
+            b.style.paddingRight = 0
+        }
+    })
+
     return (
-        <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-dialog" id="modal-film">
-                <div className="modal-dialog">
-                    <div className="modal-content">
+        <div className="modal-dialog modal-dialog-centered" style={{zIndex:100}}>
+                <div
+                    className="modal myclass show"
+                    style={{display:"block", zIndex:1, background:"rgb(0,0,0,.5)",opacity:1}}
+                >
+                    <div className="modal-dialog" style={{zIndex:2}}>
+                        <div className="modal-content" >
                         <div className="modal-header" style={{ padding: 3 }}>
                             <h1
                                 className="modal-title fs-5"
-                                id="staticBackdropLabel"
                             >
                                 {`Изменить данные пленки \n ${film.mark} ${film.thickness}мкм ${film.color}`}{" "}
                             </h1>
