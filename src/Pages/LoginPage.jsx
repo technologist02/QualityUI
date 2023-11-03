@@ -30,7 +30,7 @@ export const LoginPage = () => {
     }
 
     return(
-        <div className="container" style={{maxWidth:400, marginTop:20}}>
+        <div className="container" style={{maxWidth:400, marginTop:20, textAlign:"center"}}>
             <form onSubmit={handleSubmit}>
                 <h3 style={{textAlign:"center"}}>Войти</h3>
                 <ControledInput type="text" id="userName" text="Имя пользователя" value={name} setValue={(text) => setName(text)}/>

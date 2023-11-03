@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import { Login } from "./Login"
 import { HelloUser } from "./HelloUser"
 import { useSelector, useDispatch } from "react-redux"
@@ -9,6 +9,7 @@ export const Header = () => {
     const isAuth = useSelector(state => state.user.isUserAuth)
     const dispatch = useDispatch()
     const token = sessionStorage.getItem("tokenkey")
+    const location = useLocation()
     
     useEffect(() => {
         if (token) {
@@ -16,6 +17,8 @@ export const Header = () => {
         }
     }, [token, dispatch])
     console.log(token)
+    console.log(location)
+    if (location.pathname === "/AutorizePage") return null
     return(
         <nav className="navbar navbar-dark bg-dark" style={{marginBottom:20}}>
             <div className="container-fluid">

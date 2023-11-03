@@ -18,7 +18,7 @@ code {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color:khaki;
+    background-color: azure;
     max-width: 70%;
     /* border-radius: 1rem;
     border-style: solid; */
@@ -35,4 +35,11 @@ code {
     z-index: 5;
     top: 50%;
     left: 50%;
+    max-width: 70%;
+    transform: translate(-50%, -50%);
+}
+
+[aria-invalid="true"] {
+    border: 1px solid;
+    border-color: crimson;
 }
