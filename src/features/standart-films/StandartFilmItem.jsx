@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { filmsSelector } from "../../features/films/films-slice";
-import { standartTitlesSelector } from "../../features/standart-titles/standart-titles-slice";
+import { filmsSelector } from "../films/films-slice";
+import { standartTitlesSelector } from "../standart-titles/standart-titles-slice";
 
 export const StandartFilmItem = ({ standart }) => {
     const {

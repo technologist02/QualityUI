@@ -1,10 +1,10 @@
 //import { getPassportQuality } from "../../Api/api-orders";
 import { useDispatch, useSelector } from "react-redux";
-import { setOrderModal } from "../../features/orders/edit-orders-slice";
-import { filmsSelector } from "../../features/films/films-slice";
-import { extrudersSelector } from "../../features/extruders/extruders-slice";
-import { standartTitlesSelector } from "../../features/standart-titles/standart-titles-slice";
-import { loadPassportQuality } from "../../features/orders/orders-slice";
+import { setOrderModal } from "./edit-orders-slice";
+import { filmsSelector } from "../films/films-slice";
+import { extrudersSelector } from "../extruders/extruders-slice";
+import { standartTitlesSelector } from "../standart-titles/standart-titles-slice";
+import { loadPassportQuality } from "./orders-slice";
 
 export const OrderQuality = ({order}) => {
     const dispatch = useDispatch()

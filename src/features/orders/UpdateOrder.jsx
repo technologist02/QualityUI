@@ -1,5 +1,5 @@
-import { ControledSelect } from "../../FormComponents/ControledSelect";
-import { ControledInput } from "../../FormComponents/ControledInput";
+import { ControledSelect } from "../../components/FormComponents/ControledSelect";
+import { ControledInput } from "../../components/FormComponents/ControledInput";
 import { useDispatch, useSelector } from "react-redux";
 import {
     chooseColor,
@@ -23,10 +23,10 @@ import {
     setCoronaTreatment,
     setStandartTitle,
     resetModal,
-} from "../../features/orders/edit-orders-slice";
-import { extrudersSelector } from "../../features/extruders/extruders-slice";
-import { standartTitlesSelector } from "../../features/standart-titles/standart-titles-slice";
-import { updateOrder } from "../../features/orders/orders-slice";
+} from "./edit-orders-slice";
+import { extrudersSelector } from "../extruders/extruders-slice";
+import { standartTitlesSelector } from "../standart-titles/standart-titles-slice";
+import { updateOrder } from "./orders-slice";
 
 export const UpdateOrder = () => {
     const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import { useEffect} from "react";
-import { Film } from "../components/film-components/FilmItem";
+import { Film } from "../features/films/FilmItem";
 import { useDispatch, useSelector } from "react-redux";
 import { filmsSelector, loadFilms } from "../features/films/films-slice";
-import { FilmModal } from "../components/film-components/ModalFilm";
+import { FilmModal } from "../features/films/ModalFilm";
 
 
 

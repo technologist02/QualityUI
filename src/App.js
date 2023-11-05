@@ -5,15 +5,12 @@ import { Films } from './Pages/Films';
 import { Extruders } from './Pages/Extruders';
 import { Order } from './Pages/AddOrder';
 import { StandartTitles } from './Pages/StandartQualityNames';
-import { UserRegistrationForm } from './Pages/UserRegistrationForm';
-import { LoginContext } from './Context/user-context';
-import { LoginPage } from './Pages/LoginPage';
+import { UserRegistrationForm } from './Pages/UserRegistrationPage';
 import { StandartQualityFilms } from './Pages/StandartsFilmQuality';
 import { AutorizePage } from './Pages/AutorizePage';
 
 function App() {
   return (
-    <LoginContext>
       <div className="App">
         <Header />
         <main className='container-fluid'>
@@ -27,12 +24,10 @@ function App() {
             <Route path="/Orders/:id" element={<Order/>}/>
             <Route path="/Orders" element={<Main/>}/>
             <Route path="/Registration" element={<UserRegistrationForm/>}/>
-            <Route path="/Autorization" element={<LoginPage/>}/>
             <Route path="/AutorizePage" element={<AutorizePage/>}/>
           </Routes>
         </main>
       </div>
-    </LoginContext>
   );
 }
 

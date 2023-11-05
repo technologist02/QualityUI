@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { ControledSelect } from "../FormComponents/ControledSelect";
-import { ControledInput } from "../FormComponents/ControledInput";
+import { ControledSelect } from "../components/FormComponents/ControledSelect";
+import { ControledInput } from "../components/FormComponents/ControledInput";
 import { Preloader } from "../components/Preloader";
 import { createOrder } from "../features/orders/orders-slice";
 import { useDispatch, useSelector } from "react-redux";

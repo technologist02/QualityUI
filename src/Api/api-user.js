@@ -14,8 +14,6 @@ export async function registry(user) {
     else{
         console.log(response)
         alert("WTF?")
-        // await response.then(data=>arr.push(data))
-        // alert(arr[0])
     }
 }
 

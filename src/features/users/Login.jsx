@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { NavLink } from "react-router-dom"
-import { User } from "../Entities/user"
+import { User } from "../../Entities/user"
 import { useDispatch } from "react-redux"
-import { authorizeUser } from "../features/users/users-slice"
+import { authorizeUser } from "./users-slice"
 
 
 export const Login = () => {

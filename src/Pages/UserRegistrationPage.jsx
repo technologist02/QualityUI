@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { ControledInput } from "../FormComponents/ControledInput"
+import { ControledInput } from "../components/FormComponents/ControledInput"
 //import { registry } from "../Api/api-user"
 import { User } from "../Entities/user"
 import { useDispatch, useSelector } from "react-redux"

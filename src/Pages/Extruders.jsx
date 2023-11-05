@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
-import { Extruder } from "../components/extruder-components/ExtruderItem"
-//import { AddExtruder } from "../components/extruder-components/add-extruder-modal"
 import { useDispatch, useSelector } from "react-redux"
 import { extrudersSelector, loadExtruders, createExtruder } from "../features/extruders/extruders-slice"
+import { Extruder } from "../features/extruders/ExtruderItem"
 
 
 export const Extruders = () => {

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { StandartFilmItem } from "../components/standart-film-components/StandartFilmItem";
+import { StandartFilmItem } from "../features/standart-films/StandartFilmItem";
 import { useDispatch, useSelector } from "react-redux";
 import { filmsSelector, loadFilms } from "../features/films/films-slice";
 import {

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Logout } from "../features/users/users-slice"
+import { Logout } from "./users-slice"
 
 
 export const HelloUser = () => {

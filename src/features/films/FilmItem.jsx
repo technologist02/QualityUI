@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { showFilmModal } from "../../features/films/edit-film-slice";
+import { showFilmModal } from "./edit-film-slice";
 
 export const Film = ({ film }) => {
     const { id, mark, thickness, color, density } = film;

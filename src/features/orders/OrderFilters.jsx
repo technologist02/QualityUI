@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ControledInput } from "../../FormComponents/ControledInput";
+import { ControledInput } from "../../components/FormComponents/ControledInput";
 import {
     setCustomerFilter,
     // setFilmColorFilter,
@@ -9,7 +9,7 @@ import {
     // setExtruderFilter,
     clearFilters,
     setWidthFilter,
-} from "../../features/orders/orders-slice";
+} from "./orders-slice";
 
 export const OrderFilters = () => {
     const dispatch = useDispatch();

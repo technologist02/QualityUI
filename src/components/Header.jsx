@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom"
-import { Login } from "./Login"
-import { HelloUser } from "./HelloUser"
+import { Login } from "../features/users/Login"
+import { HelloUser } from "../features/users/HelloUser"
 import { useSelector, useDispatch } from "react-redux"
 import { loadUserData } from "../features/users/users-slice"
 import { useEffect } from "react"

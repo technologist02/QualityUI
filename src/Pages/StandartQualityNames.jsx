@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { Standart } from "../components/standart-name-components/StandartItem";
+// import { Standart } from "../features/standart-titles/StandartItem";
 import { useDispatch, useSelector } from "react-redux";
+import { Standart } from "../features/standart-titles/StandartItem";
 import {
     loadStandartTitles,
     standartTitlesSelector,

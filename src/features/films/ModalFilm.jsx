@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ControledInput } from "../../FormComponents/ControledInput";
-import { updateFilm } from "../../features/films/films-slice";
+import { ControledInput } from "../../components/FormComponents/ControledInput";
+import { updateFilm } from "./films-slice";
 import {
     setMark,
     setThick,
     setColor,
     setDensity,
     resetModal,
-} from "../../features/films/edit-film-slice";
+} from "./edit-film-slice";
 import { useEffect } from "react";
 
 export const FilmModal = () => {

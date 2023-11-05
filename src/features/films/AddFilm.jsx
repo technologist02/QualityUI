@@ -1,4 +1,4 @@
-import { ControledInput } from "../../FormComponents/ControledInput"
+import { ControledInput } from "../../components/FormComponents/ControledInput"
 import { FilmChangeContext } from "../../Context/add-or-update-film-context"
 import { useContext } from "react"
 import { DataContext } from "../../Context/Context"
