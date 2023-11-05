@@ -17,8 +17,8 @@ export const Header = () => {
         }
     }, [token, dispatch])
     console.log(token)
-    console.log(location)
-    if (location.pathname === "/AutorizePage") return null
+    // console.log(location)
+    if (location.pathname === "/AutorizePage" || location.pathname === "/Registration") return null
     return(
         <nav className="navbar navbar-dark bg-dark" style={{marginBottom:20}}>
             <div className="container-fluid">

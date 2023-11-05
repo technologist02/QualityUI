@@ -24,7 +24,7 @@ export const AutorizePage = () => {
   }}, [isUserAuth, navigate])
 
   return (
-    <div className="preloader">
+    <div className="pos-center border rounded border-3">
       <h3 style={{textAlign:"center"}}>Вход</h3>
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <div className="form-floating" style={{margin:"0.25rem"}}>
@@ -41,8 +41,10 @@ export const AutorizePage = () => {
           <label htmlFor="pass">Password</label>
         </div>
         {errors.password? <p>This field is required</p> : <p></p>}
-        <NavLink to ="/Registration">Регистрация</NavLink>
-        <button className="btn btn-primary">Войти</button>
+        <div style={{display: "flex", justifyContent: "space-between", margin: "1rem"}}>
+          <button className="btn btn-primary">Войти</button>
+          <NavLink to ="/Registration">Регистрация</NavLink>
+        </div>
       </form>
     </div>
     

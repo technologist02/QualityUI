@@ -21,7 +21,7 @@ const SuccessInterceptor = (response) => {
 const ErrorInterceptor = (error) => {
     console.log(error)
     if (error.response.status === 401){
-        window.location.href = "/Autorization"    
+        window.location.href = "/AutorizePage"    
     }
     const foo = () => { new Modal(error)}
     foo();

@@ -37,10 +37,15 @@ export const authorizeUser = createAsyncThunk(
 
 export const registryUser = createAsyncThunk(
     "@@users/registry-user",
-    async (user, {
+    async (data, {
+        dispatch,
         extra: {client, api}
     }) => {
-        return client.post(api.USERS_REGISTER, user)
+        const response =  await client.post(api.USERS_REGISTER, data);
+        console.log(response)
+        if (response.status === 201){
+            dispatch(authorizeUser({name: data.name, password: data.password}))
+        }
     }
 )
 

@@ -1,14 +1,26 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ControledInput } from "../FormComponents/ControledInput"
-import { registry } from "../Api/api-user"
+//import { registry } from "../Api/api-user"
 import { User } from "../Entities/user"
+import { useDispatch, useSelector } from "react-redux"
+import { registryUser } from "../features/users/users-slice"
+import { useNavigate} from "react-router-dom";
 
 export const UserRegistrationForm = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const isUserAuth = useSelector(state => state.user.isUserAuth)
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
     const [confirmPass, setConfirmPass] = useState("")
 
+    useEffect(()=> {if (isUserAuth) {
+        alert("регистрация прошла успешно")
+        // console.log(isUserAuth)
+        navigate("/Orders")
+    }}, [isUserAuth, navigate])
+    
     const handleSubmit = (event) => {
         event.preventDefault();
         if(pass !== confirmPass){
@@ -18,12 +30,12 @@ export const UserRegistrationForm = () => {
             const user = new User(name, pass)
             user.email = email
             console.log(user)
-            registry(user);
+            dispatch(registryUser(user));
         }
     }
 
     return(
-        <div className="container" style={{maxWidth:400, marginTop:20}}>
+        <div className="pos-center border rounded border-3">
             <form onSubmit={handleSubmit}>
                 <h3 style={{textAlign:"center"}}>Регистрация</h3>
                 <ControledInput type="text" id="userName" text="Имя пользователя" value={name} setValue={(text) => setName(text)}/>
