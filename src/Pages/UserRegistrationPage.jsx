@@ -16,7 +16,7 @@ export const UserRegistrationForm = () => {
     const [confirmPass, setConfirmPass] = useState("")
 
     useEffect(()=> {if (isUserAuth) {
-        alert("регистрация прошла успешно")
+        alert("Вы авторизованы")
         // console.log(isUserAuth)
         navigate("/Orders")
     }}, [isUserAuth, navigate])

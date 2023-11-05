@@ -1,5 +1,5 @@
 import { FilmChangeContext } from "../../Context/add-or-update-film-context";
-import { ControledInput } from "../../components/FormComponents/ControledInput";
+import { ControledInput } from "../components/FormComponents/ControledInput";
 import { useContext } from "react";
 import { DataContext } from "../../Context/Context";
 

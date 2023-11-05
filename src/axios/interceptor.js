@@ -1,5 +1,5 @@
 import axios from "axios"
-import { Modal } from "../modal"
+import { Modal } from "./error-modal"
 
 export const client = axios.create(
 )

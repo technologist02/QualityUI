@@ -25,19 +25,20 @@ export const FilmModal = () => {
     })
 
     return (
-        <div className="modal-dialog modal-dialog-centered" style={{zIndex:100}}>
+        <div className="modal-dialog modal-dialog-centered"  style={{zIndex:100}}>
                 <div
                     className="modal myclass show"
                     style={{display:"block", zIndex:1, background:"rgb(0,0,0,.5)",opacity:1}}
                 >
                     <div className="modal-dialog" style={{zIndex:2}}>
                         <div className="modal-content" >
-                        <div className="modal-header" style={{ padding: 3 }}>
-                            <h1
+                        <div className="modal-header" style={{ padding: "1rem" }}>
+                            <h2
                                 className="modal-title fs-5"
+                                style= {{textAlign:"start"}}
                             >
-                                {`Изменить данные пленки \n ${film.mark} ${film.thickness}мкм ${film.color}`}{" "}
-                            </h1>
+                                {`Изменить данные пленки \n ${film.mark} ${film.thickness}мкм ${film.color}`}
+                            </h2>
                             <button
                                 type="button"
                                 className="btn-close"
