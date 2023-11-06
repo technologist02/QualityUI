@@ -2,7 +2,7 @@ import { useEffect} from "react";
 import { Film } from "../features/films/FilmItem";
 import { useDispatch, useSelector } from "react-redux";
 import { filmsSelector, loadFilms } from "../features/films/films-slice";
-import { FilmModal } from "../features/films/ModalFilm";
+import { EditFilm } from "../features/films/EditFilm";
 import { addFilm } from "../features/films/edit-film-slice";
 
 
@@ -20,9 +20,7 @@ export const Films = () => {
             <button className="btn btn-primary" onClick={() => dispatch(addFilm())}>Добавить пленку</button>
             {error && <h2>{error}</h2>}
             {loading === 'loading' && <h2>Loading...</h2>}
-            {isModalShow && <FilmModal/>}
-            {/* <UpdateFilm/>
-            <AddFilm/> */}
+            {isModalShow && <EditFilm/>}
             <table className="table">
                 <thead>
                     <tr>

@@ -2,8 +2,8 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { extrudersSelector, loadExtruders } from "../features/extruders/extruders-slice"
 import { Extruder } from "../features/extruders/ExtruderItem"
-import { ExtruderModal } from "../features/extruders/ExtruderModal"
 import { addExtruder } from "../features/extruders/edit-extruder-slice"
+import { EditExtruder } from "../features/extruders/EditExtruder"
 
 
 export const Extruders = () => {
@@ -17,7 +17,7 @@ export const Extruders = () => {
             <button type="button" className="btn btn-primary" onClick={() => dispatch(addExtruder())}>
                 Добавить Рабочий центр
             </button>
-            {isModalShow && <ExtruderModal/>}
+            {isModalShow && <EditExtruder/>}
             <table className="table">
                 <thead>
                     <tr>

@@ -1,8 +1,10 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { filmsSelector } from "../films/films-slice";
 import { standartTitlesSelector } from "../standart-titles/standart-titles-slice";
+import { changeStandartFilm } from "./edit-standart-film-slice";
 
 export const StandartFilmItem = ({ standart }) => {
+    const dispatch = useDispatch();
     const {
         filmID,
         thicknessVariation,
@@ -17,8 +19,14 @@ export const StandartFilmItem = ({ standart }) => {
         standartQualityNameID,
     } = standart;
     const film = useSelector(state => filmsSelector.selectById(state, filmID))
-    const standartName = useSelector(state => standartTitlesSelector.selectById(state, standartQualityNameID));
+    const standartTitle = useSelector(state => standartTitlesSelector.selectById(state, standartQualityNameID));
 
+    const setData = (data) => {
+        const standartView = {...data, filmMark:film.mark, filmThick: +film.thickness, filmColor:film.color, standartTitle: standartTitle.name};
+        delete standartView.filmID;
+        delete standartView.standartQualityNameID;
+        dispatch(changeStandartFilm(standartView))
+    }
     return (
         <>
             <td>{film && film.mark}</td>
@@ -33,9 +41,9 @@ export const StandartFilmItem = ({ standart }) => {
             <td>{coefficientOfFrictionD}</td>
             <td>{lightTransmission}</td>
             <td>{coronaTreatment}</td>
-            <td>{standartName && standartName.name}</td>
+            <td>{standartTitle && standartTitle.name}</td>
             <td>
-                <button type="button" className="btn btn-outline-warning">
+                <button type="button" className="btn btn-outline-warning" onClick={() => setData(standart)}>
                     Изменить
                 </button>
             </td>

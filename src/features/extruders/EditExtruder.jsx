@@ -4,7 +4,7 @@ import { resetExtruder, setExtruderName } from "./edit-extruder-slice"
 import { createExtruder, updateExtruder } from "./extruders-slice"
 
 
-export const ExtruderModal = () => {
+export const EditExtruder = () => {
     const dispatch = useDispatch()
     const {extruder, mode} = useSelector(state => state.editExtruder)
 

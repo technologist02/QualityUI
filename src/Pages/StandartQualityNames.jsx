@@ -6,7 +6,7 @@ import {
     standartTitlesSelector,
 } from "../features/standart-titles/standart-titles-slice";
 import { addStandartTitle } from "../features/standart-titles/edit-standart-title-slice";
-import { StandartTitleModal } from "../features/standart-titles/StandartTitleModal";
+import { EditStandartTitle} from "../features/standart-titles/EditStandartTitle";
 
 export const StandartTitles = () => {
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export const StandartTitles = () => {
             <button type="button" className="btn btn-primary" onClick={() => dispatch(addStandartTitle())}>
                 Добавить стандарт качества
             </button>
-            {isModalShow && <StandartTitleModal/>}
+            {isModalShow && <EditStandartTitle/>}
             <table className="table">
                 <thead>
                     <tr>

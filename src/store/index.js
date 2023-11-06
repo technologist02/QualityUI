@@ -13,6 +13,7 @@ import { filmsMapReducer } from "../features/films/films-map-slice";
 import { userReducer } from "../features/users/users-slice";
 import { editExtruderReducer } from "../features/extruders/edit-extruder-slice";
 import { editStandartTitleReducer } from "../features/standart-titles/edit-standart-title-slice";
+import { editStandartFilmReducer } from "../features/standart-films/edit-standart-film-slice";
 
 
 export const store = configureStore({
@@ -23,6 +24,7 @@ export const store = configureStore({
       extruders: extrudersReducer,
       editExtruder: editExtruderReducer,
       standartFilms: standartFilmsReducer,
+      editStandartFilm: editStandartFilmReducer,
       standartTitles: standartTitlesReducer,
       editStandartTitle: editStandartTitleReducer,
       orders: ordersReducer,

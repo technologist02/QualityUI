@@ -1,26 +1,22 @@
 import { useEffect } from "react";
 import { StandartFilmItem } from "../features/standart-films/StandartFilmItem";
 import { useDispatch, useSelector } from "react-redux";
-import { filmsSelector, loadFilms } from "../features/films/films-slice";
-import {
-    loadStandartTitles,
-    standartTitlesSelector,
-} from "../features/standart-titles/standart-titles-slice";
+import { loadFilms } from "../features/films/films-slice";
+import { loadStandartTitles } from "../features/standart-titles/standart-titles-slice";
 import {
     loadStandartFilms,
     standartFilmsSelector,
 } from "../features/standart-films/standart-films-slice";
 import { Preloader } from "../components/Preloader";
+import { EditStandartFilm } from "../features/standart-films/EditStandartFilm";
+import { addStandartFilm } from "../features/standart-films/edit-standart-film-slice";
 
 export const StandartQualityFilms = () => {
     const dispatch = useDispatch();
-    const films = useSelector(filmsSelector.selectAll);
-    const standartTitles = useSelector(standartTitlesSelector.selectAll);
+    const isModalShow = useSelector(state => state.editStandartFilm.isModalShow)
     const standartFilms = useSelector(standartFilmsSelector.selectAll);
     const {
         statusFilms,
-        // statusExtruders,
-        // statusOrders,
         statusStandartFilms,
         statusStandartTitles,
     } = useSelector((state) => state.appStatusLoad.statusLoad);
@@ -41,6 +37,11 @@ export const StandartQualityFilms = () => {
             {!fulfilled ? (
                 <Preloader />
             ) : (
+                <div>
+                <button type="button" className="btn btn-primary" onClick={() => dispatch(addStandartFilm())}>
+                    Добавить стандарт качества
+                </button>
+                {isModalShow && <EditStandartFilm/>}
                 <table className="table table-sm table-bordered">
                     <thead>
                         <tr>
@@ -65,13 +66,12 @@ export const StandartQualityFilms = () => {
                             <tr key={standart.id}>
                                 <StandartFilmItem
                                     standart={standart}
-                                    films={films}
-                                    standartTitles={standartTitles}
                                 />
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                </div>
             )}
         </div>
     );

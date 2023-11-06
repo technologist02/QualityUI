@@ -10,7 +10,7 @@ import {
 } from "./edit-film-slice";
 import { useEffect } from "react";
 
-export const FilmModal = () => {
+export const EditFilm = () => {
     const dispatch = useDispatch();
     const {film, mode} = useSelector((state) => state.editFilm)
     //const film = useSelector((state) => state.editFilm.film);

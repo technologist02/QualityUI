@@ -133,7 +133,7 @@ const editOrderSlice = createSlice({
             state.order.filmColor = action.payload
         },
         resetModal: (state,action) => {
-            state.order = {}
+            state.order = initialState.order
         }
     },
     extraReducers: builder => {

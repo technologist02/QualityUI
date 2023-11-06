@@ -3,7 +3,7 @@ import { ControledInput } from "../../components/FormComponents/ControledInput";
 import { resetEditStandartTitle, setStandartTitleDescription, setStandartTitleName } from "./edit-standart-title-slice";
 import { createStandartTitle, updateStandartTitle } from "./standart-titles-slice";
 
-export const StandartTitleModal = () => {
+export const EditStandartTitle = () => {
     const dispatch = useDispatch();
     const {standart, mode} = useSelector(state => state.editStandartTitle)
 
