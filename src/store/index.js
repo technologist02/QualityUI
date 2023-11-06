@@ -12,6 +12,7 @@ import { editOrderReducer } from "../features/orders/edit-orders-slice";
 import { filmsMapReducer } from "../features/films/films-map-slice";
 import { userReducer } from "../features/users/users-slice";
 import { editExtruderReducer } from "../features/extruders/edit-extruder-slice";
+import { editStandartTitleReducer } from "../features/standart-titles/edit-standart-title-slice";
 
 
 export const store = configureStore({
@@ -23,6 +24,7 @@ export const store = configureStore({
       editExtruder: editExtruderReducer,
       standartFilms: standartFilmsReducer,
       standartTitles: standartTitlesReducer,
+      editStandartTitle: editStandartTitleReducer,
       orders: ordersReducer,
       editOrder: editOrderReducer,
       appStatusLoad: appStatusLoadReducer,

@@ -25,7 +25,7 @@ const editExtruderSlice = createSlice({
         },
         changeExtruder: (state, action) => {
             state.isModalShow = true;
-            state.mode = "Изменить рабочий центр";
+            state.mode = `Изменить рабочий центр ${action.payload.extruderName}`;
             state.extruder = action.payload;
         },
         resetExtruder: () => {
