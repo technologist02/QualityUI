@@ -8,10 +8,6 @@ import { ControledSelect } from "../../components/FormComponents/ControledSelect
 export const EditStandartFilm = () => {
     const dispatch = useDispatch();
     const {standartFilm, films, filmsData, mode} = useSelector(state => state.editStandartFilm)
-    //const films = useSelector((state) => state.editStandartFilm.films);
-    // const marks = useSelector((state) => state.editStandartFilm.filmsData.marks);
-    // const thicks = useSelector((state) => state.editStandartFilm.filmsData.thicks);
-    // const colors = useSelector((state) => state.editStandartFilm.filmsData.colors);
     const standartTitles = useSelector(standartTitlesSelector.selectAll);
 
     const handleSubmit = () => {
@@ -21,22 +17,19 @@ export const EditStandartFilm = () => {
                 x.thickness === +standartFilm.filmThick &&
                 x.color === standartFilm.filmColor
         ).id;
-        console.log(filmID);
+        // console.log(filmID);
         const standartQualityNameId = standartTitles.find(
             (x) => x.name === standartFilm.standartTitle
         ).id;
-        console.log(standartQualityNameId);
+        // console.log(standartQualityNameId);
         const newStandartTitle = { ...standartFilm, filmID, standartQualityNameId };
         delete newStandartTitle.filmMark;
         delete newStandartTitle.filmThick;
         delete newStandartTitle.filmColor;
         delete newStandartTitle.standartTitle;
-        console.log(newStandartTitle);
+        // console.log(newStandartTitle);
         standartFilm.id === 0 ? dispatch(createStandartFilm(newStandartTitle)) : dispatch(updateStandartFilm(newStandartTitle));
     };
-
-    console.log(standartTitles)
-    console.log(filmsData)
 
     return (
         <div
@@ -55,7 +48,6 @@ export const EditStandartFilm = () => {
                 <ControledSelect
                     id="standartTitle"
                     text="Стандарт качества"
-                    
                     options={standartTitles.map(title => title.name)}
                     value={standartFilm.standartTitle}
                     setValue={(text) => dispatch(setStandartTitle(text))}

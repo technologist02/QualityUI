@@ -19,7 +19,6 @@ export const AutorizePage = () => {
     const onError = (data) => console.log(data)
 
     useEffect(()=> {if (isUserAuth) {
-      console.log(isUserAuth)
       navigate("/Orders")
   }}, [isUserAuth, navigate])
 
