@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { ControledInput } from "../components/FormComponents/ControledInput"
-//import { registry } from "../Api/api-user"
 import { User } from "../Entities/user"
 import { useDispatch, useSelector } from "react-redux"
 import { registryUser } from "../features/users/users-slice"
@@ -17,7 +16,6 @@ export const UserRegistrationForm = () => {
 
     useEffect(()=> {if (isUserAuth) {
         alert("Вы авторизованы")
-        // console.log(isUserAuth)
         navigate("/Orders")
     }}, [isUserAuth, navigate])
     
@@ -43,8 +41,7 @@ export const UserRegistrationForm = () => {
                 <ControledInput type="password" id="password" text="Пароль" value={pass} setValue={(text) => setPass(text)}/>
                 <ControledInput type="password" id="confirmPassword" text="Подтвердите пароль" value={confirmPass} setValue={(text) => setConfirmPass(text)}/>
                 <button style={{display:"block", marginLeft:"auto", marginRight:"auto"}} type="submit" className="btn btn-primary">Поехали</button>
-            </form>
-            
+            </form>    
         </div>
     )
 }

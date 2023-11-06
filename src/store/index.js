@@ -11,6 +11,7 @@ import { appStatusLoadReducer } from "../features/app-status-loading.slice";
 import { editOrderReducer } from "../features/orders/edit-orders-slice";
 import { filmsMapReducer } from "../features/films/films-map-slice";
 import { userReducer } from "../features/users/users-slice";
+import { editExtruderReducer } from "../features/extruders/edit-extruder-slice";
 
 
 export const store = configureStore({
@@ -19,6 +20,7 @@ export const store = configureStore({
       editFilm: editFilmReducer,
       filmsMap: filmsMapReducer,
       extruders: extrudersReducer,
+      editExtruder: editExtruderReducer,
       standartFilms: standartFilmsReducer,
       standartTitles: standartTitlesReducer,
       orders: ordersReducer,

@@ -18,8 +18,16 @@ export const createExtruder = createAsyncThunk(
     async (extruder, {
         extra: {client, api}
     }) => {
-        const newExtruder = {extruderName: extruder}
-        return client.post(api.EXTRUDERS, newExtruder)
+        return client.post(api.EXTRUDERS, extruder)
+    }
+)
+
+export const updateExtruder = createAsyncThunk(
+    '@@extruders/update-extruder',
+    async (extruder, {
+        extra: {client, api}
+    }) => {
+        return client.patch(api.EXTRUDERS, extruder)
     }
 )
 
@@ -45,9 +53,18 @@ const extrudersSlice = createSlice({
                 state.error = action.payload || action.meta.error
             })
             .addCase(createExtruder.fulfilled, (state, action) => {
-                extrudersAdapter.setOne(state, action.payload.data)
+                alert("Новый рабочий центр успешно добавлен")
+                // extrudersAdapter.setOne(state, action.payload.data)
             })
             .addCase(createExtruder.rejected, (state, action) => {
+                state.loading = 'rejected';
+                state.error = action.payload || action.meta.error
+            })
+            .addCase(updateExtruder.fulfilled, (state, action) => {
+                alert("Данные успешно обновлены")
+                extrudersAdapter.setOne(state, action.payload.data)
+            })
+            .addCase(updateExtruder.rejected, (state, action) => {
                 state.loading = 'rejected';
                 state.error = action.payload || action.meta.error
             })
