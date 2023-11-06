@@ -33,7 +33,7 @@ const editFilmSlice = createSlice({
         },
         changeFilm: (state, action) => {
             state.isModalShow = true;
-            state.mode = "Изменить пленку"
+            state.mode = `Изменить пленку ${action.payload.mark} ${action.payload.thickness} ${action.payload.color}`
             state.film = action.payload
         },
         addFilm: (state) => {
