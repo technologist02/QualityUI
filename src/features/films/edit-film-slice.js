@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isModalShow: false,
+    mode: "",
     film: {
         id: 0,
         mark: "",
@@ -30,9 +31,14 @@ const editFilmSlice = createSlice({
         setDensity: (state, action) => {
             state.film.density = action.payload
         },
-        showFilmModal: (state, action) => {
+        changeFilm: (state, action) => {
             state.isModalShow = true;
+            state.mode = "Изменить пленку"
             state.film = action.payload
+        },
+        addFilm: (state) => {
+            state.isModalShow = true;
+            state.mode = "Добавить пленку"
         },
         resetModal: () => {
             return initialState
@@ -40,6 +46,6 @@ const editFilmSlice = createSlice({
     }
 })
 
-export const {setFilmId, setMark, setThick, setColor, setDensity, showFilmModal, resetModal} = editFilmSlice.actions;
+export const {setFilmId, setMark, setThick, setColor, setDensity, changeFilm, addFilm, showFilmModal, resetModal} = editFilmSlice.actions;
 
 export const editFilmReducer = editFilmSlice.reducer;

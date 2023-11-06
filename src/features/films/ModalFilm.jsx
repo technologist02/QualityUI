@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ControledInput } from "../../components/FormComponents/ControledInput";
-import { updateFilm } from "./films-slice";
+import { createFilm, updateFilm } from "./films-slice";
 import {
     setMark,
     setThick,
@@ -12,8 +12,10 @@ import { useEffect } from "react";
 
 export const FilmModal = () => {
     const dispatch = useDispatch();
-    const film = useSelector((state) => state.editFilm.film);
+    const {film, mode} = useSelector((state) => state.editFilm)
+    //const film = useSelector((state) => state.editFilm.film);
 
+    
     useEffect(() => {
         const b = document.querySelector("body")
         b.style.overflow = "hidden"
@@ -23,6 +25,10 @@ export const FilmModal = () => {
             b.style.paddingRight = 0
         }
     })
+
+    const handleSubmit = (film) => {
+        film.color && film.mark && film.thickness > 0  && film.density > 0 ? dispatch(createFilm(film)) : alert("Заполните все поля!")
+    }
 
     return (
         <div className="modal-dialog modal-dialog-centered"  style={{zIndex:100}}>
@@ -37,7 +43,8 @@ export const FilmModal = () => {
                                 className="modal-title fs-5"
                                 style= {{textAlign:"start"}}
                             >
-                                {`Изменить данные пленки \n ${film.mark} ${film.thickness}мкм ${film.color}`}
+                                {mode}
+                                {/* {`Изменить данные пленки \n ${film.mark} ${film.thickness}мкм ${film.color}`} */}
                             </h2>
                             <button
                                 type="button"
@@ -101,7 +108,7 @@ export const FilmModal = () => {
                                 type="button"
                                 className="btn btn-primary"
                                 onClick={() => {
-                                    dispatch(updateFilm(film));
+                                    film.id === 0 ? handleSubmit(film) : dispatch(updateFilm(film));
                                     dispatch(resetModal());
                                 }}
                             >

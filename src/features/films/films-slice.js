@@ -49,9 +49,11 @@ const filmsSlice = createSlice({
                 state.error = null;
             })
             .addCase(createFilm.fulfilled, (state, action) => {
-                filmsAdapter.addOne(state, action.payload.data)
+                alert("Пленка успешно добавлена")
+                //filmsAdapter.addOne(state, action.payload.data)
             })
             .addCase(updateFilm.fulfilled, (state, action) => {
+                alert("Данные пленки обновлены")
                 filmsAdapter.setOne(state, action.payload.data) 
             })
             .addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { showFilmModal } from "./edit-film-slice";
+import { changeFilm } from "./edit-film-slice";
 
 export const Film = ({ film }) => {
     const { id, mark, thickness, color, density } = film;
@@ -16,7 +16,7 @@ export const Film = ({ film }) => {
                     <button
                         type="button"
                         className="btn btn-outline-warning"
-                        onClick={() => dispatch(showFilmModal(film))}
+                        onClick={() => dispatch(changeFilm(film))}
                     >
                         Изменить
                     </button>

@@ -8,6 +8,7 @@ import { StandartTitles } from './Pages/StandartQualityNames';
 import { UserRegistrationForm } from './Pages/UserRegistrationPage';
 import { StandartQualityFilms } from './Pages/StandartsFilmQuality';
 import { AutorizePage } from './Pages/AutorizePage';
+import { AddFilm } from './Pages/AddFilm';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/Orders" element={<Main/>}/>
             <Route path="/Registration" element={<UserRegistrationForm/>}/>
             <Route path="/AutorizePage" element={<AutorizePage/>}/>
+            <Route path="/AddFilm" element={<AddFilm/>}/>
           </Routes>
         </main>
       </div>
