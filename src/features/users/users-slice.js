@@ -2,7 +2,17 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 
 const initialState = {
     isUserAuth: false,
-    user: "",
+    login: "",
+    userData: {
+        "id": 0,
+        "login": "",
+        "name": "",
+        "surname": "",
+        "email": "",
+        "password": null,
+        "roles": [],
+        "created": ""
+    },
     token : "",
 }
 
@@ -44,7 +54,7 @@ export const registryUser = createAsyncThunk(
         const response =  await client.post(api.USERS_REGISTER, data);
         console.log(response)
         if (response.status === 201){
-            dispatch(authorizeUser({name: data.name, password: data.password}))
+            dispatch(authorizeUser({login: data.login, password: data.password}))
         }
     }
 )
@@ -68,7 +78,8 @@ const userSlice = createSlice({
             })
             .addCase(loadUserData.fulfilled, (state, action) => {
                 state.isUserAuth = true;
-                state.user = action.payload.data
+                state.login =  action.payload.data.login;
+                state.userData = action.payload.data;
             })
             .addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
                 alert(action.error.message);

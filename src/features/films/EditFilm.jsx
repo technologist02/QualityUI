@@ -44,7 +44,6 @@ export const EditFilm = () => {
                                 style= {{textAlign:"start"}}
                             >
                                 {mode}
-                                {/* {`Изменить данные пленки \n ${film.mark} ${film.thickness}мкм ${film.color}`} */}
                             </h2>
                             <button
                                 type="button"
@@ -108,7 +107,7 @@ export const EditFilm = () => {
                                 type="button"
                                 className="btn btn-primary"
                                 onClick={() => {
-                                    film.id === 0 ? handleSubmit(film) : dispatch(updateFilm(film));
+                                    film.filmId === 0 ? handleSubmit(film) : dispatch(updateFilm(film));
                                     dispatch(resetModal());
                                 }}
                             >

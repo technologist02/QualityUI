@@ -6,7 +6,7 @@ import { changeStandartFilm } from "./edit-standart-film-slice";
 export const StandartFilmItem = ({ standart }) => {
     const dispatch = useDispatch();
     const {
-        filmID,
+        filmId,
         thicknessVariation,
         tensileStrengthMD,
         tensileStrengthTD,
@@ -16,15 +16,15 @@ export const StandartFilmItem = ({ standart }) => {
         coefficientOfFrictionD,
         lightTransmission,
         coronaTreatment,
-        standartQualityNameID,
+        standartQualityTitleId,
     } = standart;
-    const film = useSelector(state => filmsSelector.selectById(state, filmID))
-    const standartTitle = useSelector(state => standartTitlesSelector.selectById(state, standartQualityNameID));
+    const film = useSelector(state => filmsSelector.selectById(state, filmId))
+    const standartTitle = useSelector(state => standartTitlesSelector.selectById(state, standartQualityTitleId));
 
     const setData = (data) => {
-        const standartView = {...data, filmMark:film.mark, filmThick: +film.thickness, filmColor:film.color, standartTitle: standartTitle.name};
-        delete standartView.filmID;
-        delete standartView.standartQualityNameID;
+        const standartView = {...data, filmMark:film.mark, filmThick: +film.thickness, filmColor:film.color, standartTitle: standartTitle.title};
+        delete standartView.filmId;
+        delete standartView.standartQualityTitleId;
         dispatch(changeStandartFilm(standartView))
     }
     return (
@@ -41,7 +41,7 @@ export const StandartFilmItem = ({ standart }) => {
             <td>{coefficientOfFrictionD}</td>
             <td>{lightTransmission}</td>
             <td>{coronaTreatment}</td>
-            <td>{standartTitle && standartTitle.name}</td>
+            <td>{standartTitle && standartTitle.title}</td>
             <td>
                 <button type="button" className="btn btn-outline-warning" onClick={() => setData(standart)}>
                     Изменить

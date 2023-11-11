@@ -75,7 +75,7 @@ export const Orders = () => {
                         </thead>
                         <tbody>
                             {orders.map((order) => (
-                                <tr key={order.id}>
+                                <tr key={order.orderQualityId}>
                                     <OrderQuality
                                         order={order}
                                         // films={films}

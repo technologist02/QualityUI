@@ -47,6 +47,7 @@ export const Order = () => {
     const colors = useSelector((state) => state.editOrder.filmsData.colors);
     const order = useSelector((state) => state.editOrder.order);
     const standartTitles = useSelector(standartTitlesSelector.selectAll);
+    const inspectorId = useSelector(state => state.user.userData.userId)
 
     useEffect(() => {
         dispatch(loadExtruders());
@@ -59,23 +60,23 @@ export const Order = () => {
         // console.log(customer)
         console.log(films);
         console.log(extruders);
-        const film = films.find(
+        const filmId = films.find(
             (x) =>
                 x.mark === order.filmMark &&
                 x.thickness === +order.filmThick &&
                 x.color === order.filmColor
-        );
-        const filmID = film.id;
-        console.log(filmID);
-        const extruderID = extrs.find(
-            (x) => x.extruderName === order.extruderName
-        ).id;
-        console.log(extruderID);
-        const standartQualityNameId = standartTitles.find(
-            (x) => x.Name === order.standartTitle
-        );
+        ).filmId;
+        //const filmId = film.filmId;
+        console.log(filmId);
+        const extruderId = extrs.find(
+            (x) => x.name === order.extruderName
+        ).extruderId;
+        console.log(extruderId);
+        const standartQualityTitleId = standartTitles.find(
+            (x) => x.title === order.standartTitle
+        ).standartQualityTitleId;
 
-        const order2 = { ...order, extruderID, filmID, standartQualityNameId };
+        const order2 = { ...order, extruderId, filmId, standartQualityTitleId, inspectorId };
         delete order2.filmMark;
         delete order2.extruderName;
         delete order2.filmThick;
@@ -240,7 +241,7 @@ export const Order = () => {
                     text="Стандарт качества"
                     value={order.standartTitle}
                     setValue={(text) => dispatch(setStandartTitle(text))}
-                    options={standartTitles.map((title) => title.name)}
+                    options={standartTitles.map((title) => title.title)}
                 />
                 <button type="submit" className="btn btn-primary btn-lg">
                     Сохранить

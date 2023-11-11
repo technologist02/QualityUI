@@ -1,7 +1,7 @@
 import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit';
 
 const filmsAdapter = createEntityAdapter({
-    selectId: (film) => film.id,
+    selectId: (film) => film.filmId,
 });
 
 export const loadFilms = createAsyncThunk(

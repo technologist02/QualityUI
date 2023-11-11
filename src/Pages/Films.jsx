@@ -32,7 +32,7 @@ export const Films = () => {
                 </thead>
                 <tbody>
                     {
-                        films2.map(film => <Film key={film.id} film={film} />)
+                        films2.map(film => <Film key={film.filmId} film={film} />)
                     }
                 </tbody>
             </table>

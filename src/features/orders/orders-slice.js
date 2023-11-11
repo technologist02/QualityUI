@@ -1,7 +1,7 @@
 import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit';
 
 const ordersAdapter = createEntityAdapter({
-    selectId: (order) => order.id,
+    selectId: (order) => order.orderQualityId,
 });
 
 const filters = {

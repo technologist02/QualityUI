@@ -4,7 +4,7 @@ import { Logout } from "./users-slice"
 
 export const HelloUser = () => {
     const dispatch = useDispatch()
-    const username = useSelector(state => state.user.user)
+    const username = useSelector(state => state.user.login)
 
     return(
         <div>

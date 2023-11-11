@@ -18,7 +18,7 @@ export const EditStandartTitle = () => {
                 ></button>
             </div>
             <div className="modal-body">
-                <ControledInput type="text" id="standartName" text="Стандарт качества" value={standart.name} setValue={(text) => dispatch(setStandartTitleName(text))}/>
+                <ControledInput type="text" id="standartName" text="Стандарт качества" value={standart.title} setValue={(text) => dispatch(setStandartTitleName(text))}/>
                 <div class="input-group" >
                     <span class="input-group-text">Описание</span>
                     <textarea
@@ -43,7 +43,7 @@ export const EditStandartTitle = () => {
                 <button
                     className="btn btn-primary"
                     onClick={() => {
-                        standart.id === 0 ? dispatch(createStandartTitle(standart)) : dispatch(updateStandartTitle(standart));
+                        standart.standartQualityTitleId === 0 ? dispatch(createStandartTitle(standart)) : dispatch(updateStandartTitle(standart));
                         dispatch(resetEditStandartTitle())
                     }}
                 >

@@ -2,12 +2,12 @@ import { useDispatch } from "react-redux";
 import { changeFilm } from "./edit-film-slice";
 
 export const Film = ({ film }) => {
-    const { id, mark, thickness, color, density } = film;
+    const { filmId, mark, thickness, color, density } = film;
     const dispatch = useDispatch();
 
     return (
         <>
-            <tr id={id}>
+            <tr id={filmId}>
                 <td>{mark}</td>
                 <td>{thickness}</td>
                 <td>{color}</td>

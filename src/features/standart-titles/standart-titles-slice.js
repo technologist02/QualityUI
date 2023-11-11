@@ -1,7 +1,7 @@
 import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit';
 
 const standartTitlesAdapter = createEntityAdapter({
-    selectId: (title) => title.id,
+    selectId: (title) => title.standartQualityTitleId,
 });
 
 export const loadStandartTitles = createAsyncThunk(

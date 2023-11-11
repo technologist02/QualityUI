@@ -8,20 +8,20 @@ import { loadPassportQuality } from "./orders-slice";
 
 export const OrderQuality = ({order}) => {
     const dispatch = useDispatch()
-    const {id, orderNumber, customer, productionDate, brigadeNumber, extruderID, filmID, width, minThickness, maxThickness,
+    const {orderQualityId, orderNumber, customer, productionDate, brigadeNumber, extruderId, filmId, width, minThickness, maxThickness,
          tensileStrengthMD, tensileStrengthTD, elongationAtBreakMD, elongationAtBreakTD, coefficientOfFrictionS, coefficientOfFrictionD,
-         lightTransmission, coronaTreatment, standartQualityNameID} = order;
-    const film = useSelector(state => filmsSelector.selectById(state, filmID))
-    const extruder = useSelector(state => extrudersSelector.selectById(state, extruderID))
-    const standartTitle = useSelector(state => standartTitlesSelector.selectById(state, standartQualityNameID))
+         lightTransmission, coronaTreatment, standartQualityTitleId} = order;
+    const film = useSelector(state => filmsSelector.selectById(state, filmId))
+    const extruder = useSelector(state => extrudersSelector.selectById(state, extruderId))
+    const standartTitle = useSelector(state => standartTitlesSelector.selectById(state, standartQualityTitleId))
 
     const orderView =  {
-        id: id,
+        orderQualityId: orderQualityId,
         orderNumber : orderNumber,
         customer: customer,
         productionDate: productionDate,
         brigadeNumber: brigadeNumber,
-        extruderName : extruder ? extruder.extruderName : "",
+        extruderName : extruder ? extruder.name : "",
         filmMark: film ? film.mark : "",
         filmThick: film ? film.thickness : "",
         filmColor: film ? film.color : "",
@@ -36,7 +36,7 @@ export const OrderQuality = ({order}) => {
         coefficientOfFrictionD: coefficientOfFrictionD,
         lightTransmission: lightTransmission,
         coronaTreatment: coronaTreatment,
-        standartTitle: standartTitle? standartTitle.name : ""
+        standartTitle: standartTitle? standartTitle.title : ""
     }
 
     return (<>
@@ -45,7 +45,7 @@ export const OrderQuality = ({order}) => {
         <td>{productionDate}</td>
         {/* <td>{brigadeNumber}</td> */}
         <td>
-            {extruder ? extruder.extruderName : "-"}
+            {extruder ? extruder.name : "-"}
         </td>
         <td>
             {film ? film.mark : "-"}
@@ -67,7 +67,7 @@ export const OrderQuality = ({order}) => {
         <td>{coefficientOfFrictionD}</td>
         {/* <td>{lightTransmission}</td> */}
         <td>{coronaTreatment}</td>
-        <td>{standartTitle? standartTitle.name: "-"}</td>
+        <td>{standartTitle? standartTitle.title: "-"}</td>
         <td>
             <button type="button" 
                 className="btn btn-outline-warning" 
@@ -75,7 +75,7 @@ export const OrderQuality = ({order}) => {
                 data-bs-target="#updateOrder" onClick={()=>dispatch(setOrderModal(orderView))}>Изменить</button> 
         </td>
         <td>
-            <button type="button" className="btn btn-outline-info" onClick={() => dispatch(loadPassportQuality(id))}>Паспорт качества</button>
+            <button type="button" className="btn btn-outline-info" onClick={() => dispatch(loadPassportQuality(orderQualityId))}>Паспорт качества</button>
         </td>
     </>)
 }

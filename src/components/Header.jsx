@@ -8,7 +8,7 @@ import { useEffect } from "react"
 export const Header = () => {
     const isAuth = useSelector(state => state.user.isUserAuth)
     const dispatch = useDispatch()
-    const token = sessionStorage.getItem("tokenkey")
+    const token = sessionStorage.getItem("tokenKey")
     const location = useLocation()
     
     useEffect(() => {
@@ -16,7 +16,7 @@ export const Header = () => {
             dispatch(loadUserData())
         }
     }, [token, dispatch])
-    console.log(token)
+    // console.log(token)
     // console.log(location)
     if (location.pathname === "/AutorizePage" || location.pathname === "/Registration") return null
     return(

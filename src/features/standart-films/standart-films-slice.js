@@ -1,7 +1,7 @@
 import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit';
 
 const standartFilmsAdapter = createEntityAdapter({
-    selectId: (standart) => standart.id,
+    selectId: (standart) => standart.standartQualityFilmId,
 });
 
 export const loadStandartFilms = createAsyncThunk(
@@ -49,7 +49,7 @@ const standartFilmsSlice = createSlice({
                 state.error = null;
             })
             .addCase(createStandartFilm.fulfilled, (state, action) => {
-                standartFilmsAdapter.addOne(state, action.payload.data);
+                // standartFilmsAdapter.addOne(state, action.payload.data);
             })
             .addCase(updateStandartFilm.fulfilled, (state, action) => {
                 standartFilmsAdapter.setOne(state, action.payload.data);

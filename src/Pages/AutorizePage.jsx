@@ -28,7 +28,7 @@ export const AutorizePage = () => {
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <div className="form-floating" style={{margin:"0.25rem"}}>
           <input type="text" id="user" className="form-control"  placeholder="Логин" 
-            {...register("name", {required:true})} aria-invalid={errors.name ? true : false}
+            {...register("login", {required:true})} aria-invalid={errors.login ? true : false}
           />
           <label htmlFor="user">Login</label>
         </div>

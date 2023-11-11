@@ -63,7 +63,7 @@ export const StandartQualityFilms = () => {
                     </thead>
                     <tbody>
                         {standartFilms.map((standart) => (
-                            <tr key={standart.id}>
+                            <tr key={standart.standartQualityFilmId}>
                                 <StandartFilmItem
                                     standart={standart}
                                 />

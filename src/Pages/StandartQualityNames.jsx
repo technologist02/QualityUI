@@ -33,7 +33,7 @@ export const StandartTitles = () => {
                 </thead>
                 <tbody>
                     {standartTitles.map((standart) => (
-                        <Standart key={standart.id} standart={standart} />
+                        <Standart key={standart.standartQualityTitleId} standart={standart} />
                     ))}
                 </tbody>
             </table>

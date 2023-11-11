@@ -26,7 +26,7 @@ export const Extruders = () => {
                 </thead>
                 <tbody>
                     {
-                        extruders.map(extruder => <Extruder key={extruder.id} extruder={extruder}/>)
+                        extruders.map(extruder => <Extruder key={extruder.extruderId} extruder={extruder}/>)
                     }
                 </tbody>
             </table>

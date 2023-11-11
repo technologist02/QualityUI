@@ -38,24 +38,25 @@ export const UpdateOrder = () => {
     const colors = useSelector((state) => state.editOrder.filmsData.colors);
     const order = useSelector((state) => state.editOrder.order);
     const standartTitles = useSelector(standartTitlesSelector.selectAll);
+    const inspectorId = useSelector(state => state.user.userData.userId)
 
     const handleSubmit = () => {
-        const filmID = films.find(
+        const filmId = films.find(
             (x) =>
                 x.mark === order.filmMark &&
                 x.thickness === +order.filmThick &&
                 x.color === order.filmColor
-        ).id;
-        console.log(filmID);
-        const extruderID = extrs.find(
-            (x) => x.extruderName === order.extruderName
-        ).id;
-        console.log(extruderID);
-        const standartQualityNameId = standartTitles.find(
-            (x) => x.name === order.standartTitle
-        ).id;
+        ).filmId;
+        console.log(filmId);
+        const extruderId = extrs.find(
+            (x) => x.name === order.extruderName
+        ).extruderId;
+        console.log(extruderId);
+        const standartQualityTitleId = standartTitles.find(
+            (x) => x.title === order.standartTitle
+        ).standartQualityTitleId;
 
-        const order2 = { ...order, extruderID, filmID, standartQualityNameId };
+        const order2 = { ...order, extruderId, filmId, standartQualityTitleId, inspectorId };
         delete order2.filmMark;
         delete order2.extruderName;
         delete order2.filmThick;
@@ -269,7 +270,7 @@ export const UpdateOrder = () => {
                                     dispatch(setStandartTitle(text))
                                 }
                                 options={standartTitles.map(
-                                    (title) => title.name
+                                    (title) => title.title
                                 )}
                             />
                         </div>

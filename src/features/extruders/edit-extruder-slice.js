@@ -4,8 +4,8 @@ const initialState = {
     isModalShow: false,
     mode: "",
     extruder: {
-        id: 0,
-        extruderName: ""
+        extruderId: 0,
+        name: ""
     }
 }
 
@@ -14,10 +14,10 @@ const editExtruderSlice = createSlice({
     initialState: initialState,
     reducers: {
         setExtruderId: (state, action) => {
-            state.extruder.id = action.payload;
+            state.extruder.extruderId = action.payload;
         },
         setExtruderName : (state, action) => {
-            state.extruder.extruderName = action.payload;
+            state.extruder.name = action.payload;
         },
         addExtruder: (state) => {
             state.isModalShow = true;
@@ -25,7 +25,7 @@ const editExtruderSlice = createSlice({
         },
         changeExtruder: (state, action) => {
             state.isModalShow = true;
-            state.mode = `Изменить рабочий центр ${action.payload.extruderName}`;
+            state.mode = `Изменить рабочий центр ${action.payload.name}`;
             state.extruder = action.payload;
         },
         resetExtruder: () => {

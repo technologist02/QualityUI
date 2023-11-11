@@ -6,7 +6,7 @@ const initialState = {
     isModalShow: false,
     mode:"",
     standartFilm: {
-        id: 0,
+        standartQualityFilmId: 0,
         filmMark: "",
         filmThick: 0,
         filmColor: "",
@@ -34,7 +34,7 @@ const editStandartFilmSlice = createSlice({
     initialState: initialState,
     reducers: {
         setStandartFilmId: (state, action) => {
-            state.standartFilm.id = action.payload
+            state.standartFilm.standartQualityFilmId = action.payload
         },
         setThicknessVariation: (state, action) => {
             state.standartFilm.thicknessVariation = action.payload

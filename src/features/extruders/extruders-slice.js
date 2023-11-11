@@ -1,7 +1,7 @@
 import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit';
 
 const extrudersAdapter = createEntityAdapter({
-    selectId: (extruder) => extruder.id,
+    selectId: (extruder) => extruder.extruderId,
 });
 
 export const loadExtruders = createAsyncThunk(

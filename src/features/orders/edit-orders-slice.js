@@ -6,7 +6,7 @@ import { loadExtruders } from "../extruders/extruders-slice";
 const initialState = {
     isModalShow: false,
     order: {
-        id: 0,
+        orderQualityId: 0,
         orderNumber : null,
         customer: null,
         productionDate: null,
@@ -102,13 +102,13 @@ const editOrderSlice = createSlice({
         },
         setOrderModal: (state, action) => {
             //state.isModalShow = true;
-            state.order = action.payload
+            
             state.filmsData.thicks = filmsParse(state.films
                 .filter(film => film.mark === action.payload.filmMark)).thicks;
-            state.order.filmThick = action.payload.filmThick;
+            //state.order.filmThick = action.payload.filmThick;
             state.filmsData.colors = filmsParse(state.films
-                .filter(film => film.mark === action.payload.filmMark && film.thickness === +state.order.filmThick)).colors;
-            state.order.filmThick = +action.payload.filmThick;
+                .filter(film => film.mark === action.payload.filmMark && film.thickness === +action.payload.filmThick)).colors;
+            state.order = action.payload
         },
         chooseMark: (state, action) => {
             state.order.filmMark = action.payload;
@@ -146,7 +146,7 @@ const editOrderSlice = createSlice({
                 // }
             })
             .addCase(loadExtruders.fulfilled, (state, action) => {
-                state.extruders = action.payload.data.map(extruder => extruder.extruderName);
+                state.extruders = action.payload.data.map(extruder => extruder.name);
             })
     }
 })

@@ -4,7 +4,7 @@ const initialState = {
     isModalShow: false,
     mode: "",
     film: {
-        id: 0,
+        filmId: 0,
         mark: "",
         thickness: 0,
         color: "",
@@ -17,7 +17,7 @@ const editFilmSlice = createSlice({
     initialState: initialState,
     reducers: {
         setFilmId: (state, action) => {
-            state.film.id = action.payload
+            state.film.filmId = action.payload
         },
         setMark : (state, action) => {
             state.film.mark = action.payload

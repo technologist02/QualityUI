@@ -4,8 +4,8 @@ const initialState = {
     isModalShow: false,
     mode: "",
     standart: {
-        id: 0,
-        name: "",
+        standartQualityTitleId: 0,
+        title: "",
         description: ""
     }
 }
@@ -15,10 +15,10 @@ const editStandartTitleSlice = createSlice({
     initialState: initialState,
     reducers: {
         setStandartTitleId: (state, action) => {
-            state.standart.id = action.payload;
+            state.standart.standartQualityTitleId = action.payload;
         },
         setStandartTitleName : (state, action) => {
-            state.standart.name = action.payload;
+            state.standart.title = action.payload;
         },
         setStandartTitleDescription : (state, action) => {
             state.standart.description = action.payload;
@@ -30,7 +30,7 @@ const editStandartTitleSlice = createSlice({
         },
         changeStandartTitle: (state, action) => {
             state.isModalShow = true;
-            state.mode = `Изменить стандарт качества ${action.payload.name}`;
+            state.mode = `Изменить стандарт качества ${action.payload.title}`;
             state.standart = action.payload;
         },
         resetEditStandartTitle: () => {

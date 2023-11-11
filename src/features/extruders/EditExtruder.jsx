@@ -19,7 +19,7 @@ export const EditExtruder = () => {
                 ></button>
             </div>
             <div className="modal-body">
-                <ControledInput type="text" id="extruderName" text="Название рабочего центра" value={extruder.extruderName} setValue={(text) => dispatch(setExtruderName(text))}/>
+                <ControledInput type="text" id="extruderName" text="Название рабочего центра" value={extruder.name} setValue={(text) => dispatch(setExtruderName(text))}/>
             </div>
             <div style={{display: "flex", justifyContent: "end"}}>
                 <button
@@ -33,7 +33,7 @@ export const EditExtruder = () => {
                 <button
                     className="btn btn-primary"
                     onClick={() => {
-                        extruder.id === 0 ? dispatch(createExtruder(extruder)) : dispatch(updateExtruder(extruder));
+                        extruder.extruderId === 0 ? dispatch(createExtruder(extruder)) : dispatch(updateExtruder(extruder));
                         dispatch(resetExtruder())
                     }}
                 >

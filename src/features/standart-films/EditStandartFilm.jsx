@@ -11,24 +11,24 @@ export const EditStandartFilm = () => {
     const standartTitles = useSelector(standartTitlesSelector.selectAll);
 
     const handleSubmit = () => {
-        const filmID = films.find(
+        const filmId = films.find(
             (x) =>
                 x.mark === standartFilm.filmMark &&
                 x.thickness === +standartFilm.filmThick &&
                 x.color === standartFilm.filmColor
-        ).id;
+        ).filmId;
         // console.log(filmID);
-        const standartQualityNameId = standartTitles.find(
-            (x) => x.name === standartFilm.standartTitle
-        ).id;
+        const standartQualityTitleId = standartTitles.find(
+            (x) => x.title === standartFilm.standartTitle
+        ).standartQualityTitleId;
         // console.log(standartQualityNameId);
-        const newStandartTitle = { ...standartFilm, filmID, standartQualityNameId };
+        const newStandartTitle = { ...standartFilm, filmId, standartQualityTitleId };
         delete newStandartTitle.filmMark;
         delete newStandartTitle.filmThick;
         delete newStandartTitle.filmColor;
         delete newStandartTitle.standartTitle;
         // console.log(newStandartTitle);
-        standartFilm.id === 0 ? dispatch(createStandartFilm(newStandartTitle)) : dispatch(updateStandartFilm(newStandartTitle));
+        standartFilm.standartQualityFilmId === 0 ? dispatch(createStandartFilm(newStandartTitle)) : dispatch(updateStandartFilm(newStandartTitle));
     };
 
     return (
@@ -48,7 +48,7 @@ export const EditStandartFilm = () => {
                 <ControledSelect
                     id="standartTitle"
                     text="Стандарт качества"
-                    options={standartTitles.map(title => title.name)}
+                    options={standartTitles.map(title => title.title)}
                     value={standartFilm.standartTitle}
                     setValue={(text) => dispatch(setStandartTitle(text))}
                 />
