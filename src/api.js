@@ -10,3 +10,6 @@ export const USERS_REGISTER = API_URL + '/Authorization/register'
 export const USERS_DATA = API_URL + '/Authorization'
 
 export const PASSPORT = ORDERS + '/passport'
+
+export const USERS = API_URL + '/Users'
+export const ROLES = API_URL + '/Users/roles'

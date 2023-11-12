@@ -14,6 +14,7 @@ import { userReducer } from "../features/users/users-slice";
 import { editExtruderReducer } from "../features/extruders/edit-extruder-slice";
 import { editStandartTitleReducer } from "../features/standart-titles/edit-standart-title-slice";
 import { editStandartFilmReducer } from "../features/standart-films/edit-standart-film-slice";
+import { rolesReducer } from "../features/admin-panel/roles-slice";
 
 
 export const store = configureStore({
@@ -31,6 +32,7 @@ export const store = configureStore({
       editOrder: editOrderReducer,
       appStatusLoad: appStatusLoadReducer,
       user: userReducer,
+      roles: rolesReducer,
     //   filter: filterReducer,
     },
     devTools: true,
