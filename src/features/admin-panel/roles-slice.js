@@ -12,7 +12,7 @@ export const loadUsers = createAsyncThunk(
     async (_, {
         extra: {client, api}
     }) => {
-        return client.get(api.USERS)
+        return await client.get(api.USERS)
     }
 )
 
@@ -21,7 +21,7 @@ export const loadRoles = createAsyncThunk(
     async (_, {
         extra: {client, api}
     }) => {
-        return client.get(api.ROLES)
+        return await client.get(api.ROLES)
     }
 )
 
@@ -30,7 +30,7 @@ export const updateUserRoles = createAsyncThunk(
     async (user, {
         extra: {client, api}
     }) => {
-        return client.get(api.USERS, user)
+        return await client.post(api.USERS, user)
     }
 )
 
@@ -54,7 +54,7 @@ const rolesSlice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(loadRoles.fulfilled, (state,action) => {
+            .addCase(loadRoles.fulfilled, (state, action) => {
                 state.loading = 'fulfilled';
                 rolesAdapter.addMany(state, action.payload.data);
                 state.roleIds = action.payload.data.map(r => r.roleId)
@@ -69,8 +69,13 @@ const rolesSlice = createSlice({
                 state.loadingUsers = "fulfilled"
             })
             .addCase(updateUserRoles.fulfilled, (state, action) => {
-                console.log(action.payload.data)
+                console.log(action.payload.status)
                 alert("Роли пользователя успешно изменены");
+            })
+            .addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
+                alert(action.error.message);
+                state.loading = 'rejected';
+                state.error = action.error.message || action.payload;
             })
     }
 })

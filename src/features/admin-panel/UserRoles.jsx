@@ -7,7 +7,9 @@ export const UserRoles = ({ user }) => {
     const roles = user.roles;
 
 
-    //const userUpdateView = {userId: user.userId, roleIds: [...user.roles.map(r=>r.roleId)]}
+    const userUpdateView = {userId: user.userId, roleIds: user.roles.filter(r=>r.status).map(x => x.roleId)}
+    //console.log(userUpdateView)
+    // {userId: user.userId, roleIds: [...user.roles.map(r=>r.roleId)]}
     return (
         <>
             <tr>
@@ -28,7 +30,7 @@ export const UserRoles = ({ user }) => {
                     </td>
                 ))}
                 <td>
-                    <button type="button" className="btn btn-outline-warning" onClick={() => dispatch(updateUserRoles({userId: user.userId, roleIds: [...user.roles.map(r=>r.roleId)]}))}>
+                    <button type="button" className="btn btn-outline-warning" onClick={() => dispatch(updateUserRoles(userUpdateView))}>
                         Назначить роли
                     </button>
                 </td>

@@ -15,7 +15,7 @@ function App() {
   return (
       <div className="App">
         <Header />
-        <main className='container-fluid' style={{overflow:"scroll", maxHeight: "600px"}}>
+        <main className='container-fluid' style={{overflow:"scroll"}}>
           <Routes>
             <Route path="/" element={<Main/>} />
             <Route path="/Films" element={<Films/>}/>
