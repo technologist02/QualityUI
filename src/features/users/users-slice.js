@@ -9,7 +9,6 @@ const initialState = {
         "name": "",
         "surname": "",
         "email": "",
-        "password": null,
         "roles": [],
         "created": ""
     },
@@ -17,7 +16,7 @@ const initialState = {
 }
 
 export const loadUserData = createAsyncThunk(
-    "@@users/load-user-data",
+    "@@user/load-user-data",
     async (_, {
         extra: {client, api}
     }) => {
@@ -26,7 +25,7 @@ export const loadUserData = createAsyncThunk(
 )
 
 export const authorizeUser = createAsyncThunk(
-    "@@users/autorize-user",
+    "@@user/autorize-user",
     async (user, {
         dispatch,
         extra: {client, api}
@@ -46,7 +45,7 @@ export const authorizeUser = createAsyncThunk(
 )
 
 export const registryUser = createAsyncThunk(
-    "@@users/registry-user",
+    "@@user/registry-user",
     async (data, {
         dispatch,
         extra: {client, api}
@@ -59,8 +58,17 @@ export const registryUser = createAsyncThunk(
     }
 )
 
+export const updateUserData = createAsyncThunk(
+    "@@user/update-user",
+    async (user, {
+        extra: {client, api}
+    }) => {
+        return client.patch(api.USERS_DATA, user)
+    }
+)
+
 const userSlice = createSlice({
-    name: "@@users",
+    name: "@@user",
     initialState: initialState,
     reducers: {
         Logout: (state, action) => {

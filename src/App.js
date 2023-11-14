@@ -10,6 +10,7 @@ import { StandartQualityFilms } from './Pages/StandartsFilmQuality';
 import { AutorizePage } from './Pages/AutorizePage';
 import { AddFilm } from './Pages/AddFilm';
 import { Roles } from './features/admin-panel/Roles';
+import { Profile } from './Pages/UserDataPage';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/AutorizePage" element={<AutorizePage/>}/>
             <Route path="/AddFilm" element={<AddFilm/>}/>
             <Route path="/Roles" element={<Roles/>}/>
+            <Route path="/Profile" element={<Profile/>}/>
           </Routes>
         </main>
       </div>
