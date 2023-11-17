@@ -17,11 +17,20 @@ export const loadUsers = createAsyncThunk(
 )
 
 export const loadRoles = createAsyncThunk(
-    '@@users-data/load-roles',
+    '@@users-data/load-role',
     async (_, {
         extra: {client, api}
     }) => {
         return await client.get(api.ROLES)
+    }
+)
+
+export const createRoles = createAsyncThunk(
+    '@@users-data/create-role',
+    async (role, {
+        extra: {client, api}
+    }) => {
+        return await client.post(api.ROLES, role)
     }
 )
 
