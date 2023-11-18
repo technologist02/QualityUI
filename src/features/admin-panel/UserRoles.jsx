@@ -8,7 +8,7 @@ export const UserRoles = ({ user }) => {
 
 
     const userUpdateView = {userId: user.userId, roleIds: user.roles.filter(r=>r.status).map(x => x.roleId)}
-    //console.log(userUpdateView)
+    // console.log(userUpdateView)
     // {userId: user.userId, roleIds: [...user.roles.map(r=>r.roleId)]}
     return (
         <>

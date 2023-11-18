@@ -39,7 +39,7 @@ export const updateUserRoles = createAsyncThunk(
     async (user, {
         extra: {client, api}
     }) => {
-        return await client.post(api.USERS, user)
+        return await client.patch(api.USERS, user)
     }
 )
 
@@ -82,7 +82,7 @@ const rolesSlice = createSlice({
                 alert("Роли пользователя успешно изменены");
             })
             .addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
-                alert(action.error.message);
+                // alert(action.error.message);
                 state.loading = 'rejected';
                 state.error = action.error.message || action.payload;
             })

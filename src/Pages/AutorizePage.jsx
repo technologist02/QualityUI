@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { authorizeUser } from "../features/users/users-slice";
+import { authorizeUser } from "../features/users/user-slice";
 import { useEffect } from "react";
 
 export const AutorizePage = () => {

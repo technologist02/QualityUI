@@ -1,11 +1,14 @@
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { updateUserData } from "../features/users/users-slice"
+import { updateUserData } from "../features/users/user-slice"
+import { Preloader } from "../components/Preloader"
 
 export const Profile = () => {
-    const userData = useSelector(state => state.user.userData)
-    const [name, setName] = useState(userData.name)
+    const user = useSelector(state => state.user)
+    const userData = user.userData;
+    const load = user.loading;
+    const [name, setName] = useState("")
     const [surname, setSurname] = useState("")
     const [email, setEmail] = useState("")
     
@@ -25,11 +28,12 @@ export const Profile = () => {
         )
     }
 
-    useEffect(() => {setName(userData.name);setSurname(userData.surname);setEmail(userData.email)}, [])
+    useEffect(() => {setName(userData.name);setSurname(userData.surname);setEmail(userData.email)}, [load])
 
     return (
+        
         <>
-            
+            {load !== "fulfilled" ? <Preloader/> :
             <form>
                 <div className="container">
                     <h3 style={{padding:"1rem"}}>Профиль</h3>
@@ -77,6 +81,7 @@ export const Profile = () => {
                 </div>
                 
             </form>
-        </>
+        }</>
+    
     )
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { ControledInput } from "../components/FormComponents/ControledInput"
 import { User } from "../Entities/user"
 import { useDispatch, useSelector } from "react-redux"
-import { registryUser } from "../features/users/users-slice"
+import { registryUser } from "../features/users/user-slice"
 import { useNavigate} from "react-router-dom";
 
 export const UserRegistrationForm = () => {

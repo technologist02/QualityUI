@@ -10,7 +10,7 @@ import { ordersReducer } from "../features/orders/orders-slice";
 import { appStatusLoadReducer } from "../features/app-status-loading.slice";
 import { editOrderReducer } from "../features/orders/edit-orders-slice";
 import { filmsMapReducer } from "../features/films/films-map-slice";
-import { userReducer } from "../features/users/users-slice";
+import { userReducer } from "../features/users/user-slice";
 import { editExtruderReducer } from "../features/extruders/edit-extruder-slice";
 import { editStandartTitleReducer } from "../features/standart-titles/edit-standart-title-slice";
 import { editStandartFilmReducer } from "../features/standart-films/edit-standart-film-slice";

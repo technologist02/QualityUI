@@ -1,16 +1,17 @@
 
 export class Modal{
+    static count = 0
     constructor(error) {
         this.error = error
-        // this.text = text
-        // this.status = status
-        // this.data = data
+        this.id = Modal.count
+        this.modalId = "modal-film" + this.id
         this.init();
     }
 
     init(){
+        Modal.count += 1
         this.createMarkup();
-        this.modal = document.getElementById("modal-film");
+        this.modal = document.getElementById(this.modalId);
         this.closeBtn = this.modal.querySelector('.btn-close');
         this.attachEvents();
     }
@@ -30,7 +31,7 @@ export class Modal{
     
     createMarkup(){
         document.body.insertAdjacentHTML('beforeend', `
-        <div id="modal-film" class="modal-dialog modal-dialog-centered">
+        <div id=${this.modalId} class="modal-dialog modal-dialog-centered">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" >

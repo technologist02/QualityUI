@@ -12,6 +12,7 @@ const initialState = {
         "roles": [],
         "created": ""
     },
+    loading: "idle",
     token : "",
 }
 
@@ -88,10 +89,11 @@ const userSlice = createSlice({
                 state.isUserAuth = true;
                 state.login =  action.payload.data.login;
                 state.userData = action.payload.data;
+                state.loading = "fulfilled"
             })
             .addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
-                alert(action.error.message);
-                state.loading = 'rejected';
+                // alert(action.error.message);
+                //state.loading = 'rejected';
                 state.error = action.error.message || action.payload;
             })
     }

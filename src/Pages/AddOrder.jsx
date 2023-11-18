@@ -57,34 +57,34 @@ export const Order = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // console.log(customer)
         console.log(films);
         console.log(extruders);
-        const filmId = films.find(
-            (x) =>
-                x.mark === order.filmMark &&
-                x.thickness === +order.filmThick &&
-                x.color === order.filmColor
-        ).filmId;
-        //const filmId = film.filmId;
-        console.log(filmId);
-        const extruderId = extrs.find(
-            (x) => x.name === order.extruderName
-        ).extruderId;
-        console.log(extruderId);
-        const standartQualityTitleId = standartTitles.find(
-            (x) => x.title === order.standartTitle
-        ).standartQualityTitleId;
+        const film = films.find( (x) => x.mark === order.filmMark && x.thickness === +order.filmThick && x.color === order.filmColor);
+        if(!film) {
+            return alert("Выберите корректные данные пленки")
+        }
+        const filmId = film.filmId
+        const extruder = extrs.find((x) => x.name === order.extruderName);
+        if(!extruder) {
+            return alert("Выберите экструдер")
+        }
+        const extruderId = extruder.extruderId
+        // console.log(extruderId);
+        const standartQualityTitle = standartTitles.find(x => x.title === order.standartTitle);
+        if (!standartQualityTitle) {
+            return alert("Выберите стандарт качества")
+        }
+        const standartQualityTitleId = standartQualityTitle.standartQualityTitleId
 
-        const order2 = { ...order, extruderId, filmId, standartQualityTitleId, inspectorId };
-        delete order2.filmMark;
-        delete order2.extruderName;
-        delete order2.filmThick;
-        delete order2.filmColor;
-        delete order2.id;
-        delete order2.standartTitle;
-        console.log(order2);
-        dispatch(createOrder(order2));
+        const newOrder = { ...order, extruderId, filmId, standartQualityTitleId, inspectorId };
+        delete newOrder.filmMark;
+        delete newOrder.extruderName;
+        delete newOrder.filmThick;
+        delete newOrder.filmColor;
+        delete newOrder.id;
+        delete newOrder.standartTitle;
+        console.log(newOrder);
+        dispatch(createOrder(newOrder));
     };
 
     return loading === "loading" ? (

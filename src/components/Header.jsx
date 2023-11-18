@@ -2,7 +2,7 @@ import { NavLink, useLocation } from "react-router-dom"
 import { Login } from "../features/users/Login"
 import { HelloUser } from "../features/users/HelloUser"
 import { useSelector, useDispatch } from "react-redux"
-import { loadUserData } from "../features/users/users-slice"
+import { loadUserData } from "../features/users/user-slice"
 import { useEffect } from "react"
 
 export const Header = () => {
