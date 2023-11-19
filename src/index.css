@@ -55,3 +55,20 @@ code {
 .mg-top {
     margin-top: 0.5rem;
 }
+
+.filter-item {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0.5rem;
+    padding: 0.25rem;
+    /* display: inline-grid;
+    grid-template-columns: auto;
+    column-gap: 3px;
+    justify-content: space-around;
+    align-content: space-around;
+    align-items: center; */
+    /* background-color: beige;
+    border: 1px solid burlywood; */
+}

@@ -20,8 +20,8 @@ export const Orders = () => {
         statusStandartTitles,
     } = useSelector((state) => state.appStatusLoad.statusLoad);
     const { error } = useSelector((state) => state.orders);
-    const activeFilters = useSelector(state => state.orders.filters)
-    const orders = visibleOrdersSelector(useSelector(ordersSelector.selectAll), activeFilters);
+    //const activeFilters = useSelector(state => state.orders.filters)
+    const orders = (useSelector(ordersSelector.selectAll));
     
     useEffect(() => {
         dispatch(loadFilms());
@@ -38,14 +38,14 @@ export const Orders = () => {
         statusStandartTitles === 'fulfilled';
     //console.log(load)
     return (
-        <div>
+        <>
+
+        <div style={{overflow:"scroll", maxHeight:"700px"}}>
             {error && <h2>{error}</h2>}
             {!load && <Preloader />}
             {/* {(state.films.loading === 'loading' || state.extruders.loading === 'loading' || state.orders.loading === 'loading')&& <Preloader/>} */}
             {load && !error && (
                 <>
-                    <UpdateOrder />
-                    <OrderFilters />
                     <table className="table table-sm table-bordered">
                         <thead>
                             <tr>
@@ -89,5 +89,6 @@ export const Orders = () => {
                 </>
             )}
         </div>
+        </>
     );
 };

@@ -42,7 +42,7 @@ const filmsSlice = createSlice({
         builder
             .addCase(loadFilms.fulfilled, (state, action) => {
                 state.loading = 'fulfilled';
-                filmsAdapter.addMany(state, action.payload.data);
+                filmsAdapter.setMany(state, action.payload.data);
             })
             .addCase(loadFilms.pending, (state) => {
                 state.loading = 'loading';

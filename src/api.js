@@ -1,6 +1,7 @@
 import { API_URL } from "./config";
 
 export const ORDERS = API_URL + '/OrderQuality'
+export const SEARCH_ORDERS = API_URL + '/OrderQuality/search'
 export const EXTRUDERS = API_URL + '/Extruders'
 export const FILMS = API_URL + '/Films'
 export const STANDART_FILMS = API_URL + '/StandartQualityFilms'

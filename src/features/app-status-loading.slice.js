@@ -37,7 +37,7 @@ const appStatusLoadSlice = createSlice({
                 state.statusLoad.statusOrders = 'fulfilled'
             },)
             .addCase(loadOrders.pending, (state, action) => {
-                state.statusLoad.statusFilms = 'loading'
+                state.statusLoad.statusOrders = 'loading'
             })
             .addCase(loadStandartFilms.fulfilled, (state, action) => {
                 state.statusLoad.statusStandartFilms = 'fulfilled'
