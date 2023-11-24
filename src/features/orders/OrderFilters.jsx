@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ControledInput } from "../../components/FormComponents/ControledInput";
 import {
     setCustomerFilter,
     setFilmColorFilter,
@@ -20,7 +19,7 @@ import {
     searchOrders,
     loadOrders,
 } from "./orders-slice";
-import { InlineCheckBox } from "../../components/FormComponents/InlineCheckBox";
+import { Filter } from "../../components/FormComponents/Filter";
 
 export const OrderFilters = () => {
     const dispatch = useDispatch();
@@ -59,92 +58,61 @@ export const OrderFilters = () => {
             >
                 Сбросить фильтры
             </button>
-            <div >
-                <div className="filter-item">
-                    <InlineCheckBox value={OrderNumber.status} setValue={e => {dispatch(setOrderNumberFilterStatus(e))}}/>
-                    <ControledInput
-                        type="text"
-                        id="OrderNumber"
-                        text="Номер заказа"
-                        value={OrderNumber.value}
-                        setValue={(e) => {
-                            dispatch(setOrderNumberFilter(e));
-                        }}
-                    />
-                </div>
-                <div className="filter-item">
-                    <InlineCheckBox value={Customer.status} setValue={e => {dispatch(setCustomerFilterStatus(e))}}/>
-                    <ControledInput
-                        type="text"
-                        id="Customer"
-                        text="Клиент"
-                        value={Customer.value}
-                        setValue={(e) => {
-                            dispatch(setCustomerFilter(e));
-                        }}
-                    />
-                </div>
-                <div className="filter-item">
-                    <InlineCheckBox value={Extruder.status} setValue={e => {dispatch(setExtruderFilterStatus(e))}}/>
-                    <ControledInput
-                        type="text"
-                        id="ExtruderName"
-                        text="Экструдер"
-                        value={Extruder.value}
-                        setValue={(e) => {
-                            dispatch(setExtruderFilter(e));
-                        }}
-                    />
-                </div>
-                <div className="filter-item">
-                    <InlineCheckBox value={FilmMark.status} setValue={e => {dispatch(setFilmMarkFilterStatus(e))}}/>
-                    <ControledInput
-                        type="text"
-                        id="FilmMark"
-                        text="Марка пленки"
-                        value={FilmMark.value}
-                        setValue={(e) => {
-                            dispatch(setFilmMarkFilter(e));
-                        }}
-                    />
-                </div>
-                <div className="filter-item">
-                    <InlineCheckBox value={FilmThickness.status} setValue={e => {dispatch(setFilmThicknessFilterStatus(e))}}/>
-                    <ControledInput
-                        type="text"
-                        id="FilmThickness"
-                        text="Толщина пленки"
-                        value={FilmThickness.value}
-                        setValue={(e) => {
-                            dispatch(setFilmThicknessFilter(e));
-                        }}
-                    />
-                </div>
-                <div className="filter-item">
-                    <InlineCheckBox value={FilmColor.status} setValue={e => {dispatch(setFilmColorFilterStatus(e))}}/>
-                    <ControledInput
-                        type="text"
-                        id="FilmColor"
-                        text="Цвет пленки"
-                        value={FilmColor.value}
-                        setValue={(e) => {
-                            dispatch(setFilmColorFilter(e));
-                        }}
-                    />
-                </div>
-                <div className="filter-item">
-                    <InlineCheckBox value={Width.status} setValue={e => {dispatch(setWidthFilterStatus(e))}}/>
-                    <ControledInput
-                        type="text"
-                        id="Width"
-                        text="Ширина"
-                        value={Width.value}
-                        setValue={(e) => {
-                            dispatch(setWidthFilter(e));
-                        }}
-                    />
-                </div>
-
+            <div>
+                <Filter label="Номер заказа"
+                    checkboxValue={OrderNumber.status}
+                    setCheckboxValue={e => {dispatch(setOrderNumberFilterStatus(e))}}
+                    inputValue={OrderNumber.value}
+                    setInputValue={e => {dispatch(setOrderNumberFilter(e))}}
+                />
+                <Filter label="Клиент"
+                    checkboxValue={Customer.status}
+                    setCheckboxValue={e => {dispatch(setCustomerFilterStatus(e))}}
+                    inputValue={Customer.value}
+                    setInputValue={(e) => {
+                        dispatch(setCustomerFilter(e));
+                    }}
+                />
+                <Filter label="Экструдер"
+                    checkboxValue={Extruder.status}
+                    setCheckboxValue={e => {dispatch(setExtruderFilterStatus(e))}}
+                    inputValue={Extruder.value}
+                    setInputValue={(e) => {
+                        dispatch(setExtruderFilter(e));
+                    }}
+                />
+                <Filter label="Марка пленки"
+                    checkboxValue={FilmMark.status}
+                    setCheckboxValue={e => {dispatch(setFilmMarkFilterStatus(e))}}
+                    inputValue={FilmMark.value}
+                    setInputValue={(e) => {
+                        dispatch(setFilmMarkFilter(e));
+                    }}
+                />
+                <Filter label="Толщина пленки"
+                    checkboxValue={FilmThickness.status}
+                    setCheckboxValue={e => {dispatch(setFilmThicknessFilterStatus(e))}}
+                    inputValue={FilmThickness.value}
+                    setInputValue={(e) => {
+                        dispatch(setFilmThicknessFilter(e));
+                    }}
+                />
+                <Filter label="Цвет пленки"
+                    checkboxValue={FilmColor.status}
+                    setCheckboxValue={e => {dispatch(setFilmColorFilterStatus(e))}}
+                    inputValue={FilmColor.value}
+                    setInputValue={(e) => {
+                        dispatch(setFilmColorFilter(e));
+                    }}
+                />
+                <Filter label="Ширина"
+                    checkboxValue={Width.status}
+                    setCheckboxValue={e => {dispatch(setWidthFilterStatus(e))}}
+                    inputValue={Width.value}
+                    setInputValue={(e) => {
+                        dispatch(setWidthFilter(e));
+                    }}
+                />
             </div>
         </>
     );

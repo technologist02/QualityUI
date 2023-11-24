@@ -10,6 +10,7 @@ import {
 import { Preloader } from "../components/Preloader";
 import { EditStandartFilm } from "../features/standart-films/EditStandartFilm";
 import { addStandartFilm } from "../features/standart-films/edit-standart-film-slice";
+import { FilmFilter } from "../features/films/FilmFilter";
 
 export const StandartQualityFilms = () => {
     const dispatch = useDispatch();
@@ -27,9 +28,9 @@ export const StandartQualityFilms = () => {
         statusStandartTitles === "fulfilled" &&
         statusFilms === "fulfilled";
     useEffect(() => {
-        dispatch(loadFilms());
-        dispatch(loadStandartTitles());
-        dispatch(loadStandartFilms());
+        dispatch(loadFilms()).then(dispatch(loadStandartTitles())).then(dispatch(loadStandartFilms()));
+        // dispatch(loadStandartTitles());
+        // dispatch(loadStandartFilms());
     }, [dispatch]);
 
     return (
@@ -38,6 +39,7 @@ export const StandartQualityFilms = () => {
                 <Preloader />
             ) : (
                 <div>
+                    <FilmFilter/>
                 <button type="button" className="btn btn-primary" onClick={() => dispatch(addStandartFilm())}>
                     Добавить стандарт качества
                 </button>

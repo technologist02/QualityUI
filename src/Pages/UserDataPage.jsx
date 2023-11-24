@@ -27,7 +27,7 @@ export const Profile = () => {
             })
         )
     }
-
+    // eslint-disable-next-line
     useEffect(() => {setName(userData.name);setSurname(userData.surname);setEmail(userData.email)}, [load])
 
     return (

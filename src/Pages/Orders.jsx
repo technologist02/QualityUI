@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { OrderQuality } from "../features/orders/OrderQuality";
 import { Preloader } from "../components/Preloader";
-import { UpdateOrder } from "../features/orders/UpdateOrder";
+//import { UpdateOrder } from "../features/orders/UpdateOrder";
 import { useDispatch, useSelector } from "react-redux";
-import { loadOrders, ordersSelector, visibleOrdersSelector } from "../features/orders/orders-slice";
+import { loadOrders, ordersSelector } from "../features/orders/orders-slice";
 import { loadFilms } from "../features/films/films-slice";
 import {loadExtruders,} from "../features/extruders/extruders-slice";
 import { loadStandartTitles } from "../features/standart-titles/standart-titles-slice";
 import { loadStandartFilms } from "../features/standart-films/standart-films-slice";
-import { OrderFilters } from "../features/orders/OrderFilters";
+//import { OrderFilters } from "../features/orders/OrderFilters";
 
 export const Orders = () => {
     const dispatch = useDispatch();
@@ -20,7 +20,6 @@ export const Orders = () => {
         statusStandartTitles,
     } = useSelector((state) => state.appStatusLoad.statusLoad);
     const { error } = useSelector((state) => state.orders);
-    //const activeFilters = useSelector(state => state.orders.filters)
     const orders = (useSelector(ordersSelector.selectAll));
     
     useEffect(() => {

@@ -72,3 +72,7 @@ code {
     /* background-color: beige;
     border: 1px solid burlywood; */
 }
+
+.custom-checkbox {
+    margin-right: 0.5rem;
+}
