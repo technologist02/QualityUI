@@ -19,7 +19,6 @@ const SuccessInterceptor = (response) => {
 };
 
 const ErrorInterceptor = (error) => {
-    // console.log(error)
     if (error.response) {
         if (error.response.status === 401){
             alert("Вы не авторизованы");
@@ -31,10 +30,6 @@ const ErrorInterceptor = (error) => {
       } else {
         console.error('Error:', error.message);
       }
-    // if (error.response.status === 401){
-    //     alert("Вы не авторизованы");
-    //     window.location.href = "/AutorizePage"    
-    // }
     const foo = () => { new Modal(error)}
     foo();
     return Promise.reject(error);

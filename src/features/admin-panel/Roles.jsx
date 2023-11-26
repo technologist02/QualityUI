@@ -14,7 +14,7 @@ export const Roles = () => {
 
     const load = loadingRoles === 'fulfilled' && loadingUsers === 'fulfilled'
 
-    useEffect(()=> {dispatch(loadRoles()).then(dispatch(loadUsers()))}, [dispatch])
+    useEffect( () => async () => { await dispatch(loadRoles()); await (dispatch(loadUsers()))}, [dispatch])
 
     return (
         <>
