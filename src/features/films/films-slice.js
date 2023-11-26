@@ -46,7 +46,7 @@ export const updateFilm = createAsyncThunk(
     }
 )
 export const searchFilms = createAsyncThunk(
-    '@@orders/search-films',
+    '@@films/search-films',
     async (query, {
         extra: {client, api}
     }) => {

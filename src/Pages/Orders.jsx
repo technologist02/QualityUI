@@ -30,20 +30,19 @@ export const Orders = () => {
         dispatch(loadOrders());
     }, [dispatch]);
     const load =
-        statusFilms === 'fulfilled' &&
-        statusExtruders === 'fulfilled' &&
-        statusOrders === 'fulfilled' &&
-        statusStandartFilms === 'fulfilled' &&
-        statusStandartTitles === 'fulfilled';
+        statusFilms === 'loading' ||
+        statusExtruders === 'loading' ||
+        statusOrders === 'loading' ||
+        statusStandartFilms === 'loading' ||
+        statusStandartTitles === 'loading';
     //console.log(load)
     return (
         <>
 
         <div style={{overflow:"scroll", maxHeight:"700px"}}>
             {error && <h2>{error}</h2>}
-            {!load && <Preloader />}
-            {/* {(state.films.loading === 'loading' || state.extruders.loading === 'loading' || state.orders.loading === 'loading')&& <Preloader/>} */}
-            {load && !error && (
+            {load && <Preloader />}
+            {!load && !error && (
                 <>
                     <table className="table table-sm table-bordered">
                         <thead>

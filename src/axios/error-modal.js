@@ -43,10 +43,10 @@ export class Modal{
                     </div>
                     <div class="modal-body">
                         <div class="col-md error-item">
-                            <h6>Status Code: ${this.error.response.status}</h6>
+                            <h6>Status Code: ${this.error.response ? this.error.response.status : this.error.message}</h6>
                         </div>
                         <div class="col-md error-item">
-                            <h6>Text: ${this.error.response.data}</h6>
+                            <h6>Text: ${this.error.response ? this.error.response.data : this.error.message}</h6>
                         </div>
                     </div>
                 </div>

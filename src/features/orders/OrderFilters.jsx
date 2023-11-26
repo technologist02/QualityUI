@@ -19,7 +19,8 @@ import {
     searchOrders,
     loadOrders,
 } from "./orders-slice";
-import { Filter } from "../../components/FormComponents/Filter";
+import { FilterItem } from "../../components/FormComponents/FilterItem";
+import { Filter } from "../../components/Filter";
 
 export const OrderFilters = () => {
     const dispatch = useDispatch();
@@ -36,36 +37,17 @@ export const OrderFilters = () => {
     const filters = useSelector(state => state.orders.filters)
     const query1 = Object.keys(filters).filter(key => filters[key].status === true).map(key => (`${key}=${filters[key].value}`));
     const query = `?${query1.join("&")}`
-    // if (f) {
-    //     state.query = `?${f.join("&")}`;
-    //     // dispatchEvent(searchOrders(state.query))
-    // }
+
     return (
         <>
-            <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => {dispatch(setSearch());
-                    console.log(query);
-                    dispatch(searchOrders(query))}}
-            >
-                Поиск
-            </button>
-            <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => {dispatch(loadOrders());dispatch(clearFilters());}}
-            >
-                Сбросить фильтры
-            </button>
-            <div>
-                <Filter label="Номер заказа"
+            <Filter>
+                <FilterItem label="Номер заказа"
                     checkboxValue={OrderNumber.status}
                     setCheckboxValue={e => {dispatch(setOrderNumberFilterStatus(e))}}
                     inputValue={OrderNumber.value}
                     setInputValue={e => {dispatch(setOrderNumberFilter(e))}}
                 />
-                <Filter label="Клиент"
+                <FilterItem label="Клиент"
                     checkboxValue={Customer.status}
                     setCheckboxValue={e => {dispatch(setCustomerFilterStatus(e))}}
                     inputValue={Customer.value}
@@ -73,7 +55,7 @@ export const OrderFilters = () => {
                         dispatch(setCustomerFilter(e));
                     }}
                 />
-                <Filter label="Экструдер"
+                <FilterItem label="Экструдер"
                     checkboxValue={Extruder.status}
                     setCheckboxValue={e => {dispatch(setExtruderFilterStatus(e))}}
                     inputValue={Extruder.value}
@@ -81,7 +63,7 @@ export const OrderFilters = () => {
                         dispatch(setExtruderFilter(e));
                     }}
                 />
-                <Filter label="Марка пленки"
+                <FilterItem label="Марка пленки"
                     checkboxValue={FilmMark.status}
                     setCheckboxValue={e => {dispatch(setFilmMarkFilterStatus(e))}}
                     inputValue={FilmMark.value}
@@ -89,7 +71,7 @@ export const OrderFilters = () => {
                         dispatch(setFilmMarkFilter(e));
                     }}
                 />
-                <Filter label="Толщина пленки"
+                <FilterItem label="Толщина пленки"
                     checkboxValue={FilmThickness.status}
                     setCheckboxValue={e => {dispatch(setFilmThicknessFilterStatus(e))}}
                     inputValue={FilmThickness.value}
@@ -97,7 +79,7 @@ export const OrderFilters = () => {
                         dispatch(setFilmThicknessFilter(e));
                     }}
                 />
-                <Filter label="Цвет пленки"
+                <FilterItem label="Цвет пленки"
                     checkboxValue={FilmColor.status}
                     setCheckboxValue={e => {dispatch(setFilmColorFilterStatus(e))}}
                     inputValue={FilmColor.value}
@@ -105,7 +87,7 @@ export const OrderFilters = () => {
                         dispatch(setFilmColorFilter(e));
                     }}
                 />
-                <Filter label="Ширина"
+                <FilterItem label="Ширина"
                     checkboxValue={Width.status}
                     setCheckboxValue={e => {dispatch(setWidthFilterStatus(e))}}
                     inputValue={Width.value}
@@ -113,7 +95,23 @@ export const OrderFilters = () => {
                         dispatch(setWidthFilter(e));
                     }}
                 />
-            </div>
+                <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => {dispatch(setSearch());
+                    console.log(query);
+                    dispatch(searchOrders(query))}}
+                >
+                    Поиск
+                </button>
+                <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => {dispatch(loadOrders());dispatch(clearFilters());}}
+                >
+                    Сбросить фильтры
+                </button>
+            </Filter>
         </>
     );
 };

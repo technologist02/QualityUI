@@ -1,4 +1,4 @@
-export const Filter = ({label="", checkboxValue="", inputValue="", setInputValue = () => {}, setCheckboxValue = () => {}}) => {
+export const FilterItem = ({label="", checkboxValue="", inputValue="", setInputValue = () => {}, setCheckboxValue = () => {}}) => {
     
     return (
         <div className="filter-item">

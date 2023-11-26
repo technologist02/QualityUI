@@ -41,21 +41,24 @@ export const UpdateOrder = () => {
     const inspectorId = useSelector(state => state.user.userData.userId)
 
     const handleSubmit = () => {
-        const filmId = films.find(
-            (x) =>
-                x.mark === order.filmMark &&
-                x.thickness === +order.filmThick &&
-                x.color === order.filmColor
-        ).filmId;
-        console.log(filmId);
-        const extruderId = extrs.find(
-            (x) => x.name === order.extruderName
-        ).extruderId;
-        console.log(extruderId);
+        const film = films.find( (x) => x.mark === order.filmMark && x.thickness === +order.filmThick && x.color === order.filmColor);
+        if(!film) {
+            return alert("Выберите корректные данные пленки")
+        }
+        const filmId = film.filmId
+        const extruder = extrs.find((x) => x.name === order.extruderName);
+        if(!extruder) {
+            return alert("Выберите экструдер")
+        }
+        const extruderId = extruder.extruderId
+        // console.log(extruderId);
+        const standartQualityTitle = standartTitles.find(x => x.title === order.standartTitle);
+        if (!standartQualityTitle) {
+            return alert("Выберите стандарт качества")
+        }
         const standartQualityTitleId = standartTitles.find(
             (x) => x.title === order.standartTitle
         ).standartQualityTitleId;
-
         const order2 = { ...order, extruderId, filmId, standartQualityTitleId, inspectorId };
         delete order2.filmMark;
         delete order2.extruderName;

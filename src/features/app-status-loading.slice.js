@@ -12,7 +12,8 @@ const initialState = {
         statusOrders: 'idle',
         statusStandartFilms: 'idle',
         statusStandartTitles: 'idle'
-    }
+    },
+    errors: []
 }
 
 const appStatusLoadSlice = createSlice({
@@ -31,7 +32,7 @@ const appStatusLoadSlice = createSlice({
                 state.statusLoad.statusExtruders = 'fulfilled'
             })
             .addCase(loadExtruders.pending, (state, action) => {
-                state.statusLoad.statusFilms = 'loading'
+                state.statusLoad.statusExtruders = 'loading'
             })
             .addCase(loadOrders.fulfilled, (state, action) => {
                 state.statusLoad.statusOrders = 'fulfilled'
@@ -43,13 +44,19 @@ const appStatusLoadSlice = createSlice({
                 state.statusLoad.statusStandartFilms = 'fulfilled'
             })
             .addCase(loadStandartFilms.pending, (state, action) => {
-                state.statusLoad.statusFilms = 'loading'
+                state.statusLoad.statusStandartFilms = 'loading'
             })
             .addCase(loadStandartTitles.fulfilled, (state, action) => {
                 state.statusLoad.statusStandartTitles = 'fulfilled'
             })
             .addCase(loadStandartTitles.pending, (state, action) => {
-                state.statusLoad.statusFilms = 'loading'
+                state.statusLoad.statusStandartTitles = 'loading'
+            })
+            .addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
+                // state.statusLoad.loading = 'rejected';
+                // console.log(action)
+                state.errors.push(action.payload || action.error.message);
+                // console.log(state.error)
             })
     }
 })

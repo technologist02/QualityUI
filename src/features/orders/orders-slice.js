@@ -192,7 +192,9 @@ const ordersSlice = createSlice({
             })
             .addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
                 state.loading = 'rejected';
+                console.log(action)
                 state.error = action.payload || action.error.message;
+                console.log(state.error)
             })
     }
 })

@@ -3,9 +3,6 @@ import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolk
 const rolesAdapter = createEntityAdapter({
     selectId: (role) => role.roleId,
 });
-// const usersAdapter = createEntityAdapter({
-//     selectId: (user) => user.userId
-// })
 
 export const loadUsers = createAsyncThunk(
     '@@users-data/load-users',
