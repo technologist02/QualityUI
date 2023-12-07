@@ -55,7 +55,7 @@ const extrudersSlice = createSlice({
             .addCase(createExtruder.fulfilled, (state, action) => {
                 console.log(action)
                 alert("Новый рабочий центр успешно добавлен")
-                // extrudersAdapter.setOne(state, action.payload.data)
+                extrudersAdapter.setOne(state, action.payload.data)
             })
             .addCase(createExtruder.rejected, (state, action) => {
                 state.loading = 'rejected';

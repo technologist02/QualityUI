@@ -27,7 +27,7 @@ export const updateStandartTitle = createAsyncThunk(
     async (standart, {
         extra: {client, api}
     }) => {
-        return client.patch(api.STANDART_FILMS, standart)
+        return client.patch(api.STANDART_TITLE, standart)
     }
 )
 
@@ -52,6 +52,7 @@ const standartTitlesSlice = createSlice({
                 standartTitlesAdapter.addOne(state, action.payload.data);
             })
             .addCase(updateStandartTitle.fulfilled, (state, action) => {
+                console.log(action.payload.data);
                 standartTitlesAdapter.setOne(state, action.payload.data);
             })
             .addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {

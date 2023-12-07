@@ -116,7 +116,7 @@ const filmsSlice = createSlice({
             })
             .addCase(createFilm.fulfilled, (state, action) => {
                 alert("Пленка успешно добавлена")
-                //filmsAdapter.addOne(state, action.payload.data)
+                filmsAdapter.addOne(state, action.payload.data)
             })
             .addCase(updateFilm.fulfilled, (state, action) => {
                 alert("Данные пленки обновлены")
